@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html lang="kr">
-  <head>
   <title> 이것은 큰 제목이다</title>
-  <style>
-  table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-  }
-  th, td {
-    padding: 15px;
-    text-align: center;
-  }
-
-  </style>
+  <link rel="stylesheet" type="text/css" href="template.css">
+    <meta charset="utf-8">
+    <meta name="document title" content="introduce">
+    <meta name="description" content="about myself">
+    <meta name="keywords" content="student">
+    <meta name="author" content="Gun">
   </head>
   <body>
+    <header> 나의 소개 </header>
+    <section>
     <h2>작은 제목 1</h2>
       <p>
         이번 19학년 봄학기에 진행하는 웹프로그래밍 수업으로 HTML을 배우게 되었다.
@@ -25,17 +21,28 @@
       <p>
     여기엔 감동받은 글 또는 명언을 넣어야 한다. 명언을 인용부호 " " 를 이용하거나, 새롭게 줄을 나타내어 표현해야 하는데,
     그냥 공부하기 위해 난 둘다 써보자. 인용 부호 " "는 영어로 quotations 이기때문에 태그 q로 나타낸다.<q> 세상이 너를 버렸다고 생각하지 마라. 세상은 너를 가진 적이 없다. </q>두번째는 새롭게 줄을 바꿔 들여쓰기를 하여 글이나 명언을 표시해야한다. br 태그를 사용하여 강조하면<br> 세상이 너를 버렸다고 생각하지 마라. 세상은 너를 가진 적이 없다. <br>줄을 바꿔서 강조했다.
+    <div class="like-link">
     <h2> 작은 제목 3 </h2>
-    <p> 여기엔 내가 좋아하는 페이지를 링크해야 한다. link는 원래 태그 상관없이 herf 속성만 넣으면 되는것 같은데, 여기에 link 라고 치니까 이 Atom 이 알아서 추천해줘서 태그를 만들어준다. 그래서 link 태그로 만들어보자. 새 탭은 target 속성에 내가 원하는 행동을 넣어야 한다. 해봣는데 a 태그로 할때만 작동된다.</p>
+    <p> 여기엔 내가 좋아하는 페이지를 링크해야 한다. link는 원래 태그 상관없이 herf 속성만 넣으면 되는것 같은데,
+      여기에 link 라고 치니까 이 Atom 이 알아서 추천해줘서 태그를 만들어준다. 그래서 link 태그로 만들어보자.
+      새 탭은 target 속성에 내가 원하는 행동을 넣어야 한다. 해봣는데 a 태그로 할때만 작동된다.</p>
     <a href="https://www.naver.com/" target="_blank"> 네이버로 간다. 원래 link 태그로 했었지만 안되서 a 로 수정했다.</a><br>
     <a href="https://www.codecademy.com/" target="_blank"> 이건 코드아카데미로 간다. 수업에 쓰인다. 이건 link 태그가 아니라 p 태그로 만들어봤었지만 a 로 바꿨다.</a><br>
     <a href="https://www.inflearn.com/" target="_blank"> 이건 인프런 사이트이다. 여기도 수업에 쓰인다. 이건 a 태그로 써봤다.</a><br>
+  </div>
+</section>
   <br>
   <br>
-  <h1> 파이썬언어 아이콘</h1>
-  <img src="images/opengraph-icon-200x200.png" width="200" height="200" alt="python_icon">
-  <p> 파이썬은 뱀이라 이런 아이콘을 쓴다.</p>
-<h1> 이번학기 시간표</h1>
+  <article>
+  <h2> 파이썬언어 아이콘</h2>
+  <h4> 파이썬을 대표하는 이미지</h4>
+  <div class="picture-document">
+  <p><img src="images/opengraph-icon-200x200.png" width="200" height="200" alt="python_icon">
+   파이썬은 뱀이라 이런 아이콘을 쓴다. This is python and english text. balblablablal</p>
+</div>
+</article>
+<aside>
+<h2> 이번학기 시간표</h2>
   <table>
     <caption> &lt;2019년 1학기 이상건 시간표 &gt; </caption>
 <thead>
@@ -88,6 +95,8 @@
 
 </tbody>
   </table>
+
+</aside>
   <h1> 이번학기 할것들</h1>
 <ol>
   <li> Toeic 시험 준비하기
@@ -108,5 +117,11 @@ Written by Gun
       Korea
     </pre>
   </address>
+
+  <footer>
+
+  </footer>
+
+
 </body>
 </html>

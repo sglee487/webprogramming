@@ -1,0 +1,66 @@
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 15px;
+  text-align: center;
+}
+
+html {
+  background-color: rgba(0,0,255,0.2);
+}
+
+p {
+  font-family: "Gulim", "Times New Roman", serif;
+  color: #007700;
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 1.6em;
+}
+
+article {
+  position: static;
+  display: block;
+  border: 2px black;
+
+}
+article .picture-document {
+  left: 10px;
+  top: 10px;
+  width: 30%;
+  display: block;
+  position: relative;
+  border: 2px black;
+  box-sizing: border-box;
+  border: 2px solid black;
+   overflow: auto;
+
+}
+
+ img {
+  border: 2px solid black;
+   float: left;
+   /* left: 10px;
+   top: 10px; */
+   margin: 10px;
+
+  }
+
+article .picture-document p {
+
+  position: relative;
+  display: inline-block;
+  /* float: left; */
+  margin: 10px;
+}
+
+.like-link {
+  position: absolute;
+  border: 1px solid red;
+  right: 50px;
+  width: 20%;
+  height: 50%;
+  font-size: 16px;
+  overflow: scroll;
+}
