@@ -1,0 +1,23 @@
+/* table, th, td #Sunday{
+  color: red;
+}
+
+table, th, td #Saturday{
+  color: blue;
+} */
+#Sunday{
+  color: red;
+}
+
+#Saturday{
+  color: blue;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 15px;
+  text-align: center;
+}
