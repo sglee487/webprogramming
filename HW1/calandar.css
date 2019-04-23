@@ -5,11 +5,19 @@
 table, th, td #Saturday{
   color: blue;
 } */
-#Sunday{
+table #Sunday{
   color: red;
 }
 
-#Saturday{
+table #Sunday ,#cell_1 ,#cell_8 ,#cell_15, #cell_22 ,#cell_29 ,#cell_35{
+  color: red;
+}
+
+table #Saturday{
+  color: blue;
+}
+
+table #Saturday ,#cell_7 ,#cell_14 ,#cell_21 ,#cell_28 ,#cell_35, #cell_42{
   color: blue;
 }
 
