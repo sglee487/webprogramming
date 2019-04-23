@@ -23,8 +23,15 @@ table_caption.innerHTML=today;
 
 }
 // 달력 안 내용 채우기
-function today_input() {
+{
    var start_cell = new Date(yyyy+'-'+mm+'-'+'01').getDay() + dd;
+   var now = new Date();
+var firstDate, lastDate;
+
+firstDate = new Date(now.getYear(), now.getMonth(),1).getDate();
+lastDate = new Date(now.getYear(), now.getMonth()+1,0).getDate();
+
+alert(firstDate + "/" + lastDate);
     // alert(start_cell-2);
   // alert(typeof(start_cell));
 
@@ -44,4 +51,6 @@ function today_input() {
  //test.innerHTML=d;
 }
 
-today_input();
+function cal_end_day() {
+  return new Date(now.getYear(), now.getMonth()+1,0).getDate();
+}
