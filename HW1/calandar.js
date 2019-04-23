@@ -23,7 +23,7 @@ table_caption.innerHTML=today;
 
 }
 // 달력 안 내용 채우기
-function days_input() {
+function today_input() {
    var start_cell = new Date(yyyy+'-'+mm+'-'+'01').getDay() + dd;
     // alert(start_cell-2);
   // alert(typeof(start_cell));
@@ -44,4 +44,4 @@ function days_input() {
  //test.innerHTML=d;
 }
 
-days_input();
+today_input();
