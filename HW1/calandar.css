@@ -58,7 +58,20 @@ td {
   overflow: visible;
   table-layout: fixed;
   font-style:italic;
-  
+
   text-align: left;
   vertical-align: top;
+}
+
+div#day_add {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  border: 3px solid black;
+  /* color: red; */
+
+  /* display: none; */
 }
