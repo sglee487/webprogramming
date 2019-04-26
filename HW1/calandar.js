@@ -42,8 +42,11 @@ table_caption.innerHTML=today;
      days[i].style.backgroundColor = "#e3e4ea";
    } else if ((i+1) == dd) {
      days[i].style.backgroundColor = "#96e3ff";
+     days[i].setAttribute('ondblclick', 'show_add_schedule(' + (i+1) + ')');
    } else {
      days[i].style.backgroundColor = "#d9e8ce";
+     days[i].setAttribute('ondblclick', 'show_add_schedule(' + (i+1) + ')');
+     // days[i].setAttribute('onclick', show_add_schedule());
    }
  }
 
@@ -86,10 +89,6 @@ function make_backgroundcolor_original() {
 
 make_backgroundcolor_original();
 
-var testp = document.getElementById("day_add");
-testp.style.backgroundColor = "white";
-testp.style.display = "none";
-
 
 var testdiv = document.getElementById("test_div");
 testdiv.style.color = "red";
@@ -99,8 +98,35 @@ testdiv.insertAdjacentHTML('beforeend','<div id="tow">tow</div>');
 // 각 날마다 4 크기 배열을 가지는 빈 박스 object 만들고,
 // for문을 돌려 안에 내용이 없으면 none, 있으면 표시 하게 하는게 나을것 같다.
 // 왜냐하면 나중에 자동 순서 배치도 있어야 하고, 순서도 바꿀수 있어야 하기 때문.
-// 근데 지금 너무 졸리다 아 자고실다 아ㅣ지너라ㅏㅣ런ㅇㄹㅇ너ㅏㅣㅣ 질꺼야 말리지마 
-function schedulebox(var day) {
-  this.date = new Date(now.getYear(), now.getMonth(), day);
-  this.priority;
+// 근데 지금 너무 졸리다 아 자고실다 아ㅣ지너라ㅏㅣ런ㅇㄹㅇ너ㅏㅣㅣ 질꺼야 말리지마
+// function schedulebox(var day) {
+//   this.date = new Date(now.getYear(), now.getMonth(), day);
+//   this.priority;
+// }
+
+// Object 만들라 했는데 굳이 그럴 필요 없대
+// 0426 실습에 배운 자바스크립트로 element 추가를 통해 만들어보자
+
+// 일단 날짜 추가받는 window 창을 띄워서 변수 입력받는 함수부터 만들자.
+
+var add_schedule_window = document.getElementById("add_schedule_window");
+var add_schedule_window_original_html = add_schedule_window.innerHTML;
+
+function show_add_schedule(day) {
+  make_backgroundcolor_gray();
+  add_schedule_window.style.display = "block";
+  add_schedule_window.innerHTML = day + add_schedule_window.innerHTML;
+
+}
+
+// ok 버튼을 누르든 Cancel 버튼을 누르든 둘 다 적용해야 하는 함수.
+function hide_add_schedule() {
+  make_backgroundcolor_original();
+  add_schedule_window.style.display = "none";
+  add_schedule_window.innerHTML = add_schedule_window_original_html;
+}
+
+
+function add_schedule(day) {
+
 }
