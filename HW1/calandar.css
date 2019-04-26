@@ -5,27 +5,73 @@
 table, th, td #Saturday{
   color: blue;
 } */
+
 table #Sunday{
   color: red;
-}
-
-table #Sunday ,#cell_1 ,#cell_8 ,#cell_15, #cell_22 ,#cell_29 ,#cell_35{
-  color: red;
+  text-align: center;
+  vertical-align: middle;
 }
 
 table #Saturday{
   color: blue;
+  text-align: center;
+  vertical-align: middle;
 }
 
-table #Saturday ,#cell_7 ,#cell_14 ,#cell_21 ,#cell_28 ,#cell_35, #cell_42{
+table #Monday, #Tuesday, #Wednesday, #Thursday, #Friday {
+  color: black;
+  text-align: center;
+  vertical-align: middle;
+}
+
+table #cell_1 ,#cell_8 ,#cell_15, #cell_22 ,#cell_29 ,#cell_35{
+  color: red;
+
+}
+
+table #cell_7 ,#cell_14 ,#cell_21 ,#cell_28 ,#cell_35, #cell_42{
   color: blue;
 }
+
+
 
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
+
+  overflow: visible;
+  table-layout: fixed;
+
+
 }
+
 th, td {
   padding: 15px;
   text-align: center;
+  overflow: visible;
+}
+
+td {
+  padding: 0px;
+  width: 100px;
+  height: 100px;
+  overflow: visible;
+  table-layout: fixed;
+  font-style:italic;
+
+  text-align: left;
+  vertical-align: top;
+}
+
+div#day_add {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  border: 3px solid black;
+  /* color: red; */
+
+  /* display: none; */
 }
