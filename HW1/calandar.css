@@ -67,6 +67,7 @@ td {
   vertical-align: top;
 }
 
+
 div#add_schedule_window {
   position: absolute;
   top: 250px;
@@ -80,4 +81,5 @@ div#add_schedule_window {
   padding: 10px;
   text-align: center;
   line-height: 200%;
+
 }
