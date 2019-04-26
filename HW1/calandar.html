@@ -33,15 +33,16 @@
         <td id="cell_35"></td><td id="cell_37"></td><td id="cell_38"></td><td id="cell_39"></td><td id="cell_40"></td><td id="cell_41"></td><td id="cell_42"></td>
       </tr>
 
-      <div id="add_schedule_window">
-         일 일정추가
-         <br>
-         <input type="text" name="일정" value="">
-         <br>
-         <button type="button" name="add">add</button>
-         <button type="button" name="Cancel" onclick="hide_add_schedule()">Cancel</button>
-       </div>
+      <div class="add_schedule_window">
+      <form id="form">
 
+         <input id="input_add" type="text" name="일정" value="">
+         <br>
+         <button type="button" name="add" onclick="input_add_OK()">add</button>
+         <button type="button" name="Cancel" onclick="input_add_Cancel()">Cancel</button>
+
+       </form>
+     </div>
     </tbody>
 
   </table>

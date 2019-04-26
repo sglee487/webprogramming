@@ -109,24 +109,52 @@ testdiv.insertAdjacentHTML('beforeend','<div id="tow">tow</div>');
 
 // 일단 날짜 추가받는 window 창을 띄워서 변수 입력받는 함수부터 만들자.
 
-var add_schedule_window = document.getElementById("add_schedule_window");
-var add_schedule_window_original_html = add_schedule_window.innerHTML;
+// var add_schedule_window = document.getElementById("add_schedule_window");
+var add_schedule_window = document.getElementsByClassName("add_schedule_window");
+// var add_schedule_window_original_html = add_schedule_window.innerHTML;
+var add_schedule_window_original_html = add_schedule_window[0].innerHTML;
 
+var temp_day_for_add;
 function show_add_schedule(day) {
   make_backgroundcolor_gray();
-  add_schedule_window.style.display = "block";
+  // add_schedule_window.style.display = "block";
+  // add_schedule_window.innerHTML = day + add_schedule_window.innerHTML;
+
+  add_schedule_window[0].style.display = "block";
   add_schedule_window.innerHTML = day + add_schedule_window.innerHTML;
+
+  temp_day_for_add = day;
 
 }
 
 // ok 버튼을 누르든 Cancel 버튼을 누르든 둘 다 적용해야 하는 함수.
 function hide_add_schedule() {
   make_backgroundcolor_original();
-  add_schedule_window.style.display = "none";
+  add_schedule_window[0].style.display = "none";
   add_schedule_window.innerHTML = add_schedule_window_original_html;
 }
 
+function input_add_schedule() {
+  var input_add_value = document.getElementById("form")[0].value;
+  alert(input_add_value);
+  return input_add_value;
+}
 
-function add_schedule(day) {
+function input_add_OK() {
+  var parent = document.createElement("div");
+  var child_node = document.createTextNode(input_add_schedule());
 
+  parent.setAttribute('color', '#000000' );
+
+  // alert(input_add_schedule());
+  parent.appendChild(child_node);
+  days[(temp_day_for_add-1)].appendChild(parent);
+
+  hide_add_schedule();
+  make_backgroundcolor_original();
+}
+
+function input_add_Cancel() {
+  hide_add_schedule();
+  make_backgroundcolor_original();
 }
