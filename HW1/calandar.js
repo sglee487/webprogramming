@@ -143,11 +143,18 @@ function input_add_OK() {
   var parent_1 = document.createElement("input");
   // var child_node_1 = document.createTextNode(input_add_schedule());
   var parent_2 = document.createElement("span");
-  var child_node_2 = document.createTextNode("X");
+  var child_node_2 = document.createTextNode("x");
+
 
   parent_1.setAttribute('value', input_add_schedule());
   parent_1.setAttribute('color', '#000000' );
   parent_1.setAttribute('size','7');
+  parent_1.setAttribute('style','background-color: #e2e2e2;');
+  // parent_1.setAttribute('style','padding:5px 0px 0px 10px;');
+  // style="padding:5px 0px 0px 10px;"
+
+  // 나중에 편집할 때, 현재 누른게 어느 날짜인지 인식할 수 있도록 부여함.
+  parent_2.setAttribute('name', (temp_day_for_add));
 
   // alert(input_add_schedule());
   // parent_1.appendChild(child_node_1);
