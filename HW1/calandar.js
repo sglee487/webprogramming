@@ -121,7 +121,7 @@ function show_add_schedule(day) {
   // add_schedule_window.innerHTML = day + add_schedule_window.innerHTML;
 
   add_schedule_window[0].style.display = "block";
-  add_schedule_window.innerHTML = day + add_schedule_window.innerHTML;
+  add_schedule_window.innerHTML = day + add_schedule_window[0].innerHTML;
 
   temp_day_for_add = day;
 
