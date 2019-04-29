@@ -89,12 +89,6 @@ function make_backgroundcolor_original() {
 
 make_backgroundcolor_original();
 
-
-var testdiv = document.getElementById("test_div");
-testdiv.style.color = "red";
-
-testdiv.insertAdjacentHTML('beforeend','<div id="tow">tow</div>');
-
 // 각 날마다 4 크기 배열을 가지는 빈 박스 object 만들고,
 // for문을 돌려 안에 내용이 없으면 none, 있으면 표시 하게 하는게 나을것 같다.
 // 왜냐하면 나중에 자동 순서 배치도 있어야 하고, 순서도 바꿀수 있어야 하기 때문.
@@ -111,6 +105,7 @@ testdiv.insertAdjacentHTML('beforeend','<div id="tow">tow</div>');
 
 // var add_schedule_window = document.getElementById("add_schedule_window");
 var add_schedule_window = document.getElementsByClassName("add_schedule_window");
+var sth_day_input = document.getElementById("sth_day_input");
 // var add_schedule_window_original_html = add_schedule_window.innerHTML;
 var add_schedule_window_original_html = add_schedule_window[0].innerHTML;
 
@@ -120,9 +115,11 @@ function show_add_schedule(day) {
   // add_schedule_window.style.display = "block";
   // add_schedule_window.innerHTML = day + add_schedule_window.innerHTML;
 
+  sth_day_input.innerHTML = day + "일 일정추가";
   add_schedule_window[0].style.display = "block";
-  add_schedule_window.innerHTML = day + add_schedule_window[0].innerHTML;
-
+  // add_schedule_window[0].innerHTML = day + add_schedule_window[0].innerHTML;
+  // add_schedule_window[0].innerHTML = "day + add_schedule_window[0].innerHTML";
+  // alert(day);
   temp_day_for_add = day;
 
 }
@@ -131,7 +128,8 @@ function show_add_schedule(day) {
 function hide_add_schedule() {
   make_backgroundcolor_original();
   add_schedule_window[0].style.display = "none";
-  add_schedule_window.innerHTML = add_schedule_window_original_html;
+  // add_schedule_window.innerHTML = add_schedule_window_original_html;
+  document.getElementById("form")[0].value = "";
 }
 
 function input_add_schedule() {
