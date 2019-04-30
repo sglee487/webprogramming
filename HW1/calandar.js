@@ -132,7 +132,7 @@ function hide_add_schedule() {
   make_backgroundcolor_original();
   add_schedule_window[0].style.display = "none";
   // add_schedule_window.innerHTML = add_schedule_window_original_html;
-  document.getElementById("form")[0].value = "";
+  document.getElementById("form_add")[0].value = "";
 }
 
 function show_edit_schedule() {
@@ -148,17 +148,17 @@ function hide_edit_schedule() {
 }
 
 function input_add_schedule() {
-  var input_add_value = document.getElementById("form")[0].value;
+  var input_add_value = document.getElementById("form_add")[0].value;
   // alert(input_add_value);
   return input_add_value;
 }
 
 function input_add_OK() {
-  var form_parent = document.createElement("form");
+  var form_add_parent = document.createElement("form");
   var parent_1 = document.createElement("input");
   // var child_node_1 = document.createTextNode(input_add_schedule());
   var parent_2 = document.createElement("span");
-  var child_node_2 = document.createTextNode("x");
+  var child_node_2 = document.createTextNode("x ");
 
 
   parent_1.setAttribute('value', input_add_schedule());
@@ -174,11 +174,11 @@ function input_add_OK() {
 
   // alert(input_add_schedule());
   // parent_1.appendChild(child_node_1);
-  form_parent.appendChild(parent_1);
+  form_add_parent.appendChild(parent_1);
   parent_2.appendChild(child_node_2);
-  form_parent.appendChild(parent_2);
+  form_add_parent.appendChild(parent_2);
 
-  days[(temp_day_for_add-1)].appendChild(form_parent);
+  days[(temp_day_for_add-1)].appendChild(form_add_parent);
   // parent_2.appendChild(child_node_2);
   // days[(temp_day_for_add-1)].appendChild(parent_2);
 
@@ -190,4 +190,18 @@ function input_add_OK() {
 function input_add_Cancel() {
   hide_add_schedule();
   make_backgroundcolor_original();
+}
+
+function input_edit_day_Edit() {
+
+
+  hide_edit_schedule();
+  make_backgroundcolor_original();
+}
+
+function input_edit_Delete(){
+
+
+    hide_edit_schedule();
+    make_backgroundcolor_original();
 }
