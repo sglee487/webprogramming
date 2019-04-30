@@ -45,6 +45,21 @@
 
        </form>
      </div>
+
+     <div class="edit_schedule_window">
+     <form id="form">
+
+        일정 날짜 변경: <input id="input_edit_day" type="date" name="일정 날짜 변경" value="">
+        <br>
+        일정 순서 변경: <input id="input_sequence_day" type="number" name="일정 순서 변경" value="" min=1 max=4>
+        <br>
+        <button type="button" name="Save" onclick="input_edit_day_Ok()">edit</button>
+        <button type="button" name="Delete" onclick="input_edit_Delete()">Delete</button>
+
+      </form>
+    </div>
+
+
     </tbody>
 
   </table>

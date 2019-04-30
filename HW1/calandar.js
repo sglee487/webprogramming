@@ -109,6 +109,9 @@ var sth_day_input = document.getElementById("sth_day_input");
 // var add_schedule_window_original_html = add_schedule_window.innerHTML;
 var add_schedule_window_original_html = add_schedule_window[0].innerHTML;
 
+var edit_schedule_window = document.getElementsByClassName("edit_schedule_window");
+
+
 var temp_day_for_add;
 function show_add_schedule(day) {
   make_backgroundcolor_gray();
@@ -130,6 +133,18 @@ function hide_add_schedule() {
   add_schedule_window[0].style.display = "none";
   // add_schedule_window.innerHTML = add_schedule_window_original_html;
   document.getElementById("form")[0].value = "";
+}
+
+function show_edit_schedule() {
+  make_backgroundcolor_gray();
+  edit_schedule_window[0].style.display = "block";
+
+}
+
+function hide_edit_schedule() {
+  make_backgroundcolor_original();
+  edit_schedule_window[0].style.display = "none";
+
 }
 
 function input_add_schedule() {
@@ -155,6 +170,7 @@ function input_add_OK() {
 
   // 나중에 편집할 때, 현재 누른게 어느 날짜인지 인식할 수 있도록 부여함.
   parent_2.setAttribute('name', (temp_day_for_add));
+  parent_2.setAttribute('onclick', 'show_edit_schedule()');
 
   // alert(input_add_schedule());
   // parent_1.appendChild(child_node_1);
