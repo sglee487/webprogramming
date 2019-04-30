@@ -135,9 +135,18 @@ function hide_add_schedule() {
   document.getElementById("form_add")[0].value = "";
 }
 
-function show_edit_schedule() {
+function show_edit_schedule(day) {
   make_backgroundcolor_gray();
   edit_schedule_window[0].style.display = "block";
+
+  if (day < 10) {
+    day = '0' + day;
+  }
+
+  // document.getElementById("form_edit")[0].value = "2019-04-30"
+  document.getElementById("form_edit")[0].value = yyyy+'-'+mm+'-'+day;
+
+  // today = yyyy +" 년 " + mm + " 월 " + dd + " 일";
 
 }
 
@@ -170,8 +179,8 @@ function input_add_OK() {
 
   // 나중에 편집할 때, 현재 누른게 어느 날짜인지 인식할 수 있도록 부여함.
   parent_2.setAttribute('name', (temp_day_for_add));
-  parent_2.setAttribute('onclick', 'show_edit_schedule()');
-
+  // parent_2.setAttribute('onclick', 'show_edit_schedule()');
+  parent_2.setAttribute('onclick', 'show_edit_schedule(' + (temp_day_for_add) + ')');
   // alert(input_add_schedule());
   // parent_1.appendChild(child_node_1);
   form_add_parent.appendChild(parent_1);
