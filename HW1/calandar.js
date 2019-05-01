@@ -271,6 +271,11 @@ function input_edit_day_Edit(input_string_day,input_order) {
       form_add_parent.appendChild(parent_2);
 
       days[(input_day-1)].appendChild(form_add_parent);
+
+      var clicked_day = days[(x_clicked_day-1)];
+      clicked_day.removeChild(clicked_day.childNodes[x_clicked_order]);
+
+
   }
   // alert(input_day);
   // alert(input_order);
