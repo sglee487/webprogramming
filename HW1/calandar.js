@@ -119,6 +119,7 @@ function show_add_schedule(day) {
   // add_schedule_window.innerHTML = day + add_schedule_window.innerHTML;
 
   sth_day_input.innerHTML = day + "일 일정추가";
+
   add_schedule_window[0].style.display = "block";
   // add_schedule_window[0].innerHTML = day + add_schedule_window[0].innerHTML;
   // add_schedule_window[0].innerHTML = "day + add_schedule_window[0].innerHTML";
@@ -135,7 +136,7 @@ function hide_add_schedule() {
   document.getElementById("form_add")[0].value = "";
 }
 
-function show_edit_schedule(day) {
+function show_edit_schedule(day, order_value) {
   make_backgroundcolor_gray();
   edit_schedule_window[0].style.display = "block";
 
@@ -145,7 +146,7 @@ function show_edit_schedule(day) {
 
   // document.getElementById("form_edit")[0].value = "2019-04-30"
   document.getElementById("form_edit")[0].value = yyyy+'-'+mm+'-'+day;
-
+  document.getElementById("form_edit")[1].value = order_value;
   // today = yyyy +" 년 " + mm + " 월 " + dd + " 일";
   // alert(this.element);
 
@@ -181,10 +182,12 @@ function input_add_OK() {
   // 나중에 편집할 때, 현재 누른게 어느 날짜인지 인식할 수 있도록 name을 부여함.
   parent_2.setAttribute('name', (temp_day_for_add));
   // 나중을 위해 순서도 value로 저장함.
-  parent_2.setAttribute('value', (days[(temp_day_for_add-1)].childElementCount+1));
+  var order_value = (days[(temp_day_for_add-1)].childElementCount+1)
+  parent_2.setAttribute('value', order_value);
 
   // parent_2.setAttribute('onclick', 'show_edit_schedule()');
-  parent_2.setAttribute('onclick', 'show_edit_schedule(' + (temp_day_for_add) + ')');
+  parent_2.setAttribute('onclick',
+  'show_edit_schedule(' + (temp_day_for_add) + ',' + order_value + ')');
   // alert(input_add_schedule());
   // parent_1.appendChild(child_node_1);
   form_add_parent.appendChild(parent_1);
