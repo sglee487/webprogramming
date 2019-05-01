@@ -136,13 +136,21 @@ function hide_add_schedule() {
   document.getElementById("form_add")[0].value = "";
 }
 
+
+// x를 눌렀을때 그 날짜와 순서. 나중에 지우거나 교체할때 쓸려고 만듬.
+var x_clicked_day;
+var x_clicked_order;
 function show_edit_schedule(day, order_value) {
   make_backgroundcolor_gray();
   edit_schedule_window[0].style.display = "block";
 
+  x_clicked_day = day;
+  x_clicked_order = order_value;
+
   if (day < 10) {
     day = '0' + day;
   }
+
 
   // document.getElementById("form_edit")[0].value = "2019-04-30"
   document.getElementById("form_edit")[0].value = yyyy+'-'+mm+'-'+day;
@@ -216,8 +224,14 @@ function input_edit_day_Edit() {
   make_backgroundcolor_original();
 }
 
-function input_edit_Delete(){
+function input_edit_Delete(input_string_day,input_order){
 
+    input_day = new Date(input_string_day).getDate();
+    // alert(input_day);
+    // alert(input_order);
+    //
+    // alert(x_clicked_day);
+    // alert(x_clicked_order);
 
     hide_edit_schedule();
     make_backgroundcolor_original();

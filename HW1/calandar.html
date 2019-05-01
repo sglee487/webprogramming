@@ -54,7 +54,7 @@
         일정 순서 변경: <input id="input_sequence_day" type="number" name="일정 순서 변경" value="" min=1 max=4>
         <br>
         <button type="button" name="Save" onclick="input_edit_day_Edit()">edit</button>
-        <button type="button" name="Delete" onclick="input_edit_Delete()">Delete</button>
+        <button type="button" name="Delete" onclick="input_edit_Delete(this.parentElement.children[0][0].value,this.parentElement.children[0][1].value)">Delete</button>
 
       </form>
     </div>
