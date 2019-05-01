@@ -69,6 +69,7 @@ td {
 
 
 div.add_schedule_window {
+
   position: absolute;
   top: 250px;
   left: 250px;
@@ -85,6 +86,8 @@ div.add_schedule_window {
 }
 
 div.edit_schedule_window {
+
+
   position: absolute;
   top: 250px;
   left: 250px;
