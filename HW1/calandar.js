@@ -7,17 +7,17 @@ var dd = today.getDate();
 var mm = today.getMonth()+1; //January is 0!
 var yyyy = today.getFullYear();
 
-var n_mm;
-var n_dd;
+var o_dd = dd;
+var o_mm = mm;
 if(dd<10) {
-    n_dd='0'+dd
+    dd='0'+dd
 }
 
 if(mm<10) {
-    n_mm='0'+mm
+    mm='0'+mm
 }
 
-today = yyyy +" 년 " + n_mm + " 월 " + n_dd + " 일";
+today = yyyy +" 년 " + mm + " 월 " + dd + " 일";
 
 var table_caption;
 table_caption = document.getElementById("table_caption");
@@ -225,14 +225,17 @@ function input_edit_day_Edit(input_string_day,input_order) {
 
   input_Date = new Date(input_string_day);
   input_year = input_Date.getFullYear();
-  input_month = input_Date.getMonth();
+  input_month = input_Date.getMonth()+1;
   input_day = input_Date.getDate();
 
-  if (input_year != yyyy || input_month != mm) {
+  if (input_year != yyyy || input_month != o_mm) {
     alert("이번 달이 아닌 날로 이동이 불가능합니다.");
-  } else if (input_day > dd) {
+  } else if (input_day < o_dd) {
     alert("지난 날로 이동이 불가능합니다.")
   } else {
+
+      var order_value = (days[(input_day-1)].childElementCount+1)
+
 
       var form_add_parent = document.createElement("form");
       var parent_1 = document.createElement("input");
@@ -252,7 +255,7 @@ function input_edit_day_Edit(input_string_day,input_order) {
       parent_2.setAttribute('name', input_day);
       // parent_2.setAttribute('name', (temp_day_for_add));
       // 나중을 위해 순서도 value로 저장함.
-      var order_value = (days[(x_clicked_day-1)].childElementCount+1)
+      // var order_value = (days[(x_clicked_day-1)].childElementCount+1)
       parent_2.setAttribute('value', order_value);
 
       form_add_parent.setAttribute('id',order_value);
@@ -266,7 +269,7 @@ function input_edit_day_Edit(input_string_day,input_order) {
       parent_2.appendChild(child_node_2);
       form_add_parent.appendChild(parent_2);
 
-      days[(x_clicked_day-1)].appendChild(form_add_parent);
+      days[(input_day-1)].appendChild(form_add_parent);
   }
   // alert(input_day);
   // alert(input_order);
