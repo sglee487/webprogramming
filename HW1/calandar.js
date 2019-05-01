@@ -243,7 +243,8 @@ function input_edit_day_Edit(input_string_day,input_order) {
       var parent_2 = document.createElement("span");
       var child_node_2 = document.createTextNode("x ");
 
-      var string_value = days[(x_clicked_day-1)].childNodes[x_clicked_order].value;
+      var string_value = days[(x_clicked_day-1)].childNodes[x_clicked_order][0].value;
+
       parent_1.setAttribute('value', string_value);
       parent_1.setAttribute('color', '#000000' );
       parent_1.setAttribute('size','7');
@@ -262,7 +263,7 @@ function input_edit_day_Edit(input_string_day,input_order) {
 
       // parent_2.setAttribute('onclick', 'show_edit_schedule()');
       parent_2.setAttribute('onclick',
-      'show_edit_schedule(' + ((x_clicked_day-1)) + ',' + order_value + ')');
+      'show_edit_schedule(' + ((input_day)) + ',' + order_value + ')');
       // alert(input_add_schedule());
       // parent_1.appendChild(child_node_1);
       form_add_parent.appendChild(parent_1);
