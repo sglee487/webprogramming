@@ -7,6 +7,8 @@ var dd = today.getDate();
 var mm = today.getMonth()+1; //January is 0!
 var yyyy = today.getFullYear();
 
+var o_dd = dd;
+var o_mm = mm;
 if(dd<10) {
     dd='0'+dd
 }
@@ -109,6 +111,9 @@ var sth_day_input = document.getElementById("sth_day_input");
 // var add_schedule_window_original_html = add_schedule_window.innerHTML;
 var add_schedule_window_original_html = add_schedule_window[0].innerHTML;
 
+var edit_schedule_window = document.getElementsByClassName("edit_schedule_window");
+
+
 var temp_day_for_add;
 function show_add_schedule(day) {
   make_backgroundcolor_gray();
@@ -116,6 +121,7 @@ function show_add_schedule(day) {
   // add_schedule_window.innerHTML = day + add_schedule_window.innerHTML;
 
   sth_day_input.innerHTML = day + "일 일정추가";
+
   add_schedule_window[0].style.display = "block";
   // add_schedule_window[0].innerHTML = day + add_schedule_window[0].innerHTML;
   // add_schedule_window[0].innerHTML = "day + add_schedule_window[0].innerHTML";
@@ -129,21 +135,51 @@ function hide_add_schedule() {
   make_backgroundcolor_original();
   add_schedule_window[0].style.display = "none";
   // add_schedule_window.innerHTML = add_schedule_window_original_html;
-  document.getElementById("form")[0].value = "";
+  document.getElementById("form_add")[0].value = "";
+}
+
+
+// x를 눌렀을때 그 날짜와 순서. 나중에 지우거나 교체할때 쓸려고 만듬.
+var x_clicked_day;
+var x_clicked_order;
+function show_edit_schedule(day, order_value) {
+  make_backgroundcolor_gray();
+  edit_schedule_window[0].style.display = "block";
+
+  x_clicked_day = day;
+  x_clicked_order = order_value;
+
+  if (day < 10) {
+    day = '0' + day;
+  }
+
+
+  // document.getElementById("form_edit")[0].value = "2019-04-30"
+  document.getElementById("form_edit")[0].value = yyyy+'-'+mm+'-'+day;
+  document.getElementById("form_edit")[1].value = order_value;
+  // today = yyyy +" 년 " + mm + " 월 " + dd + " 일";
+  // alert(this.element);
+
+}
+
+function hide_edit_schedule() {
+  make_backgroundcolor_original();
+  edit_schedule_window[0].style.display = "none";
+
 }
 
 function input_add_schedule() {
-  var input_add_value = document.getElementById("form")[0].value;
+  var input_add_value = document.getElementById("form_add")[0].value;
   // alert(input_add_value);
   return input_add_value;
 }
 
 function input_add_OK() {
-  var form_parent = document.createElement("form");
+  var form_add_parent = document.createElement("form");
   var parent_1 = document.createElement("input");
   // var child_node_1 = document.createTextNode(input_add_schedule());
   var parent_2 = document.createElement("span");
-  var child_node_2 = document.createTextNode("x");
+  var child_node_2 = document.createTextNode("x ");
 
 
   parent_1.setAttribute('value', input_add_schedule());
@@ -153,18 +189,27 @@ function input_add_OK() {
   // parent_1.setAttribute('style','padding:5px 0px 0px 10px;');
   // style="padding:5px 0px 0px 10px;"
 
-  // 나중에 편집할 때, 현재 누른게 어느 날짜인지 인식할 수 있도록 부여함.
+  // 나중에 편집할 때, 현재 누른게 어느 날짜인지 인식할 수 있도록 name을 부여함.
   parent_2.setAttribute('name', (temp_day_for_add));
+  // 나중을 위해 순서도 value로 저장함.
+  var order_value = (days[(temp_day_for_add-1)].childElementCount+1)
+  parent_2.setAttribute('value', order_value);
 
+  form_add_parent.setAttribute('id',order_value);
+
+  // parent_2.setAttribute('onclick', 'show_edit_schedule()');
+  parent_2.setAttribute('onclick',
+  'show_edit_schedule(' + (temp_day_for_add) + ',' + order_value + ')');
   // alert(input_add_schedule());
   // parent_1.appendChild(child_node_1);
-  form_parent.appendChild(parent_1);
+  form_add_parent.appendChild(parent_1);
   parent_2.appendChild(child_node_2);
-  form_parent.appendChild(parent_2);
+  form_add_parent.appendChild(parent_2);
 
-  days[(temp_day_for_add-1)].appendChild(form_parent);
+  days[(temp_day_for_add-1)].appendChild(form_add_parent);
   // parent_2.appendChild(child_node_2);
   // days[(temp_day_for_add-1)].appendChild(parent_2);
+  // alert(days[(temp_day_for_add-1)].childElementCount);
 
 
   hide_add_schedule();
@@ -174,4 +219,81 @@ function input_add_OK() {
 function input_add_Cancel() {
   hide_add_schedule();
   make_backgroundcolor_original();
+}
+
+function input_edit_day_Edit(input_string_day,input_order) {
+
+  input_Date = new Date(input_string_day);
+  input_year = input_Date.getFullYear();
+  input_month = input_Date.getMonth()+1;
+  input_day = input_Date.getDate();
+
+  if (input_year != yyyy || input_month != o_mm) {
+    alert("이번 달이 아닌 날로 이동이 불가능합니다.");
+  } else if (input_day < o_dd) {
+    alert("지난 날로 이동이 불가능합니다.")
+  } else {
+
+      var order_value = (days[(input_day-1)].childElementCount+1)
+
+
+      var form_add_parent = document.createElement("form");
+      var parent_1 = document.createElement("input");
+      // var child_node_1 = document.createTextNode(input_add_schedule());
+      var parent_2 = document.createElement("span");
+      var child_node_2 = document.createTextNode("x ");
+
+      var string_value = days[(x_clicked_day-1)].childNodes[x_clicked_order][0].value;
+
+      parent_1.setAttribute('value', string_value);
+      parent_1.setAttribute('color', '#000000' );
+      parent_1.setAttribute('size','7');
+      parent_1.setAttribute('style','background-color: #e2e2e2;');
+      // parent_1.setAttribute('style','padding:5px 0px 0px 10px;');
+      // style="padding:5px 0px 0px 10px;"
+
+      // 나중에 편집할 때, 현재 누른게 어느 날짜인지 인식할 수 있도록 name을 부여함.
+      parent_2.setAttribute('name', input_day);
+      // parent_2.setAttribute('name', (temp_day_for_add));
+      // 나중을 위해 순서도 value로 저장함.
+      // var order_value = (days[(x_clicked_day-1)].childElementCount+1)
+      parent_2.setAttribute('value', order_value);
+
+      form_add_parent.setAttribute('id',order_value);
+
+      // parent_2.setAttribute('onclick', 'show_edit_schedule()');
+      parent_2.setAttribute('onclick',
+      'show_edit_schedule(' + ((input_day)) + ',' + order_value + ')');
+      // alert(input_add_schedule());
+      // parent_1.appendChild(child_node_1);
+      form_add_parent.appendChild(parent_1);
+      parent_2.appendChild(child_node_2);
+      form_add_parent.appendChild(parent_2);
+
+      days[(input_day-1)].appendChild(form_add_parent);
+
+      var clicked_day = days[(x_clicked_day-1)];
+      clicked_day.removeChild(clicked_day.childNodes[x_clicked_order]);
+
+
+  }
+  // alert(input_day);
+  // alert(input_order);
+  //
+  // alert(x_clicked_day);
+  // alert(x_clicked_order);
+
+  hide_edit_schedule();
+  make_backgroundcolor_original();
+}
+
+function input_edit_Delete(){
+
+    var clicked_day = days[(x_clicked_day-1)];
+    clicked_day.removeChild(clicked_day.childNodes[x_clicked_order]);
+
+
+
+    hide_edit_schedule();
+    make_backgroundcolor_original();
 }
