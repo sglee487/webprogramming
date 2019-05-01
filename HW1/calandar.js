@@ -228,9 +228,9 @@ function input_edit_day_Edit(input_string_day,input_order) {
   input_month = input_Date.getMonth();
   input_day = input_Date.getDate();
 
-  if (input_year != yyyy || input_month != today.getMonth()) {
+  if (input_year != yyyy || input_month != mm) {
     alert("이번 달이 아닌 날로 이동이 불가능합니다.");
-  } else if (input_Date.getDay() > today.getDay()) {
+  } else if (input_day > dd) {
     alert("지난 날로 이동이 불가능합니다.")
   } else {
 
