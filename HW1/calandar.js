@@ -193,6 +193,8 @@ function input_add_OK() {
   var order_value = (days[(temp_day_for_add-1)].childElementCount+1)
   parent_2.setAttribute('value', order_value);
 
+  form_add_parent.setAttribute('id',order_value);
+
   // parent_2.setAttribute('onclick', 'show_edit_schedule()');
   parent_2.setAttribute('onclick',
   'show_edit_schedule(' + (temp_day_for_add) + ',' + order_value + ')');
@@ -220,11 +222,11 @@ function input_add_Cancel() {
 function input_edit_day_Edit(input_string_day,input_order) {
 
   input_day = new Date(input_string_day).getDate();
-  alert(input_day);
-  alert(input_order);
-
-  alert(x_clicked_day);
-  alert(x_clicked_order);
+  // alert(input_day);
+  // alert(input_order);
+  //
+  // alert(x_clicked_day);
+  // alert(x_clicked_order);
 
   hide_edit_schedule();
   make_backgroundcolor_original();
@@ -232,6 +234,7 @@ function input_edit_day_Edit(input_string_day,input_order) {
 
 function input_edit_Delete(){
 
+    days[(x_clicked_day-1)].getElementByValue(x_clicked_order);
 
 
     hide_edit_schedule();
