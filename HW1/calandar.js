@@ -7,15 +7,17 @@ var dd = today.getDate();
 var mm = today.getMonth()+1; //January is 0!
 var yyyy = today.getFullYear();
 
+var n_mm;
+var n_dd;
 if(dd<10) {
-    dd='0'+dd
+    n_dd='0'+dd
 }
 
 if(mm<10) {
-    mm='0'+mm
+    n_mm='0'+mm
 }
 
-today = yyyy +" 년 " + mm + " 월 " + dd + " 일";
+today = yyyy +" 년 " + n_mm + " 월 " + n_dd + " 일";
 
 var table_caption;
 table_caption = document.getElementById("table_caption");
@@ -222,16 +224,49 @@ function input_add_Cancel() {
 function input_edit_day_Edit(input_string_day,input_order) {
 
   input_Date = new Date(input_string_day);
-  // input_year = input_Date.getFullYear();
-  // input_month = input_Date.getMonth();
-  // input_day = input_Date.getDate();
+  input_year = input_Date.getFullYear();
+  input_month = input_Date.getMonth();
+  input_day = input_Date.getDate();
 
-  if (input_Date.getFullYear() != today.getFullYear() || input_Date.getMonth() != today.getMonth()) {
+  if (input_year != yyyy || input_month != today.getMonth()) {
     alert("이번 달이 아닌 날로 이동이 불가능합니다.");
   } else if (input_Date.getDay() > today.getDay()) {
     alert("지난 날로 이동이 불가능합니다.")
   } else {
 
+      var form_add_parent = document.createElement("form");
+      var parent_1 = document.createElement("input");
+      // var child_node_1 = document.createTextNode(input_add_schedule());
+      var parent_2 = document.createElement("span");
+      var child_node_2 = document.createTextNode("x ");
+
+      var string_value = days[(x_clicked_day-1)].childNodes[x_clicked_order].value;
+      parent_1.setAttribute('value', string_value);
+      parent_1.setAttribute('color', '#000000' );
+      parent_1.setAttribute('size','7');
+      parent_1.setAttribute('style','background-color: #e2e2e2;');
+      // parent_1.setAttribute('style','padding:5px 0px 0px 10px;');
+      // style="padding:5px 0px 0px 10px;"
+
+      // 나중에 편집할 때, 현재 누른게 어느 날짜인지 인식할 수 있도록 name을 부여함.
+      parent_2.setAttribute('name', input_day);
+      // parent_2.setAttribute('name', (temp_day_for_add));
+      // 나중을 위해 순서도 value로 저장함.
+      var order_value = (days[(x_clicked_day-1)].childElementCount+1)
+      parent_2.setAttribute('value', order_value);
+
+      form_add_parent.setAttribute('id',order_value);
+
+      // parent_2.setAttribute('onclick', 'show_edit_schedule()');
+      parent_2.setAttribute('onclick',
+      'show_edit_schedule(' + ((x_clicked_day-1)) + ',' + order_value + ')');
+      // alert(input_add_schedule());
+      // parent_1.appendChild(child_node_1);
+      form_add_parent.appendChild(parent_1);
+      parent_2.appendChild(child_node_2);
+      form_add_parent.appendChild(parent_2);
+
+      days[(x_clicked_day-1)].appendChild(form_add_parent);
   }
   // alert(input_day);
   // alert(input_order);
