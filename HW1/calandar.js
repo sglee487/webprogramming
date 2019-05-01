@@ -234,7 +234,9 @@ function input_edit_day_Edit(input_string_day,input_order) {
 
 function input_edit_Delete(){
 
-    days[(x_clicked_day-1)].getElementByValue(x_clicked_order);
+    var clicked_day = days[(x_clicked_day-1)];
+    clicked_day.removeChild(clicked_day.childNodes[x_clicked_order]);
+
 
 
     hide_edit_schedule();
