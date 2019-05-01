@@ -217,21 +217,22 @@ function input_add_Cancel() {
   make_backgroundcolor_original();
 }
 
-function input_edit_day_Edit() {
+function input_edit_day_Edit(input_string_day,input_order) {
 
+  input_day = new Date(input_string_day).getDate();
+  alert(input_day);
+  alert(input_order);
+
+  alert(x_clicked_day);
+  alert(x_clicked_order);
 
   hide_edit_schedule();
   make_backgroundcolor_original();
 }
 
-function input_edit_Delete(input_string_day,input_order){
+function input_edit_Delete(){
 
-    input_day = new Date(input_string_day).getDate();
-    // alert(input_day);
-    // alert(input_order);
-    //
-    // alert(x_clicked_day);
-    // alert(x_clicked_order);
+
 
     hide_edit_schedule();
     make_backgroundcolor_original();
