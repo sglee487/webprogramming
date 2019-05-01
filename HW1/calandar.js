@@ -221,7 +221,18 @@ function input_add_Cancel() {
 
 function input_edit_day_Edit(input_string_day,input_order) {
 
-  input_day = new Date(input_string_day).getDate();
+  input_Date = new Date(input_string_day);
+  // input_year = input_Date.getFullYear();
+  // input_month = input_Date.getMonth();
+  // input_day = input_Date.getDate();
+
+  if (input_Date.getFullYear() != today.getFullYear() || input_Date.getMonth() != today.getMonth()) {
+    alert("이번 달이 아닌 날로 이동이 불가능합니다.");
+  } else if (input_Date.getDay() > today.getDay()) {
+    alert("지난 날로 이동이 불가능합니다.")
+  } else {
+
+  }
   // alert(input_day);
   // alert(input_order);
   //
