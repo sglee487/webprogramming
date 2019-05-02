@@ -111,7 +111,9 @@ var sth_day_input = document.getElementById("sth_day_input");
 // var add_schedule_window_original_html = add_schedule_window.innerHTML;
 var add_schedule_window_original_html = add_schedule_window[0].innerHTML;
 
+
 var edit_schedule_window = document.getElementsByClassName("edit_schedule_window");
+
 
 
 var temp_day_for_add;
@@ -296,4 +298,5 @@ function input_edit_Delete(){
 
     hide_edit_schedule();
     make_backgroundcolor_original();
+
 }
