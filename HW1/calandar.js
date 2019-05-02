@@ -164,7 +164,7 @@ function show_edit_schedule(day, order_value) {
   // today = yyyy +" 년 " + mm + " 월 " + dd + " 일";
   // alert(this.element);
     max_number = days[(day-1)].childElementCount;
-    alert(max_number);
+    // alert(max_number);
   document.getElementById("input_sequence_day").setAttribute('max',max_number);
 
 }
