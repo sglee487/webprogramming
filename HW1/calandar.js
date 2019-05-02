@@ -161,6 +161,9 @@ function show_edit_schedule(day, order_value) {
   document.getElementById("form_edit")[1].value = order_value;
   // today = yyyy +" 년 " + mm + " 월 " + dd + " 일";
   // alert(this.element);
+  var max_number = days[(day-1)].childElementCount;
+
+  document.getElementById("input_sequence_day").setAttribute('max',max_number);
 
 }
 
