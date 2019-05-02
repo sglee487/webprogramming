@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+Name: <input type="date" id="myText" value="" onchange="same_disable()">
+<br>
+Name2: <input type="text" id="myText2" value="" >
+<p>Click the button to disable the text field.</p>
+
+<button >Disable Text field</button>
+
+<script>
+  var today = new Date();
+  var mytext = document.getElementById("myText");
+  var mytext2 = document.getElementById("myText2");
+  myText.setAttribute('value',"2019-05-03");
+  mytext2.setAttribute('value',7);
+  mytext.disabled = false;
+
+  var date = new Date(myText.value);
+  var date2 = date.getDate();
+  // mytext2.setAttribute('value',date );
+  function same_disable() {
+    date = new Date(myText.value);
+    date2 = date.getDate();
+  if (date2 == mytext2.value) {
+     mytext2.disabled = true;
+  }
+}
+
+
+</script>
+
+</body>
+</html>
