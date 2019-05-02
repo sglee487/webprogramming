@@ -278,6 +278,10 @@ function input_edit_day_Edit(input_string_day,input_order) {
     // alert(input_order);
     days[(input_day-1)].insertBefore(form_add_parent, days[(input_day-1)].childNodes[input_order]);
 
+    // for 문을 돌려 (parent_2.setAttribute('onclick',
+    // 'show_edit_schedule(' + ((input_day)) + ',' + order_value + ')');)
+    // 을 다시 차례대로 1 ,2,3,4... 로 조절할 필요가 있다.
+    reOrdering(input_day);
 
     // var clicked_day = days[(x_clicked_day-1)];
     // clicked_day.removeChild(clicked_day.childNodes[x_clicked_order]);
@@ -342,6 +346,20 @@ function input_edit_day_Edit(input_string_day,input_order) {
 
   hide_edit_schedule();
   make_backgroundcolor_original();
+}
+
+function reOrdering(ShouldBeReorderday) {
+  parent = days[(ShouldBeReorderday-1)];
+  var length = parent.childElementCount;
+  // alert(length);
+
+  // parent_2.setAttribute('onclick',
+  // 'show_edit_schedule(' + ((input_day)) + ',' + order_value + ')');
+  for (let i=0;i<length;i++) {
+// parent.children[0].children[1].setAttribute('onclick','show_edit_schedule(10,1)')
+// parent.children[1].children[1].setAttribute('onclick','show_edit_schedule(10,2)')
+    parent.children[i].children[1].setAttribute('onclick','show_edit_schedule(10,' + (i+1) + ')');
+  }
 }
 
 function input_edit_Delete(){
