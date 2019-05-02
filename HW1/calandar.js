@@ -17,7 +17,7 @@ if(mm<10) {
     mm='0'+mm
 }
 
-today = yyyy +" 년 " + mm + " 월 " + dd + " 일";
+today = yyyy +" 年 " + mm + " 月 ";
 
 var table_caption;
 table_caption = document.getElementById("table_caption");
