@@ -147,7 +147,7 @@ var x_clicked_order;
 function show_edit_schedule(day, order_value) {
   make_backgroundcolor_gray();
   edit_schedule_window[0].style.display = "block";
-
+  alert(day);
   x_clicked_day = day;
   x_clicked_order = order_value;
 
@@ -167,6 +167,7 @@ function show_edit_schedule(day, order_value) {
 function hide_edit_schedule() {
   make_backgroundcolor_original();
   edit_schedule_window[0].style.display = "none";
+  document.getElementsByClassName("edit_schedule_window")[0].children[3].disabled = false;
 
 }
 
@@ -230,56 +231,63 @@ function input_edit_day_Edit(input_string_day,input_order) {
   input_month = input_Date.getMonth()+1;
   input_day = input_Date.getDate();
 
-  if (input_year != yyyy || input_month != o_mm) {
-    alert("이번 달이 아닌 날로 이동이 불가능합니다.");
-  } else if (input_day < o_dd) {
-    alert("지난 날로 이동이 불가능합니다.")
-  } else {
+  var x_clicked_date = new Date(yyyy+ "-" + mm+ "-" + x_clicked_day);
 
-      var order_value = (days[(input_day-1)].childElementCount+1)
-
-
-      var form_add_parent = document.createElement("form");
-      var parent_1 = document.createElement("input");
-      // var child_node_1 = document.createTextNode(input_add_schedule());
-      var parent_2 = document.createElement("span");
-      var child_node_2 = document.createTextNode("x ");
-
-      var string_value = days[(x_clicked_day-1)].childNodes[x_clicked_order][0].value;
-
-      parent_1.setAttribute('value', string_value);
-      parent_1.setAttribute('color', '#000000' );
-      parent_1.setAttribute('size','7');
-      parent_1.setAttribute('style','background-color: #e2e2e2;');
-      // parent_1.setAttribute('style','padding:5px 0px 0px 10px;');
-      // style="padding:5px 0px 0px 10px;"
-
-      // 나중에 편집할 때, 현재 누른게 어느 날짜인지 인식할 수 있도록 name을 부여함.
-      parent_2.setAttribute('name', input_day);
-      // parent_2.setAttribute('name', (temp_day_for_add));
-      // 나중을 위해 순서도 value로 저장함.
-      // var order_value = (days[(x_clicked_day-1)].childElementCount+1)
-      parent_2.setAttribute('value', order_value);
-
-      form_add_parent.setAttribute('id',order_value);
-
-      // parent_2.setAttribute('onclick', 'show_edit_schedule()');
-      parent_2.setAttribute('onclick',
-      'show_edit_schedule(' + ((input_day)) + ',' + order_value + ')');
-      // alert(input_add_schedule());
-      // parent_1.appendChild(child_node_1);
-      form_add_parent.appendChild(parent_1);
-      parent_2.appendChild(child_node_2);
-      form_add_parent.appendChild(parent_2);
-
-      days[(input_day-1)].appendChild(form_add_parent);
-
-      var clicked_day = days[(x_clicked_day-1)];
-      clicked_day.removeChild(clicked_day.childNodes[x_clicked_order]);
-
-
+  // 여기서 순서 바꾸는거는 if, 다른날짜로 스케줄 옮기는건 else로 하자.
+  if (input_day == x_clicked_day && input_Date.getMonth() == x_clicked_date.getMonth() && input_Date.getYear() == x_clicked_date.getYear()) {
+    alert("SAME!!");
   }
-  // alert(input_day);
+  else {
+    if (input_year != yyyy || input_month != o_mm) {
+      alert("이번 달이 아닌 날로 이동이 불가능합니다.");
+    } else if (input_day < o_dd) {
+      alert("지난 날로 이동이 불가능합니다.")
+    } else {
+
+        var order_value = (days[(input_day-1)].childElementCount+1)
+
+
+        var form_add_parent = document.createElement("form");
+        var parent_1 = document.createElement("input");
+        // var child_node_1 = document.createTextNode(input_add_schedule());
+        var parent_2 = document.createElement("span");
+        var child_node_2 = document.createTextNode("x ");
+
+        var string_value = days[(x_clicked_day-1)].childNodes[x_clicked_order][0].value;
+
+        parent_1.setAttribute('value', string_value);
+        parent_1.setAttribute('color', '#000000' );
+        parent_1.setAttribute('size','7');
+        parent_1.setAttribute('style','background-color: #e2e2e2;');
+        // parent_1.setAttribute('style','padding:5px 0px 0px 10px;');
+        // style="padding:5px 0px 0px 10px;"
+
+        // 나중에 편집할 때, 현재 누른게 어느 날짜인지 인식할 수 있도록 name을 부여함.
+        parent_2.setAttribute('name', input_day);
+        // parent_2.setAttribute('name', (temp_day_for_add));
+        // 나중을 위해 순서도 value로 저장함.
+        // var order_value = (days[(x_clicked_day-1)].childElementCount+1)
+        parent_2.setAttribute('value', order_value);
+
+        form_add_parent.setAttribute('id',order_value);
+
+        // parent_2.setAttribute('onclick', 'show_edit_schedule()');
+        parent_2.setAttribute('onclick',
+        'show_edit_schedule(' + ((input_day)) + ',' + order_value + ')');
+        // alert(input_add_schedule());
+        // parent_1.appendChild(child_node_1);
+        form_add_parent.appendChild(parent_1);
+        parent_2.appendChild(child_node_2);
+        form_add_parent.appendChild(parent_2);
+
+        days[(input_day-1)].appendChild(form_add_parent);
+
+        var clicked_day = days[(x_clicked_day-1)];
+        clicked_day.removeChild(clicked_day.childNodes[x_clicked_order]);
+
+
+    }
+  }// alert(input_day);
   // alert(input_order);
   //
   // alert(x_clicked_day);
