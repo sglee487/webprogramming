@@ -144,6 +144,8 @@ function hide_add_schedule() {
 // x를 눌렀을때 그 날짜와 순서. 나중에 지우거나 교체할때 쓸려고 만듬.
 var x_clicked_day;
 var x_clicked_order;
+
+var max_number;
 function show_edit_schedule(day, order_value) {
   make_backgroundcolor_gray();
   edit_schedule_window[0].style.display = "block";
@@ -161,8 +163,8 @@ function show_edit_schedule(day, order_value) {
   document.getElementById("form_edit")[1].value = order_value;
   // today = yyyy +" 년 " + mm + " 월 " + dd + " 일";
   // alert(this.element);
-  var max_number = days[(day-1)].childElementCount;
-
+    max_number = days[(day-1)].childElementCount;
+    alert(max_number);
   document.getElementById("input_sequence_day").setAttribute('max',max_number);
 
 }
@@ -361,7 +363,7 @@ function reOrdering(ShouldBeReorderday) {
   for (let i=0;i<length;i++) {
 // parent.children[0].children[1].setAttribute('onclick','show_edit_schedule(10,1)')
 // parent.children[1].children[1].setAttribute('onclick','show_edit_schedule(10,2)')
-    parent.children[i].children[1].setAttribute('onclick','show_edit_schedule(10,' + (i+1) + ')');
+    parent.children[i].children[1].setAttribute('onclick','show_edit_schedule(' + ShouldBeReorderday + ',' + (i+1) + ')');
   }
 }
 
