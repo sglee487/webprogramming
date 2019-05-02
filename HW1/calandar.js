@@ -300,3 +300,22 @@ function input_edit_Delete(){
     make_backgroundcolor_original();
 
 }
+
+function diffentday_disable(input_string_day,input_order) {
+  // alert(input_string_day);
+  // alert(input_order);
+
+  edit_schedule_window_class = document.getElementsByClassName("edit_schedule_window")[0];
+  var input_day = new Date(input_string_day);
+  var input_date = input_day.getDate();
+
+  var x_clicked_date = new Date(yyyy+ "-" + mm+ "-" + x_clicked_day);
+
+
+  if (input_date == x_clicked_day && input_day.getMonth() == x_clicked_date.getMonth() && input_day.getYear() == x_clicked_date.getYear()) {
+    edit_schedule_window_class.children[3].disabled = false;
+
+  } else {
+    edit_schedule_window_class.children[3].disabled = true;
+  }
+}
