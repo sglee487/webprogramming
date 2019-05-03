@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="kr">
   <head>
+    <title>Calandar</title>
+    <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="calandar.css">
   </head>
   <body>
@@ -10,7 +12,7 @@
       <th colspan="7" id="table_caption"></th>
     </tr>
     <tr>
-      <td id="Sunday">일</td> <td id="Monday">월</td> <td id="Tuesday">화</td> <td id="Wednesday">수</td> <td id="Thursday">목</td> <td id="Friday">금</td> <td id="Saturday">토</td>
+      <td id="Sunday">일</td> <td id="Monday">월</td> <td id="Tuesday">수</td> <td id="Wednesday">수</td> <td id="Thursday">목</td> <td id="Friday">금</td> <td id="Saturday">토</td>
     </tr>
     </thead>
     <tbody>
@@ -30,44 +32,42 @@
         <td id="cell_29"></td><td id="cell_30"></td><td id="cell_31"></td><td id="cell_32"></td><td id="cell_33"></td><td id="cell_34"></td><td id="cell_35"></td>
       </tr>
       <tr>
-        <td id="cell_35"></td><td id="cell_37"></td><td id="cell_38"></td><td id="cell_39"></td><td id="cell_40"></td><td id="cell_41"></td><td id="cell_42"></td>
+        <td id="cell_36"></td><td id="cell_37"></td><td id="cell_38"></td><td id="cell_39"></td><td id="cell_40"></td><td id="cell_41"></td><td id="cell_42"></td>
       </tr>
 
-      <div class="add_schedule_window">
-        <p id="sth_day_input">
-      </p>
-      <form id="form_add">
-
-         <input id="input_add" type="text" name="일정" value="">
-         <br>
-         <button type="button" name="add" onclick="input_add_OK()">add</button>
-         <button type="button" name="Cancel" onclick="input_add_Cancel()">Cancel</button>
-
-       </form>
-     </div>
-
-     <div class="edit_schedule_window">
-     <form id="form_edit">
-
-        일정 날짜 변경: <input id="input_edit_day" type="date" name="일정 날짜 변경" value="" onchange="diffentday_disable(this.parentElement.children[0][0].value,this.parentElement.children[0][1].value)">
-        <br>
-        일정 순서 변경: <input id="input_sequence_day" type="number" name="일정 순서 변경" value="" min=1 max=4>
-        <br>
-        <button type="button" name="Save" onclick="input_edit_day_Edit(this.parentElement.children[0][0].value,this.parentElement.children[0][1].value)">Save</button>
-        <button type="button" name="Delete" onclick="input_edit_Delete()">Delete</button>
-
-      </form>
-    </div>
 
 
-       </form>
-     </div>
     </tbody>
 
   </table>
-<div id="test_div"> teststsetsetestest </div>
-<button type="button" name="test" onclick="show_add_schedule()"> test function button</button>
 
+  <div class="add_schedule_window">
+    <p id="sth_day_input">
+  </p>
+  <form id="form_add">
+
+     <input id="input_add" type="text" name="일정" value="">
+     <br>
+     <button type="button" name="add" onclick="input_add_OK()">add</button>
+     <button type="button" name="Cancel" onclick="input_add_Cancel()">Cancel</button>
+
+   </form>
+ </div>
+
+ <div class="edit_schedule_window">
+   일정 변경
+ <form id="form_edit">
+
+    일정 날짜 변경: <input id="input_edit_day" type="date" name="일정 날짜 변경" value="" onchange="diffentday_disable(this.parentElement.children[0].value,this.parentElement.children[2].value)">
+    <br>
+    일정 순서 변경: <input id="input_sequence_day" type="number" name="일정 순서 변경" value="" min=1 max=4>
+    <br>
+    <button type="button" name="Save" onclick="input_edit_day_Edit(this.parentElement.children[0].value,this.parentElement.children[2].value)">Save</button>
+    <button type="button" name="Delete" onclick="input_edit_Delete()">Delete</button>
+
+  </form>
+</div>
+  
   <script src="calandar.js">
   </script>
   </body>
