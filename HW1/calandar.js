@@ -171,7 +171,7 @@ function show_edit_schedule(day, order_value) {
 
 function hide_edit_schedule() {
   make_backgroundcolor_original();
-  edit_schedule_window[0].style.display = "none"; ;
+  edit_schedule_window[0].style.display = "none";
   document.getElementsByClassName("edit_schedule_window")[0].children[0][1].disabled = false;
 
 }
