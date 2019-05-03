@@ -17,7 +17,7 @@ if(mm<10) {
     mm='0'+mm
 }
 
-today = yyyy +" 년 " + mm + " 월 " + dd + " 일";
+today = yyyy +" 年 " + mm + " 月 ";
 
 var table_caption;
 table_caption = document.getElementById("table_caption");
@@ -144,6 +144,8 @@ function hide_add_schedule() {
 // x를 눌렀을때 그 날짜와 순서. 나중에 지우거나 교체할때 쓸려고 만듬.
 var x_clicked_day;
 var x_clicked_order;
+
+var max_number;
 function show_edit_schedule(day, order_value) {
   make_backgroundcolor_gray();
   edit_schedule_window[0].style.display = "block";
@@ -161,6 +163,9 @@ function show_edit_schedule(day, order_value) {
   document.getElementById("form_edit")[1].value = order_value;
   // today = yyyy +" 년 " + mm + " 월 " + dd + " 일";
   // alert(this.element);
+    max_number = days[(day-1)].childElementCount;
+    // alert(max_number);
+  document.getElementById("input_sequence_day").setAttribute('max',max_number);
 
 }
 
@@ -278,6 +283,10 @@ function input_edit_day_Edit(input_string_day,input_order) {
     // alert(input_order);
     days[(input_day-1)].insertBefore(form_add_parent, days[(input_day-1)].childNodes[input_order]);
 
+    // for 문을 돌려 (parent_2.setAttribute('onclick',
+    // 'show_edit_schedule(' + ((input_day)) + ',' + order_value + ')');)
+    // 을 다시 차례대로 1 ,2,3,4... 로 조절할 필요가 있다.
+    reOrdering(input_day);
 
     // var clicked_day = days[(x_clicked_day-1)];
     // clicked_day.removeChild(clicked_day.childNodes[x_clicked_order]);
@@ -342,6 +351,20 @@ function input_edit_day_Edit(input_string_day,input_order) {
 
   hide_edit_schedule();
   make_backgroundcolor_original();
+}
+
+function reOrdering(ShouldBeReorderday) {
+  parent = days[(ShouldBeReorderday-1)];
+  var length = parent.childElementCount;
+  // alert(length);
+
+  // parent_2.setAttribute('onclick',
+  // 'show_edit_schedule(' + ((input_day)) + ',' + order_value + ')');
+  for (let i=0;i<length;i++) {
+// parent.children[0].children[1].setAttribute('onclick','show_edit_schedule(10,1)')
+// parent.children[1].children[1].setAttribute('onclick','show_edit_schedule(10,2)')
+    parent.children[i].children[1].setAttribute('onclick','show_edit_schedule(' + ShouldBeReorderday + ',' + (i+1) + ')');
+  }
 }
 
 function input_edit_Delete(){
