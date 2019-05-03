@@ -171,8 +171,8 @@ function show_edit_schedule(day, order_value) {
 
 function hide_edit_schedule() {
   make_backgroundcolor_original();
-  edit_schedule_window[0].style.display = "none";
-  document.getElementsByClassName("edit_schedule_window")[0].children[3].disabled = false;
+  edit_schedule_window[0].style.display = "none"; ;
+  document.getElementsByClassName("edit_schedule_window")[0].children[0][1].disabled = false;
 
 }
 
@@ -378,10 +378,8 @@ function input_edit_Delete(){
     make_backgroundcolor_original();
 
 }
-
+var da;
 function diffentday_disable(input_string_day,input_order) {
-  // alert(input_string_day);
-  // alert(input_order);
 
   edit_schedule_window_class = document.getElementsByClassName("edit_schedule_window")[0];
   var input_day = new Date(input_string_day);
@@ -391,9 +389,9 @@ function diffentday_disable(input_string_day,input_order) {
 
 
   if (input_date == x_clicked_day && input_day.getMonth() == x_clicked_date.getMonth() && input_day.getYear() == x_clicked_date.getYear()) {
-    edit_schedule_window_class.children[3].disabled = false;
+    edit_schedule_window_class.children[0][1].disabled = false;
 
   } else {
-    edit_schedule_window_class.children[3].disabled = true;
+    edit_schedule_window_class.children[0][1].disabled = true;
   }
 }
