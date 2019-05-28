@@ -3,3 +3,29 @@
     height: 750px;
     background-color: darkgreen;
 }
+
+
+.card_results{
+    border-radius: 6px;
+    border: 2px solid rgb(40, 59, 13);
+    background-color: rgb(0, 80, 0);
+    width: 100px;
+    height: 125px;
+    margin: 15px auto;
+}   
+
+.card_normal{
+  border-radius: 6px;
+  border: 2px solid rgb(40, 59, 13);
+  
+  width: 100px;
+  height: 125px;
+  margin: 15px auto;
+}
+
+.card_empty{
+    width: 100px;
+    height: 125px;
+    margin: 15px auto;
+  
+}
