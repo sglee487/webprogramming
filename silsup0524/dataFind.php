@@ -1,22 +1,17 @@
 <?php
+    $myfile = fopen("./data.txt","r");
 
-    echo "GET : ";
-    print_r($_GET);
+    $infoArray = array();
+    // echo fgets($myfile);  
+    while(!feof($myfile)) {
+        // echo fgets($myfile) . fgets($myfile);
+        $infoArray[fgets($myfile)] = fgets($myfile);
+        // echo $infoArray['aaa'];
+    }
+    foreach($infoArray as $key => $key_value) {
+        echo $key . "<br>" . $key_value;
+        echo "<br>";
+    }
+    fclose($myfile);
 
-    echo "<br>"
-
-    echo "REQUEST : ";
-    print_r($_REQUEST);
-
-    echo "<br>"
-
-    echo "POST : ";
-    print_r($_POST);
-
-    echo "<br>"
-    echo $_GET[name] . "<br";
-    echo $_GET[word] . "<br>";
-
-    echo "name : $name <br>";
-    echo "sord : $word <br>";
-    ?>
+?>
