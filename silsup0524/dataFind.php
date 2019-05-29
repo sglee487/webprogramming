@@ -8,11 +8,20 @@
     // echo fgets($myfile);  
     while(!feof($myfile)) {
         // echo fgets($myfile) . fgets($myfile);
-        $infoArray[fgets($myfile)] = fgets($myfile);
+        $temp_str = fgets($myfile);
+        if ($temp_str != NULL) {
+            $infoArray[$temp_str] = fgets($myfile);
+        }
+        // $infoArray[fgets($myfile)] = fgets($myfile);
         // echo $infoArray['aaa'];
     }
+    // $infoArray = array_pop($infoArray);
     foreach($infoArray as $key => $key_value) {
-        findInform($key,$key_value);
+        // findInform($key,$key_value);
+        echo $key;
+        echo gettype($key);
+        echo $key_value;
+        echo gettype($key_value);
     }
 
 
