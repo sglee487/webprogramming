@@ -17,30 +17,32 @@
     }
     // $infoArray = array_pop($infoArray);
     foreach($infoArray as $key => $key_value) {
-        // findInform($key,$key_value);
-        echo $key;
-        echo gettype($key);
-        echo $key_value;
-        echo gettype($key_value);
+        findInform($key,$key_value);
+        // echo $key;
+        // echo gettype($key);
+        // echo $key_value;
+        // echo gettype($key_value);
     }
 
 
     fclose($myfile);
-
-    function findInform(Str $arrayName, Str $arrayWord) {
-        if ($arrayName == NULL && $arrayWord == NULL) {
+    
+    error_reporting(0);
+    function findInform($argument) {
+        echo gettype($given_name);
+        if ($given_name == "" && $given_word == "") {
             echo "Enter the keywords of lis that you want to search.";
-        } else if($arrayName == NULL) {
-            if (!((strpos($arrayWord,$given_word) == -1))) {
-                echo $arrayName . "<br>" . $arrayWord;
+        } else if($given_name == "") {
+            if (!((strpos($argument[1],$given_word) == -1))) {
+                echo $argument[0] . "<br>" . $argument[1];
             }
-        } else if($_word == NULL) {
-            if (!(strpos($arrayName,$given_name) == -1)) {
-                echo $arrayName . "<br>" . $arrayWord;
+        } else if($given_word == "") {
+            if (!(strpos($given_name,$given_name) == -1)) {
+                echo $argument[0] . "<br>" . $argument[1];
             }
         } else {
-            if (!(strpos($arrayName,$given_name) == -1) || !(strpos($arrayWord,$given_word) == -1)) {
-                echo $arrayName . "<br>" . $arrayWord;
+            if (!(strpos($argument[0],$given_name) == -1) || !(strpos($argument[1],$given_word) == -1)) {
+                echo $argument[0] . "<br>" . $argument[1];
             }
         }
     }
