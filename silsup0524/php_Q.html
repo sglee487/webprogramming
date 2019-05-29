@@ -5,12 +5,12 @@
 	</head>
 	<body>
 
-        <form name="frame_form" method="POST">
+        <form name="frame_form" method="POST" action="dataFind.php">
 		화일 이름 : <input type="text" name="name"><br><br>
 		단어 : <input type="text" name="word"><br><br>
-        <input type="submit" value="제출" onclick="dataFind()"> 
-        <input type="submit" value="새로운 데이타 추가하기" onclick="dataSave()"> 
-        <input type="submit" value="전체 데이타 보기" onclick="allData()">
+        <input type="submit" value="제출"> 
+        <input type="submit" value="새로운 데이타 추가하기" formaction="dataSave.php"> 
+        <input type="submit" value="전체 데이타 보기" formaction="allData.php">
         <br><br>
         </form>
     
