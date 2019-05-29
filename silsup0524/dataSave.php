@@ -18,9 +18,9 @@ class FileInfo {
         $this->word = $_POST['word'];
     }
     function saveInfo() {
-        fwrite($this->myfile,$this->name . "<br>");
+        fwrite($this->myfile,$this->name . "\n");
         // fwrite($this->myfile,"\n");
-        fwrite($this->myfile,$this->word . "<br>");
+        fwrite($this->myfile,$this->word . "\n");
         // fwrite($this->myfile,"\n");
         fclose($this->myfile);
         echo "저장되었습니다.";
