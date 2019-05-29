@@ -19,7 +19,9 @@ class FileInfo {
     }
     function saveInfo() {
         fwrite($this->myfile,$this->name);
+        fwrite($this->myfile,"\n");
         fwrite($this->myfile,$this->word);
+        fwrite($this->myfile,"\n");
         fclose($this->myfile);
         echo $this->name;
         echo "저장되었습니다.";
