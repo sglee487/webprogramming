@@ -1,12 +1,15 @@
+
+var f = document.frame_form;
+
 function dataSave() {
-    form.action = "dataSave.php";
-    form.submit();
+    f.action = "dataSave.php";
+    f.submit();
 }
 function dataFind() {
-    form.action = "dataFind.php";
-    form.submit();
+    f.action = "dataFind.php";
+    f.submit();
 }
 function allData() {
-    form.action = "allData.php";
-    form.submit();
+    f.action = "allData.php";
+    f.submit();
 }
