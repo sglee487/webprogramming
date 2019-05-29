@@ -18,12 +18,11 @@ class FileInfo {
         $this->word = $_POST['word'];
     }
     function saveInfo() {
-        fwrite($this->myfile,$this->name);
-        fwrite($this->myfile,"\n");
-        fwrite($this->myfile,$this->word);
-        fwrite($this->myfile,"\n");
+        fwrite($this->myfile,$this->name . "\n");
+        // fwrite($this->myfile,"\n");
+        fwrite($this->myfile,$this->word . "\n");
+        // fwrite($this->myfile,"\n");
         fclose($this->myfile);
-        echo $this->name;
         echo "저장되었습니다.";
     }
 }
