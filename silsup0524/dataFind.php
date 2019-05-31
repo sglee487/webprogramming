@@ -32,18 +32,18 @@
         if ($given_name == "") {
             if (strpos($argument2,$given_word) === 0 || strpos($argument2,$given_word) != NULL) {
                 // echo "case 1";
-                echo "<br>" . $argument1 . "<br>" . $argument2 . "<br>";
+                echo $argument1 . "<br>" . $argument2 . "<br>";
             }
         } else if ($given_word == "") {
             if (strpos($argument1,$given_name) === 0 || strpos($argument1,$given_name) != FALSE) {
                 // echo "case 2 : " . strpos($argument1,$given_name);
-                echo "<br>" . $argument1 . "<br>" . $argument2 . "<br>";
+                echo $argument1 . "<br>" . $argument2 . "<br>";
             }
         } else {
             if (strpos($argument2,$given_word) === 0 || strpos($argument2,$given_word) != NULL
             || strpos($argument1,$given_name) === 0 || strpos($argument1,$given_name) != NULL) {
                 // echo "case 3";
-                echo "<br>" . $argument1 . "<br>" . $argument2 . "<br>";
+                echo $argument1 . "<br>" . $argument2 . "<br>";
             }
         }
     }
