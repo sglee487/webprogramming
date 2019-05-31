@@ -40,8 +40,8 @@
                 echo $argument1 . "<br>" . $argument2 . "<br>";
             }
         } else {
-            if (strpos($argument2,$given_word) === 0 || strpos($argument2,$given_word) != NULL
-            || strpos($argument1,$given_name) === 0 || strpos($argument1,$given_name) != NULL) {
+            if ((strpos($argument2,$given_word) === 0 || strpos($argument2,$given_word) != NULL)
+            && (strpos($argument1,$given_name) === 0 || strpos($argument1,$given_name) != NULL)) {
                 // echo "case 3";
                 echo $argument1 . "<br>" . $argument2 . "<br>";
             }
