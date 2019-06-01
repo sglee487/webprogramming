@@ -11,7 +11,10 @@ function showImage() {
             var file = x.files[i];
             if ('name' in file) {
                 // alert(pic_upload);
-                
+                // alert(file.name);
+                var AddImageTag = document.createElement("img");
+                AddImageTag.setAttribute('src','./' + file.name);
+                pic_upload.appendChild(AddImageTag);
             }
         }
     }
