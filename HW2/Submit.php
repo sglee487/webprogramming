@@ -26,6 +26,7 @@ while(!feof($myfile_r)) {
         if ($inputUserPassword == $tempReadPassword) {
             // 로그인 성공
             $loginFlag = $LOGIN_SUCCESS;
+            
             break;
         } else {
             // 아이디는 맞지만 비밀번호 잘못 입력
@@ -44,6 +45,8 @@ if ($loginFlag == 0) {
 } else {
     // 스케쥴 창을 띄워야 함.
     echo "로그인 성공";
+    header("Location:hw2_sche.php?name=$inputUserId");
+    // exit();
 }
 
 

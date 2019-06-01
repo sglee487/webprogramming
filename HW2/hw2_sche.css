@@ -1,0 +1,24 @@
+table, td, tr{
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+
+}
+
+#family, #school, #trip, #exercise {
+    width: 500px;
+    font-weight: bold;
+}
+
+#family_content, #school_content, #trip_content, #exercise_content {
+    height: 300px;
+    overflow: auto;
+}
+
+#family, #trip {
+    background-color: burlywood;
+}
+
+#school, #exercise {
+    background-color: powderblue;
+}
