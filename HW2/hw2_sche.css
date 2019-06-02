@@ -1,3 +1,7 @@
+#for_get_name {
+    display: none;
+}
+
 table, td, tr{
     border: 1px solid black;
     border-collapse: collapse;
@@ -21,4 +25,28 @@ table, td, tr{
 
 #school, #exercise {
     background-color: powderblue;
+}
+
+#box_add {
+    width: 300px;
+    height: auto;
+    position: fixed;
+    left: 250px;
+    top: 200px;
+    background-color: dodgerblue;
+    padding: 20px;
+    line-height: 40px;
+    display: none;
+}
+
+#box_search {
+    width: 300px;
+    height: auto;
+    position: fixed;
+    left: 250px;
+    top: 200px;
+    background-color: dodgerblue;
+    padding: 20px;
+    line-height: 40px;
+    display: none;
 }
