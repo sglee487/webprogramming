@@ -4,6 +4,18 @@
         <title>웹 텀. 솔리테어.</title>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="solitaire.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="solitaire.js"></script>
+        <!-- php에 관한 scrpit 처리는 밑에서 -->
+        <script>
+            $(document).ready(function(){
+                process1 = $("#process1");
+                process1.text("Hello world!");
+            });
+            // process1 = $("#process1");
+            // process1.text("Hello world!");
+        </script>
+
     </head>
     <body>
         <div class="maintainBoard">
@@ -34,6 +46,16 @@
             </table>
         </div>
 
+        <div id="time_and_score_show">
+
+        </div>
+
+        <div id="other_scores">
+            <?php
+
+            ?>
+        </div>
+        
 
     </body>
 </html>
