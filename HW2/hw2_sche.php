@@ -100,10 +100,19 @@ var savefilename = "./testfile.txt";
         var date_start = $("#date_start").val();
         var date_end = $("#date_end").val();
 
-        alert(category);
+        // alert(category);
         alert(memo);
-        alert(date_start);
-        alert(date_end);
+        // alert(date_start);
+        // alert(date_end);
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+            xhttp.responseText // return from your php;
+            }
+        };
+        xhttp.open("GET", "hw2_work_save.php?category="+category + "&memo=" + memo + "&date_start=" + date_start + "&date_end=" + date_end, true);
+        xhttp.send();
     }
 
     function cancel() {
@@ -115,8 +124,6 @@ var savefilename = "./testfile.txt";
     function search() {
         
     }
-
-var thisjob = "thisthisthisbjo";
 
  function loadDoc() {
   var xhttp = new XMLHttpRequest();
