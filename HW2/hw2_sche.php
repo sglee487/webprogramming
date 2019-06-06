@@ -4,10 +4,11 @@
         <title> 2019 웹프로그래밍 HW2 </title>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="hw2_sche.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	</head>
 	<body>
 
-    <input type="button" value="추가" onclick="show_window_add()"> <input type="button" value="검색" onclick="show_window_search()">
+    <input type="button" value="추가" onclick="show_window_add()"> <input type="button" value="검색" onclick="show_window_search()"> <input type="button" value="읽기" onclick="readTextFile()"> <input type="button" value="settimeouttest" onclick="test('cool')">
     <br><br>
     <div id="for_get_name" name="<?php echo $_GET["name"];?>" ><?php echo $_GET["name"];?></div>
     <table>
@@ -15,18 +16,19 @@
             <td id="family">가족</td><td id="school">학교</td>
         </tr>
         <tr>
-            <td id="family_content">
+            <td id="family_content" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <?php 
                 echo $_GET["name"]; 
-                ?></td> <td id="school_content"></td>
+                ?></td> <td id="school_content" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
         </tr>
         <tr>
             <td id="trip">여행</td><td id="exercise">운동</td>
         </tr>
         <tr>
-            <td id="trip_content"></td><td id="exercise_content"></td>
+            <td id="trip_content" ondrop="drop(event)" ondragover="allowDrop(event)"></td><td id="exercise_content" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
         </tr>
-    
+</table>
+<div id="third_window"></div>
 
         <div id="box_add">
             할 일 분류: 
@@ -47,20 +49,20 @@
             <input type="date" name="date_end" id="date_end">
             <br>
             <input type="button" value="Submit" onclick="submit()">
-            <input type="button" value="Close" onclick="cancel()">
+            <input type="button" value="Close" onclick="Close()">
             
 
         </div>
 
         <div id="box_search">
         메모 키워드 :
-            <input type="text" name="memo" id="memo">
+            <input type="text" name="search_memo" id="search_memo">
             <br>
             시작 날짜: 
-            <input type="date" name="date_start" id="date_start">
+            <input type="date" name="search_date_start" id="search_date_start">
             <br>
             끝나는 날짜: 
-            <input type="date" name="date_end" id="date_end">
+            <input type="date" name="search_date_end" id="search_date_end">
             <br>
             정렬 기준: 
             <select id="choose_sort">
@@ -75,69 +77,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js">
 
 </script>
-<!-- <script src="hw2_sche.js"></script> -->
-<script>
-$box_add = $("#box_add");
-$box_search = $("#box_search");
-// var userId = $("#for_get_name").innerText;
-var userId = document.getElementById("for_get_name").innerText;
-// alert('<?php echo "Testing";?>');
-
-var savefilename = "./testfile.txt";
-// var category = $("#choose_work").innerText;
-// alert(userId);
-    function show_window_add() {
-        box_add.style.display = "block";
-    }
-
-    function show_window_search() {
-        box_search.style.display = "block";
-    }
-
-    function submit(){
-        var category = $("#choose_work").val();
-        var memo = $("#memo").val();
-        var date_start = $("#date_start").val();
-        var date_end = $("#date_end").val();
-
-        // alert(category);
-        alert(memo);
-        // alert(date_start);
-        // alert(date_end);
-
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
-            xhttp.responseText // return from your php;
-            }
-        };
-        xhttp.open("GET", "hw2_work_save.php?category="+category + "&memo=" + memo + "&date_start=" + date_start + "&date_end=" + date_end, true);
-        xhttp.send();
-    }
-
-    function cancel() {
-
-        box_add.style.display = "none";
-        box_search.style.display = "none";
-    }
-
-    function search() {
-        
-    }
-
- function loadDoc() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {
-      xhttp.responseText // return from your php;
-    }
-  };
-  xhttp.open("GET", "hw2_work_save.php?work="+thisjob, true);
-  xhttp.send();
-}
-loadDoc();
-
-</script>
+<script src="hw2_sche.js"></script>
 
 </body>
 </html>
