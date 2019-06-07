@@ -360,17 +360,6 @@ categoryContentList = ["family_content","school_content","trip_content","exercis
             
     }
 
-    function test(second) {
-        test_c();
-        setTimeout(alertse,800,second);
-    }
-    function test_c() {
-
-    }
-    function alertse(second) {
-        alert(second);
-    }
-
 function cache_reset() {
     var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {

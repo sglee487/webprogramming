@@ -8,7 +8,7 @@
 	</head>
 	<body>
 
-    <input type="button" value="추가" onclick="show_window_add()"> <input type="button" value="검색" onclick="show_window_search()"> <input type="button" value="읽기" onclick="readTextFile()"> <input type="button" value="settimeouttest" onclick="test('cool')">
+    <input type="button" value="추가" onclick="show_window_add()"> <input type="button" value="검색" onclick="show_window_search()">
     <br><br>
     <div id="for_get_name" name="<?php echo $_GET["name"];?>" ><?php echo $_GET["name"];?></div>
     <table>
