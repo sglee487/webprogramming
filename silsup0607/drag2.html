@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="drag2.js"></script>
+<link rel="stylesheet" type="text/css" href="drag2.css">
+</head>
+<body>
+<input type="button" value="Read" onClick="read_image()">
+<br>
+<br>
+
+<div id="pic_upload">
+    <img src="image.jpg" id="img1" draggable="true" ondragstart="drag(event)">
+</div>
+
+<span>A 바구니 : </span><span id="box1_number"></span>
+<div id="box1" ondrop="drop(event)" ondragover="allowDrop(event)">
+
+</div>
+
+<span>B 바구니 : </span><span id="box2_number"></span>
+<div id="box2" ondrop="drop(event)" ondragover="allowDrop(event)">
+    
+</div>
+
+<style ></style>
+</body>
+</html>
