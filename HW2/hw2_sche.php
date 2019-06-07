@@ -74,6 +74,11 @@
             <input type="radio" name="sort_way" id="up_order" value="오름차순"> 오름차순 
             <input type="button" value="Submit" onclick="search()">
         </div>
+
+        <div id="wait_window">
+        서버에 적용 중...
+            <div id="wait_second"></div>
+        </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js">
 
 </script>
