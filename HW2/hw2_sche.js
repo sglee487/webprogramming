@@ -1,3 +1,7 @@
+$(document).ready(function(){
+    readTextFile();
+  });
+date = new Date();
 $box_add = $("#box_add");
 $box_search = $("#box_search");
 // var userId = $("#for_get_name").innerText;
@@ -41,7 +45,7 @@ categoryContentList = ["family_content","school_content","trip_content","exercis
             }
         };
         // alert(userName + category + memo + date_start + date_end);
-        xhttp.open("GET", "hw2_work_save.php?userName=" + userName + "&category="+category + "&memo=" + memo + "&date_start=" + date_start + "&date_end=" + date_end, true);
+        xhttp.open("GET", "hw2_work_save.php?userName=" + userName + "&category="+category + "&memo=" + memo + "&date_start=" + date_start + "&date_end=" + date_end + "&_=" + new Date(), true);
         xhttp.send();
 
         
@@ -283,7 +287,7 @@ categoryContentList = ["family_content","school_content","trip_content","exercis
             }
         };
         // alert(userName + category + memo + date_start + date_end);
-        xhttp.open("GET", "hw2_work_reset_file.php?user=" + userName + "&category=" + category, true);
+        xhttp.open("GET", "hw2_work_reset_file.php?user=" + userName + "&category=" + category + "&_=" + new Date(), true);
         xhttp.send(null);
         
     }
@@ -308,7 +312,7 @@ categoryContentList = ["family_content","school_content","trip_content","exercis
                 }
             };
             // alert(userName + category + memo + date_start + date_end);
-            xhttp.open("GET", "hw2_work_edit.php?user=" + userName + "&category=" + category + "&Line=" + work_list_save[edit_sort_number][i], true);
+            xhttp.open("GET", "hw2_work_edit.php?user=" + userName + "&category=" + category + "&Line=" + work_list_save[edit_sort_number][i] + "&_=" + new Date(), true);
             xhttp.send();
             }
     }
@@ -339,7 +343,7 @@ categoryContentList = ["family_content","school_content","trip_content","exercis
                 }
             };
             // alert(userName + category + memo + date_start + date_end);
-            xhttp.open("GET", "hw2_work_edit.php?user=" + userName + "&category=" + target_category + "&Line=" + work_list_save[provide_sort_number][provide_what_number], true);
+            xhttp.open("GET", "hw2_work_edit.php?user=" + userName + "&category=" + target_category + "&Line=" + work_list_save[provide_sort_number][provide_what_number] + "&_=" + new Date(), true);
             xhttp.send();
        
         // xhttp.send(null);
@@ -355,7 +359,7 @@ categoryContentList = ["family_content","school_content","trip_content","exercis
                 }
             };
             // alert(userName + category + memo + date_start + date_end);
-            xhttp.open("GET", "hw2_work_edit.php?user=" + userName + "&category=" + category + "&Line=" + work_list_save[provide_sort_number][provide_what_number], true);
+            xhttp.open("GET", "hw2_work_edit.php?user=" + userName + "&category=" + category + "&Line=" + work_list_save[provide_sort_number][provide_what_number] + "&_=" + new Date(), true);
             xhttp.send();
             
     }
@@ -368,7 +372,7 @@ function cache_reset() {
             }
         };
         // alert(userName + category + memo + date_start + date_end);
-        xhttp.open("GET", "hw2_work_cacheReset.php", true);
+        xhttp.open("GET", "hw2_work_cacheReset.php"+ "?_=" + new Date(), true);
         xhttp.send();
 }
 
