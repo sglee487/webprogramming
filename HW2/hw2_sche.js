@@ -21,7 +21,7 @@ categoryContentList = ["family_content","school_content","trip_content","exercis
 
     function submit() {
         submit_c();
-        setTimeout(readTextFile,200);
+        setTimeout(readTextFile,800);
     }
     function submit_c(){
         var category = $("#choose_work").val();
@@ -43,6 +43,8 @@ categoryContentList = ["family_content","school_content","trip_content","exercis
         // alert(userName + category + memo + date_start + date_end);
         xhttp.open("GET", "hw2_work_save.php?userName=" + userName + "&category="+category + "&memo=" + memo + "&date_start=" + date_start + "&date_end=" + date_end, true);
         xhttp.send();
+
+        
 
     }
 
@@ -194,8 +196,35 @@ categoryContentList = ["family_content","school_content","trip_content","exercis
     function drop(ev) {
         ev.preventDefault();
         var data = ev.dataTransfer.getData("work");
-
+        // data는 손으로 집어서 움직이는 값의 id임.
+        // ev.target.appendChild(document.getElementById(data));
+        //         alert(data);
         ev.target.appendChild(document.getElementById(data));
+        data_id_split = data.split("_");
+        
+        // deleteAndMakeNew_c(data_id_split[1],data_id_split[2]);
+        // alert(data_id_split[1]);
+        // alert(data_id_split[2]);
+
+        // alert(ev.target.id); // ****_content
+
+        var target_id;
+        if (ev.target.id == "family_content") {
+            target_id=1;
+        } else if (ev.target.id == "school_content") {
+            target_id=2;
+        } else if (ev.target.id == "trip_content") {
+            target_id=3;
+        } else if (ev.target.id == "exercise_content") {
+            target_id=4;
+        }
+
+        // alert(target_id);
+        
+        // addFileLine(data_id_split[1],data_id_split[2]);
+
+        // setTimeout(readTextFile,800);
+
     
     }
     
@@ -207,6 +236,7 @@ categoryContentList = ["family_content","school_content","trip_content","exercis
         // cache_reset();
         deleteAndMakeNew_c(edit_sort_number,edit_what_number);
         // cache_reset();
+
         setTimeout(readTextFile,700);
         // setTimeout(readTextFile,100);
     }
@@ -231,6 +261,7 @@ categoryContentList = ["family_content","school_content","trip_content","exercis
         // var xhttp = new XMLHttpRequest();
 
         // 파일 리셋
+        
         fileReset(userName,category);
 
         // 파일 라인별로 저장
@@ -281,11 +312,52 @@ categoryContentList = ["family_content","school_content","trip_content","exercis
             }
     }
 
-    var add_number;
-    function addFileLine() {
+    function addFileLine(edit_sort_number,edit_what_number) {
+
+        if (edit_sort_number == 0) {
+            category = "family";
+        } else if (edit_sort_number == 1) {
+            category = "school";
+        } else if (edit_sort_number == 2) {
+            category = "trip";
+        } else if (edit_sort_number == 3) {
+            category = "exercise";
+        }
+
+        // var xhttp = new XMLHttpRequest();
+
+        // 파일 라인별로 저장
+        // fileLineSave(userName,category,edit_sort_number)
+        // setTimeout(addOneLine,20,userName,category,edit_sort_number,edit_what_number);
+
+        var xhttp = new XMLHttpRequest();
+
+            xhttp.onreadystatechange = function() {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                xhttp.responseText // return from your php;
+                }
+            };
+            // alert(userName + category + memo + date_start + date_end);
+            xhttp.open("GET", "hw2_work_edit.php?user=" + userName + "&category=" + category + "&Line=" + work_list_save[edit_sort_number][edit_what_number], true);
+            xhttp.send();
+       
+        // xhttp.send(null);
 
     }
 
+    function addOneLine(userName,category,edit_sort_number,edit_what_number) {
+        var xhttp = new XMLHttpRequest();
+
+            xhttp.onreadystatechange = function() {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                xhttp.responseText // return from your php;
+                }
+            };
+            // alert(userName + category + memo + date_start + date_end);
+            xhttp.open("GET", "hw2_work_edit.php?user=" + userName + "&category=" + category + "&Line=" + work_list_save[edit_sort_number][edit_what_number], true);
+            xhttp.send();
+            
+    }
 
     function test(second) {
         test_c();
