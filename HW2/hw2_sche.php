@@ -17,9 +17,7 @@
         </tr>
         <tr>
             <td id="family_content" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <?php 
-                echo $_GET["name"]; 
-                ?></td> <td id="school_content" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+                </td> <td id="school_content" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
         </tr>
         <tr>
             <td id="trip">여행</td><td id="exercise">운동</td>

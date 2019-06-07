@@ -11,19 +11,19 @@ if ($inputUserId == "" || $inputUserPassword == "") {
     $noDuplId = TRUE;
     while(!feof($myfile_r)) {
         $tempReadId = trim(fgets($myfile_r));
-        echo "읽은 \$tempReadId 값은 : " . $tempReadId . "타입은 : " . gettype($tempReadId) . "<br>";
+        // echo "읽은 \$tempReadId 값은 : " . $tempReadId . "타입은 : " . gettype($tempReadId) . "<br>";
         if($tempReadId == NULL) {
-            echo "if(\$tempReadId == NULL) 안으로 들어왔다. <br>";
+            // echo "if(\$tempReadId == NULL) 안으로 들어왔다. <br>";
             break;
         }
-        echo "읽은 \$inputUserId 값은 : " . $inputUserId . "타입은 : " . gettype($inputUserId) . "<br>";
+        // echo "읽은 \$inputUserId 값은 : " . $inputUserId . "타입은 : " . gettype($inputUserId) . "<br>";
         if ($inputUserId == $tempReadId) {
-            echo "if(\$inputUserId == \$tempReadId) 안으로 들어왔다. <br>";
+            // echo "if(\$inputUserId == \$tempReadId) 안으로 들어왔다. <br>";
             $noDuplId = FALSE;
             break;
         }
         // fgets($myfile_r);
-        echo "읽은 password 값: " . fgets($myfile_r) . "<br>";
+        // echo "읽은 password 값: " . fgets($myfile_r) . "<br>";
     }
     fclose($myfile_r);
 
