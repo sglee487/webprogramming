@@ -7,15 +7,37 @@
 $(document).ready(function(){
     process2 = $("#process2");
     process2.text("hellop2");
+    gameInit();
 });
 
-var allCards = []
+var allCards = [];
+var allCards_id = [];
+
+// 게임 시작할 때 해야 할 것들.
+// 카드들을 배열에 넣고, 섞고, 배치하고 등등...
+function gameInit() {
+    cardsInit();
+}
+
 // 총 52개의 카드가 있으므로, 52개를 담을 수 있는 배열을 만든다.
 function cardsInit() {
+    var cardSort, cardNumber;
     for (var i=1; i <= 52; i++) {
         allCards.push(i);
-        // 이제 allCards엔 [1,2,3,4,...] 이 들어있다. 1부터 해야 카드 순서 안헷갈림.
+        // 이제 allCards엔 [1,2,3,4,...] 이 들어있다. 1부터 해야 안헷갈림
+        cardSort = getCardSort(i);
+        cardNumber = getCardNumber(i);
+        allCards_id.push(cardSort + "_" + cardNumber);
+        // 이제 allCards_id엔 [1_1,1_2,1_3,...] 이 들어있다.
     }
+}
+
+function getCardSort(i) {
+    return Math.floor((i-1) / 13) + 1;
+}
+
+function getCardNumber(i) {
+    return ((i-1) % 13) + 1;
 }
 
 // 위의 allCards가 랜덤 배열로 되어야 섞어서 넣을때도 랜덤으로 됨.
