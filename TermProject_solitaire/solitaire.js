@@ -45,7 +45,7 @@ function getCardNumber(i) {
 function suffleCards(array) {
     var temp, randomNumber;
     for (var i=0;i < array.length; i++) {
-        randomNumber = Math.floor(Math.random() * (array.length+1));
+        randomNumber = Math.floor(Math.random() * (array.length));
         temp = array[randomNumber];
         array[randomNumber] = array[i];
         array[i] = temp;
