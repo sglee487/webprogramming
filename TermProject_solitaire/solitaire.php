@@ -36,8 +36,8 @@
                 <!-- 카드 메인 부분 -->
                 <tbody>
                     <tr class="card_normal">
-                        <td id="card_1_1">a</td>
-                        <td id="card_2_2">b</td>
+                        <td id="process1">a</td>
+                        <td id="process2">b</td>
                         <td id="process3">c</td>
                         <td id="process4">d</td>
                         <td id="process5">e</td>
