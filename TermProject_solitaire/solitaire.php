@@ -10,8 +10,8 @@
         <!-- php에 관한 scrpit 처리는 밑에서 -->
         <script>
             $(document).ready(function(){
-                process1 = $("#process1");
-                process1.text("Hello world!");
+                // process1 = $("#process1");
+                // process1.text("Hello world!");
             });
             // process1 = $("#process1");
             // process1.text("Hello world!");

@@ -7,6 +7,7 @@
 $(document).ready(function(){
     process2 = $("#process2");
     process2.text("hellop2");
+
     gameInit();
 });
 
@@ -17,6 +18,8 @@ var allCards_id = [];
 // 카드들을 배열에 넣고, 섞고, 배치하고 등등...
 function gameInit() {
     cardsInit();
+    // suffleCards(allCards);
+    putCardsInit();
 }
 
 // 총 52개의 카드가 있으므로, 52개를 담을 수 있는 배열을 만든다.
@@ -55,5 +58,15 @@ function suffleCards(array) {
 
 // 처음 게임을 시작했을 때 카드를 계단 형식으로 놓도록 함..
 function putCardsInit(){
+    var rest;
+    for (var row = 1; row <= 7; row++) {
+
+        for (var col = 0; col < row; col++) {
+            // $("<div class='card'> hHHeeloo</div>").appendTo("#process"+row);
+            child = $("#process"+row).append("<div class='card'> hHHeeloo</div>");
+            $(child).append("<div class='card'> hHHeeloo</div>");
+
+        }
+    }
 
 }
