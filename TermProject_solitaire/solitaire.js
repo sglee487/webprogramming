@@ -122,6 +122,9 @@ function allowDrop(ev) {
     cE.appendChild(cT);
 
     // pn.parentElement.appendChild(cE);
+    var childindex = getChildIndex(document.getElementById(data));
+    console.log(childindex); // index가 0,1,2,... 로 시작
+    console.log(document.getElementById(data).parentNode.childElementCount); // 1개 , 2개, 3개 ... 로 시작
     pn.parentElement.appendChild(document.getElementById(data));
 }
 
@@ -136,3 +139,15 @@ function allowDrop(ev) {
 //     }
 //     return i;
 // };
+
+function getChildIndex(child) {
+    var parent = child.parentNode;
+    var children = parent.children;
+    var i = children.length - 1;
+    for (; i >= 0; i--){
+        if (child == children[i]){
+            break;
+        }
+    }
+    return i;
+}
