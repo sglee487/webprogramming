@@ -50,7 +50,8 @@
     background-color: rgb(0, 80, 0);
     width: 100px;
     height: 125px;
-    background-image: url("data/1_1.jpg");
+    /* background-image: url("data/1_1.jpg"); */
+    z-index: 3;
 }
 
 #process1 {
@@ -132,6 +133,18 @@
     width: 100px;
     height: 125px;
     /* background-image: url("data/1_1.jpg"); */
+    position: absolute;
+    top: 160px;
+    left: 775px;
+}
+
+#drag_test {
+    border-radius: 6px;
+    border: 2px solid rgb(40, 59, 13);
+
+    width: 100px;
+    height: 125px;
+    background-image: url("data/1_4.jpg");
     position: absolute;
     top: 160px;
     left: 775px;

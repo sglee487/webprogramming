@@ -5,10 +5,13 @@
 // process2 = $("#process2");
 // process2.text("hellop2");
 $(document).ready(function(){
-    process2 = $("#process2");
-    process2.text("hellop2");
+    // process2 = $("#process2");
+    // process2.text("hellop2");
 
     gameInit();
+
+    // document.getElementById("1_1").setAttribute("draggable","true");
+    // $("#1_1").css("draggable","true");
 });
 
 var allCards = [];
@@ -18,7 +21,7 @@ var allCards_id = [];
 // 카드들을 배열에 넣고, 섞고, 배치하고 등등...
 function gameInit() {
     cardsInit();
-    // suffleCards(allCards);
+    // suffleCards(allCards_id);
     putCardsInit();
 }
 
@@ -59,14 +62,77 @@ function suffleCards(array) {
 // 처음 게임을 시작했을 때 카드를 계단 형식으로 놓도록 함..
 function putCardsInit(){
     var rest;
+    var card_number = 0;
     for (var row = 1; row <= 7; row++) {
 
         for (var col = 0; col < row; col++) {
             // $("<div class='card'> hHHeeloo</div>").appendTo("#process"+row);
-            child = $("#process"+row).append("<div class='card'> hHHeeloo</div>");
-            $(child).append("<div class='card'> hHHeeloo</div>");
+            // child = $("#process"+row).append("<div class='card'> hHHeeloo</div>");
+
+            $("<div class='card' id=" + allCards_id[card_number] + " ></div>").appendTo("#process"+row);
+            $("#" + allCards_id[card_number]).css("background-image","url(data/0_0.jpg)");
+            if ((row - col) == 1) {
+                // console.log("hi");
+                // document.getElementById(allCards_id[card_number]).setAttribute("color","blue");
+                // $("#" + allCards_id[card_number]).css("draggable","true");
+                // $("#" + allCards_id[card_number]).css("ondragstart","drag(event)");
+                // $("#" + allCards_id[card_number]).css("ondragover","");
+                $("#" + allCards_id[card_number]).css("background-image","url(data/" + allCards_id[card_number] + ".jpg)");
+                // $("#" + allCards_id[card_number]).css("color","blue");
+
+                document.getElementById(allCards_id[card_number]).setAttribute("draggable","true");
+                document.getElementById(allCards_id[card_number]).setAttribute("ondragstart","drag(event)");
+                document.getElementById(allCards_id[card_number]).setAttribute("ondrop","drop(event)");
+                document.getElementById(allCards_id[card_number]).setAttribute("ondragover","allowDrop(event)");
+                
+                
+            }
+            card_number++;
 
         }
     }
 
 }
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+  
+  function drag(ev) {
+    ev.dataTransfer.setData("frontcard", ev.target.id);
+}
+
+  function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("frontcard");
+    // ev.target.appendChild(document.getElementById(data));
+    var pn = ev.target;
+    // console.log(ev.path[0]);
+    // console.log(ev.dataTransfer);
+    console.log(data); // 내가 마우스 클릭한 곳의 id string
+    console.log(typeof(data));
+    // console.log(pn); // 대상의 object
+    // console.log(typeof(pn));
+    console.log(pn.id);
+    console.log(typeof(pn.id)); // 내가 마우스 놓는 곳의 id string
+    console.log(pn.parentElement);
+
+    var cE = document.createElement("div");
+    var cT = document.createTextNode("testttt");
+    cE.appendChild(cT);
+
+    // pn.parentElement.appendChild(cE);
+    pn.parentElement.appendChild(document.getElementById(data));
+}
+
+// var getChildIndex = function(child){
+//     var parent = child.parentNode;
+//     var children = parent.children;
+//     var i = children.length - 1;
+//     for (; i >= 0; i--){
+//         if (child == children[i]){
+//             break;
+//         }
+//     }
+//     return i;
+// };
