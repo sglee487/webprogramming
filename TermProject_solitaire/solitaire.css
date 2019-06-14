@@ -16,22 +16,22 @@
 
 #result1 {
     background-image: url("data/1_1_background.jpg");
-    opacity: 0.5;
+    /* opacity: 0.5; */
 }
 
 #result2 {
     background-image: url("data/2_1_background.jpg");
-    opacity: 0.5;
+    /* opacity: 0.5; */
 }
 
 #result3 {
     background-image: url("data/3_1_background.jpg");
-    opacity: 0.5;
+    /* opacity: 0.5; */
 }
 
 #result4 {
     background-image: url("data/4_1_background.jpg");
-    opacity: 0.5;
+    /* opacity: 0.5; */
 }
 
 .card_normal{

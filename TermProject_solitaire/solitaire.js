@@ -27,6 +27,7 @@ var allCards_id = [];
 // 카드들을 배열에 넣고, 섞고, 배치하고 등등...
 function gameInit() {
     cardsInit();
+    console.log("run?");
     setCardBackgroundProperty(); // 빈 프로세스1 위에 K 카드 오게 할 수 있다던가 등등..
     suffleCards(allCards_id);
     putCardsInit();
@@ -261,9 +262,20 @@ function revealLastCardInProcessId(oldClickedCardParent) {
 }
 
 function setCardBackgroundProperty() {
-
+    console.log("run?");
+    setResultBackground();
     setProcessBackground();
 
+}
+
+function setResultBackground() {
+    var resultElement;
+    for (var resultId_index = 1; resultId_index <= 4; resultId_index++) {
+        console.log("resultId_index : " + resultId_index);
+        resultElement = document.getElementById("result" + resultId_index);
+        resultElement.setAttribute("ondrop","dropOnlyWantNumberCard(event,1)");
+        resultElement.setAttribute("ondragover","allowDrop(event)");
+    }
 }
 
 function setProcessBackground() {
