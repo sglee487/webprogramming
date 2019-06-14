@@ -271,18 +271,18 @@ function setProcessBackground() {
     var processElement;
     for (var processId_index = 1; processId_index <= 7; processId_index++) {
         processElement = document.getElementById("process" + processId_index);
-        processElement.setAttribute("ondrop","dropOnlyKCard(event)");
+        processElement.setAttribute("ondrop","dropOnlyWantNumberCard(event,13)");
         processElement.setAttribute("ondragover","allowDrop(event)");
     }
 }
 
-function dropOnlyKCard(ev) {
+function dropOnlyWantNumberCard(ev,thisNumberOnly) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("frontcard");
     var pn = ev.target;
     console.log(data); // 내가 마우스 클릭한 곳의 id string
 
-    if (getCardNumberInIdString(data) == 13) {
+    if (getCardNumberInIdString(data) == thisNumberOnly) {
         pn.appendChild(document.getElementById(data));
     }
 
