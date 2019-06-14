@@ -27,7 +27,7 @@ var allCards_id = [];
 // 카드들을 배열에 넣고, 섞고, 배치하고 등등...
 function gameInit() {
     cardsInit();
-    suffleCards(allCards_id);
+    // suffleCards(allCards_id);
     putCardsInit();
 }
 
@@ -75,7 +75,7 @@ function putCardsInit(){
             // $("<div class='card'> hHHeeloo</div>").appendTo("#process"+row);
             // child = $("#process"+row).append("<div class='card'> hHHeeloo</div>");
 
-            $("<div class='card' id=" + allCards_id[card_number] + " value = 1></div>").appendTo("#process"+row);
+            $("<div class='card' id=" + allCards_id[card_number] + " value = 0></div>").appendTo("#process"+row);
             $("#" + allCards_id[card_number]).css("background-image","url(data/0_0.jpg)");
             if ((row - col) == 1) {
                 // console.log("hi");
@@ -90,6 +90,7 @@ function putCardsInit(){
                 document.getElementById(allCards_id[card_number]).setAttribute("ondragstart","drag(event)");
                 document.getElementById(allCards_id[card_number]).setAttribute("ondrop","drop(event)");
                 document.getElementById(allCards_id[card_number]).setAttribute("ondragover","allowDrop(event)");
+                document.getElementById(allCards_id[card_number]).setAttribute("value","1");
                 
                 
             }
@@ -137,9 +138,18 @@ function allowDrop(ev) {
                 // console.log(childindex); // index가 0,1,2,... 로 시작
                 // console.log(document.getElementById(data).parentNode.childElementCount); // 1개 , 2개, 3개 ... 로 시작
                 // console.log(document.getElementById(data).parentNode.children[1]);
-                appendAllDownChild(document.getElementById(data),pn.id);
+
+                // var oldMovedCardParent = pn.id.parentNode;
+
+                // appendAllDownChild(document.getElementById(data),pn.id);
+                // console.log(oldMovedCardParent.childElementCount);
                 // pn.parentElement.appendChild(document.getElementById(data));
             }
+            var oldClickedCardParent = document.getElementById(data).parentNode;
+                // console.log(oldClickedCardParent.id);
+                appendAllDownChild(document.getElementById(data),pn.id);
+                // console.log(oldClickedCardParent.id);
+                revealLastCardInProcessId(oldClickedCardParent);
             // appendAllDownChild(document.getElementById(data),pn.id);
         }
 
@@ -230,4 +240,9 @@ function isDiffOne(targetCard_id,movedCard_id) {
         return false;
     }
 
+}
+
+function revealLastCardInProcessId(oldClickedCardParent) {
+    var lastCardInThisLine = oldClickedCardParent.children[oldClickedCardParent.childElementCount-1];
+    console.log(lastCardInThisLine);
 }
