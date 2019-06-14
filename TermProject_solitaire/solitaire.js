@@ -27,7 +27,8 @@ var allCards_id = [];
 // 카드들을 배열에 넣고, 섞고, 배치하고 등등...
 function gameInit() {
     cardsInit();
-    // suffleCards(allCards_id);
+    setCardBackgroundProperty(); // 빈 프로세스1 위에 K 카드 오게 할 수 있다던가 등등..
+    suffleCards(allCards_id);
     putCardsInit();
 }
 
@@ -257,4 +258,44 @@ function revealLastCardInProcessId(oldClickedCardParent) {
         }
     
     }
+}
+
+function setCardBackgroundProperty() {
+
+    setProcessBackground();
+
+}
+
+function setProcessBackground() {
+    // process id 들 설정
+    var processElement;
+    for (var processId_index = 1; processId_index <= 7; processId_index++) {
+        processElement = document.getElementById("process" + processId_index);
+        processElement.setAttribute("ondrop","dropOnlyKCard(event)");
+        processElement.setAttribute("ondragover","allowDrop(event)");
+    }
+}
+
+function dropOnlyKCard(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("frontcard");
+    var pn = ev.target;
+    console.log(data); // 내가 마우스 클릭한 곳의 id string
+
+    if (getCardNumberInIdString(data) == 13) {
+        pn.appendChild(data);
+    }
+
+}
+
+function getCardNumberInIdString(id_string) {
+    var cardNumber;
+    if (id_string[3] == null) {
+        // 십의 자리 수가 아니면
+        cardNumber = id_string[2];
+    } else {
+        cardNumber = id_string[2] + id_string[3];    
+    }
+
+    return cardNumber;
 }
