@@ -107,38 +107,59 @@ function allowDrop(ev) {
     var data = ev.dataTransfer.getData("frontcard");
     // ev.target.appendChild(document.getElementById(data));
     var pn = ev.target;
-    // console.log(ev.path[0]);
-    // console.log(ev.dataTransfer);
+    // // console.log(ev.path[0]);
+    // // console.log(ev.dataTransfer);
     console.log(data); // 내가 마우스 클릭한 곳의 id string
-    console.log(typeof(data));
-    // console.log(pn); // 대상의 object
-    // console.log(typeof(pn));
+    // console.log(typeof(data));
+    // // console.log(pn); // 대상의 object
+    // // console.log(typeof(pn));
     console.log(pn.id);
-    console.log(typeof(pn.id)); // 내가 마우스 놓는 곳의 id string
-    console.log(pn.parentElement);
+    // console.log(typeof(pn.id)); // 내가 마우스 놓는 곳의 id string
+    // console.log(pn.parentElement);
 
-    var cE = document.createElement("div");
-    var cT = document.createTextNode("testttt");
-    cE.appendChild(cT);
-
-    // pn.parentElement.appendChild(cE);
     var childindex = getChildIndex(document.getElementById(data));
     console.log(childindex); // index가 0,1,2,... 로 시작
     console.log(document.getElementById(data).parentNode.childElementCount); // 1개 , 2개, 3개 ... 로 시작
-    pn.parentElement.appendChild(document.getElementById(data));
+    // console.log(document.getElementById(data).parentNode.children[1]);
+    appendAllDownChild(document.getElementById(data),pn.id);
+    // pn.parentElement.appendChild(document.getElementById(data));
 }
 
-// var getChildIndex = function(child){
-//     var parent = child.parentNode;
-//     var children = parent.children;
-//     var i = children.length - 1;
-//     for (; i >= 0; i--){
-//         if (child == children[i]){
-//             break;
-//         }
-//     }
-//     return i;
-// };
+function appendAllDownChild(movedChild,str_TargetId) {
+    var target_Object = document.getElementById(str_TargetId);
+    var target_Object_Parent = target_Object.parentElement;
+    var movedparent = movedChild.parentNode;
+    var movedChildren = movedparent.children;
+    // var i = children.length - 1;
+    var foundStartIndex = 0;
+    for (foundStartIndex; foundStartIndex < movedChildren.length - 1; foundStartIndex++){
+        if (movedChild == movedChildren[foundStartIndex]){
+            break;
+        }
+    }
+
+    console.log("foundStartIndex : " + foundStartIndex);
+    console.log("movedChildren.length : " + movedChildren.length);
+    
+    if (foundStartIndex == movedChildren.length) {
+        // 못 찾았 단 뜻
+        console.log("not found");
+    } else {
+        console.log("found");
+        var iteratorCount = movedChildren.length - foundStartIndex;
+        for ( ;iteratorCount >0;iteratorCount--) {
+            console.log("foundStartIndex: " + foundStartIndex);
+            target_Object_Parent.appendChild(movedChildren[foundStartIndex]);
+        }
+        // for (foundStartIndex; foundStartIndex < movedChildren.length; foundStartIndex++) {
+        //     console.log("foundStartIndex: " + foundStartIndex);
+        //     // console.log("target_Object_Parent: " + target_Object_Parent);
+        //     // console.log("children[foundStartIndex] : " + movedChildren[foundStartIndex]);
+        //     target_Object_Parent.appendChild(movedChildren[foundStartIndex]);
+        // }
+    }
+    
+}
 
 function getChildIndex(child) {
     var parent = child.parentNode;
