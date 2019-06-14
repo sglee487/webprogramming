@@ -27,7 +27,7 @@ var allCards_id = [];
 // 카드들을 배열에 넣고, 섞고, 배치하고 등등...
 function gameInit() {
     cardsInit();
-    // suffleCards(allCards_id);
+    suffleCards(allCards_id);
     putCardsInit();
 }
 
@@ -128,16 +128,19 @@ function allowDrop(ev) {
     }
     else if (movedCard_value == 1) {
         if (isDiffSortCard(data,pn.id)) {
-            // console.log("내가 마우스 놓는 곳의 value: " + document.getElementById(pn.id).getAttribute('value'));
-            // console.log(typeof(pn.id)); // 내가 마우스 놓는 곳의 id string
-            // console.log(pn.parentElement);
+            if (isDiffOne(pn.id,data)) {
+                // console.log("내가 마우스 놓는 곳의 value: " + document.getElementById(pn.id).getAttribute('value'));
+                // console.log(typeof(pn.id)); // 내가 마우스 놓는 곳의 id string
+                // console.log(pn.parentElement);
 
-            // var childindex = getChildIndex(document.getElementById(data));
-            // console.log(childindex); // index가 0,1,2,... 로 시작
-            // console.log(document.getElementById(data).parentNode.childElementCount); // 1개 , 2개, 3개 ... 로 시작
-            // console.log(document.getElementById(data).parentNode.children[1]);
-            appendAllDownChild(document.getElementById(data),pn.id);
-            // pn.parentElement.appendChild(document.getElementById(data));
+                // var childindex = getChildIndex(document.getElementById(data));
+                // console.log(childindex); // index가 0,1,2,... 로 시작
+                // console.log(document.getElementById(data).parentNode.childElementCount); // 1개 , 2개, 3개 ... 로 시작
+                // console.log(document.getElementById(data).parentNode.children[1]);
+                appendAllDownChild(document.getElementById(data),pn.id);
+                // pn.parentElement.appendChild(document.getElementById(data));
+            }
+            // appendAllDownChild(document.getElementById(data),pn.id);
         }
 
     }
@@ -200,4 +203,31 @@ function isDiffSortCard(card1_id,card2_id) {
         return true;
     }
     return false;
+}
+
+function isDiffOne(targetCard_id,movedCard_id) {
+    var targetCard_number;
+    var movedCard_number;
+    if (targetCard_id[3] == null) {
+        // 십의 자리 수가 아니면
+        targetCard_number = targetCard_id[2];
+    } else {
+        targetCard_number = targetCard_id[2] + targetCard_id[3];    
+    }
+    if (movedCard_id[3] == null) {
+        // 십의 자리 수가 아니면
+        movedCard_number = movedCard_id[2];
+    } else {
+        movedCard_number = movedCard_id[2] + movedCard_id[3];    
+    }
+
+    console.log("targetCard_number : " + targetCard_number);
+    console.log("movedCard_number : " + movedCard_number);
+    console.log("(targetCard_number - movedCard_number) : " + (targetCard_number - movedCard_number));
+    if ((targetCard_number - movedCard_number) == 1) {
+        return true;
+    } else {
+        return false;
+    }
+
 }
