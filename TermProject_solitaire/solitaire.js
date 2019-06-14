@@ -244,5 +244,17 @@ function isDiffOne(targetCard_id,movedCard_id) {
 
 function revealLastCardInProcessId(oldClickedCardParent) {
     var lastCardInThisLine = oldClickedCardParent.children[oldClickedCardParent.childElementCount-1];
-    console.log(lastCardInThisLine);
+    if (lastCardInThisLine != null) {
+        console.log("lastCardInThisLine : " + lastCardInThisLine);
+        console.log("lastCardInThisLine.getAttribute('value') : " + lastCardInThisLine.getAttribute("value"));
+        if (lastCardInThisLine.getAttribute("value") == 0) {
+            lastCardInThisLine.setAttribute("draggable","true");
+            lastCardInThisLine.setAttribute("ondragstart","drag(event)");
+            lastCardInThisLine.setAttribute("ondrop","drop(event)");
+            lastCardInThisLine.setAttribute("ondragover","allowDrop(event)");
+            lastCardInThisLine.setAttribute("value","1");
+            lastCardInThisLine.style.backgroundImage = "url(data/" + lastCardInThisLine.getAttribute('id') + ".jpg)";
+        }
+    
+    }
 }
