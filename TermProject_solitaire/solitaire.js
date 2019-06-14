@@ -27,7 +27,6 @@ var allCards_id = [];
 // 카드들을 배열에 넣고, 섞고, 배치하고 등등...
 function gameInit() {
     cardsInit();
-    console.log("run?");
     setCardBackgroundProperty(); // 빈 프로세스1 위에 K 카드 오게 할 수 있다던가 등등..
     suffleCards(allCards_id);
     putCardsInit();
@@ -100,6 +99,7 @@ function putCardsInit(){
 
         }
     }
+    // 카드 나머지들.. id = back_card에 넣어야 함.
 
 }
 
@@ -154,6 +154,35 @@ function allowDrop(ev) {
                 revealLastCardInProcessId(oldClickedCardParent);
             // appendAllDownChild(document.getElementById(data),pn.id);
         }
+
+    } else if (movedCard_value == 2) {
+        if (isSameSort(pn.id,data)) {
+            if (isDiffOne(pn.id,data)) {
+            // result에 있는 A 위에 2가 올 때..
+            // console.log("내가 마우스 놓는 곳의 value: " + document.getElementById(pn.id).getAttribute('value'));
+            // console.log(typeof(pn.id)); // 내가 마우스 놓는 곳의 id string
+            // console.log(pn.parentElement);
+
+            // var childindex = getChildIndex(document.getElementById(data));
+            // console.log(childindex); // index가 0,1,2,... 로 시작
+            // console.log(document.getElementById(data).parentNode.childElementCount); // 1개 , 2개, 3개 ... 로 시작
+            // console.log(document.getElementById(data).parentNode.children[1]);
+
+            // var oldMovedCardParent = pn.id.parentNode;
+
+            // appendAllDownChild(document.getElementById(data),pn.id);
+            // console.log(oldMovedCardParent.childElementCount);
+            // pn.parentElement.appendChild(document.getElementById(data));
+        }
+        var oldClickedCardParent = document.getElementById(data).parentNode;
+        console.log(oldClickedCardParent.id);
+        var dataElement = document.getElementById(data);
+        data.setAttribute('value','2');
+        pn.appendChild(dataElement);
+        console.log("oldClickedCardParent : " + oldClickedCardParent);
+        revealLastCardInProcessId(oldClickedCardParent);
+        }
+        
 
     }
 
@@ -217,6 +246,15 @@ function isDiffSortCard(card1_id,card2_id) {
     return false;
 }
 
+function isSameSort(card1_id,card2_id) {
+    console.log("card1_id[0] : " + card1_id[0] + ", card2_id[0] : " + card2_id[0]);
+    if (card1_id[0] == card2_id[0]) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function isDiffOne(targetCard_id,movedCard_id) {
     var targetCard_number;
     var movedCard_number;
@@ -262,7 +300,6 @@ function revealLastCardInProcessId(oldClickedCardParent) {
 }
 
 function setCardBackgroundProperty() {
-    console.log("run?");
     setResultBackground();
     setProcessBackground();
 
@@ -271,9 +308,9 @@ function setCardBackgroundProperty() {
 function setResultBackground() {
     var resultElement;
     for (var resultId_index = 1; resultId_index <= 4; resultId_index++) {
-        console.log("resultId_index : " + resultId_index);
+        // console.log("resultId_index : " + resultId_index);
         resultElement = document.getElementById("result" + resultId_index);
-        resultElement.setAttribute("ondrop","dropOnlyWantNumberCard(event,1)");
+        resultElement.setAttribute("ondrop","dropACardToResult(event," + resultId_index + ")");
         resultElement.setAttribute("ondragover","allowDrop(event)");
     }
 }
@@ -310,4 +347,76 @@ function getCardNumberInIdString(id_string) {
     }
 
     return cardNumber;
+}
+
+function dropACardToResult(ev,sortNumber) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("frontcard");
+    var pn = ev.target;
+    console.log(data); // 내가 마우스 클릭한 곳의 id string
+
+    if (getCardNumberInIdString(data) == 1 && sortNumber == data[0]) {
+        var oldClickedCardParent = document.getElementById(data).parentNode;
+        var dataElement = document.getElementById(data);
+        pn.appendChild(dataElement);
+        // 이제 A 카드 위에 drop 되는 것들은 이 A 카드의 자식이 되어야 함. 그 자식들도 마찬가지..
+        // changeToMakeChildDrop(document.getElementById(data));
+        // dataElement.setAttribute('value','2');
+        dataElement.setAttribute("draggable","false");
+        // dataElement.setAttribute("ondragstart","drag(event)");
+        dataElement.setAttribute("ondrop","drop(event)");
+        // dataElement.setAttribute("ondragover","allowDrop(event)");
+        dataElement.setAttribute("value","2");
+        // dataElement.style.backgroundImage = "url(data/" + lastCardInThisLine.getAttribute('id') + ".jpg)";
+        // console.log("oldClickedCardParent : " + oldClickedCardParent);
+        // console.log("oldClickedCardParent.id : " + oldClickedCardParent.id);
+        revealLastCardInProcessId(oldClickedCardParent);
+    }
+}
+
+function changeToMakeChildDrop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("frontcard");
+    // ev.target.appendChild(document.getElementById(data));
+    var pn = ev.target;
+    // // console.log(ev.path[0]);
+    // // console.log(ev.dataTransfer);
+    console.log(data); // 내가 마우스 클릭한 곳의 id string
+    // console.log(typeof(data));
+    // // console.log(pn); // 대상의 object
+    // // console.log(typeof(pn));
+
+    var movedCard_value = $("#" + pn.id).attr("value");
+    console.log(pn.id);
+    console.log("내가 마우스 놓는 곳의 value: " + movedCard_value);
+    if (movedCard_value == 0) {
+
+    }
+    else if (movedCard_value == 1) {
+        if (isDiffSortCard(data,pn.id)) {
+            if (isDiffOne(pn.id,data)) {
+                // console.log("내가 마우스 놓는 곳의 value: " + document.getElementById(pn.id).getAttribute('value'));
+                // console.log(typeof(pn.id)); // 내가 마우스 놓는 곳의 id string
+                // console.log(pn.parentElement);
+
+                // var childindex = getChildIndex(document.getElementById(data));
+                // console.log(childindex); // index가 0,1,2,... 로 시작
+                // console.log(document.getElementById(data).parentNode.childElementCount); // 1개 , 2개, 3개 ... 로 시작
+                // console.log(document.getElementById(data).parentNode.children[1]);
+
+                // var oldMovedCardParent = pn.id.parentNode;
+
+                // appendAllDownChild(document.getElementById(data),pn.id);
+                // console.log(oldMovedCardParent.childElementCount);
+                // pn.parentElement.appendChild(document.getElementById(data));
+            }
+            var oldClickedCardParent = document.getElementById(data).parentNode;
+                // console.log(oldClickedCardParent.id);
+                appendAllDownChild(document.getElementById(data),pn.id);
+                // console.log(oldClickedCardParent.id);
+                revealLastCardInProcessId(oldClickedCardParent);
+            // appendAllDownChild(document.getElementById(data),pn.id);
+        }
+
+    }
 }
