@@ -100,7 +100,7 @@ function putCardsInit(){
         }
     }
     // 카드 나머지들.. id = back_card에 넣어야 함.
-
+    
 }
 
 function allowDrop(ev) {
