@@ -22,6 +22,7 @@ $(document).ready(function(){
 
 var allCards = [];
 var allCards_id = [];
+var flipBackCards_id = [];
 
 // 게임 시작할 때 해야 할 것들.
 // 카드들을 배열에 넣고, 섞고, 배치하고 등등...
@@ -99,8 +100,14 @@ function putCardsInit(){
 
         }
     }
+    console.log("card_number before insert flip cards : " + card_number);
     // 카드 나머지들.. id = back_card에 넣어야 함.
-    
+    while (card_number < 52) {
+        flipBackCards_id.push(allCards_id[card_number]);
+        card_number++;
+    }
+    console.log("allCards_id.length : " + allCards_id.length + ", flipBackCards_id.length : " + flipBackCards_id.length);
+    // console.log("allCards_id.length + flipBackCards_id.length : " + allCards_id.length + flipBackCards_id.length);
 }
 
 function allowDrop(ev) {
