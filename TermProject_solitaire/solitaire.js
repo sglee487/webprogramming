@@ -2,6 +2,12 @@
 
 // 카드 크기 100 x 125
 
+// 카드 div 태그에 붙어있는
+// value = 0 은 뒤집어져 있는 카드
+// value = 1 은 process에서 앞면인 카드
+// value = 2는 result에 박혀서 안나오게 해야하는 카드
+
+
 // process2 = $("#process2");
 // process2.text("hellop2");
 $(document).ready(function(){
@@ -69,7 +75,7 @@ function putCardsInit(){
             // $("<div class='card'> hHHeeloo</div>").appendTo("#process"+row);
             // child = $("#process"+row).append("<div class='card'> hHHeeloo</div>");
 
-            $("<div class='card' id=" + allCards_id[card_number] + " ></div>").appendTo("#process"+row);
+            $("<div class='card' id=" + allCards_id[card_number] + " value = 1></div>").appendTo("#process"+row);
             $("#" + allCards_id[card_number]).css("background-image","url(data/0_0.jpg)");
             if ((row - col) == 1) {
                 // console.log("hi");
@@ -113,16 +119,29 @@ function allowDrop(ev) {
     // console.log(typeof(data));
     // // console.log(pn); // 대상의 object
     // // console.log(typeof(pn));
-    console.log(pn.id);
-    // console.log(typeof(pn.id)); // 내가 마우스 놓는 곳의 id string
-    // console.log(pn.parentElement);
 
-    var childindex = getChildIndex(document.getElementById(data));
-    console.log(childindex); // index가 0,1,2,... 로 시작
-    console.log(document.getElementById(data).parentNode.childElementCount); // 1개 , 2개, 3개 ... 로 시작
-    // console.log(document.getElementById(data).parentNode.children[1]);
-    appendAllDownChild(document.getElementById(data),pn.id);
-    // pn.parentElement.appendChild(document.getElementById(data));
+    var movedCard_value = $("#" + pn.id).attr("value");
+    console.log(pn.id);
+    console.log("내가 마우스 놓는 곳의 value: " + movedCard_value);
+    if (movedCard_value == 0) {
+
+    }
+    else if (movedCard_value == 1) {
+        if (isDiffSortCard(data,pn.id)) {
+            // console.log("내가 마우스 놓는 곳의 value: " + document.getElementById(pn.id).getAttribute('value'));
+            // console.log(typeof(pn.id)); // 내가 마우스 놓는 곳의 id string
+            // console.log(pn.parentElement);
+
+            // var childindex = getChildIndex(document.getElementById(data));
+            // console.log(childindex); // index가 0,1,2,... 로 시작
+            // console.log(document.getElementById(data).parentNode.childElementCount); // 1개 , 2개, 3개 ... 로 시작
+            // console.log(document.getElementById(data).parentNode.children[1]);
+            appendAllDownChild(document.getElementById(data),pn.id);
+            // pn.parentElement.appendChild(document.getElementById(data));
+        }
+
+    }
+
 }
 
 function appendAllDownChild(movedChild,str_TargetId) {
@@ -138,8 +157,8 @@ function appendAllDownChild(movedChild,str_TargetId) {
         }
     }
 
-    console.log("foundStartIndex : " + foundStartIndex);
-    console.log("movedChildren.length : " + movedChildren.length);
+    // console.log("foundStartIndex : " + foundStartIndex);
+    // console.log("movedChildren.length : " + movedChildren.length);
     
     if (foundStartIndex == movedChildren.length) {
         // 못 찾았 단 뜻
@@ -148,27 +167,37 @@ function appendAllDownChild(movedChild,str_TargetId) {
         console.log("found");
         var iteratorCount = movedChildren.length - foundStartIndex;
         for ( ;iteratorCount >0;iteratorCount--) {
-            console.log("foundStartIndex: " + foundStartIndex);
+            // console.log("foundStartIndex: " + foundStartIndex);
+            // console.log("movedChildren.length : " + movedChildren.length);
             target_Object_Parent.appendChild(movedChildren[foundStartIndex]);
         }
-        // for (foundStartIndex; foundStartIndex < movedChildren.length; foundStartIndex++) {
-        //     console.log("foundStartIndex: " + foundStartIndex);
-        //     // console.log("target_Object_Parent: " + target_Object_Parent);
-        //     // console.log("children[foundStartIndex] : " + movedChildren[foundStartIndex]);
-        //     target_Object_Parent.appendChild(movedChildren[foundStartIndex]);
-        // }
     }
     
 }
 
-function getChildIndex(child) {
-    var parent = child.parentNode;
-    var children = parent.children;
-    var i = children.length - 1;
-    for (; i >= 0; i--){
-        if (child == children[i]){
-            break;
-        }
+// function getChildIndex(child) {
+//     var parent = child.parentNode;
+//     var children = parent.children;
+//     var i = children.length - 1;
+//     for (; i >= 0; i--){
+//         if (child == children[i]){
+//             break;
+//         }
+//     }
+//     return i;
+// }
+
+function isDiffSortCard(card1_id,card2_id) {
+    console.log("card1_id[0] : " + card1_id[0] + ", card2_id[0] : " + card2_id[0]);
+    if ((card1_id[0] == 1 && card2_id[0] == 3)
+    || (card1_id[0] == 2 && card2_id[0] == 3)
+    || (card1_id[0] == 1 && card2_id[0] == 4)
+    || (card1_id[0] == 2 && card2_id[0] == 4)
+    || (card1_id[0] == 3 && card2_id[0] == 1)
+    || (card1_id[0] == 4 && card2_id[0] == 1)
+    || (card1_id[0] == 3 && card2_id[0] == 2)
+    || (card1_id[0] == 4 && card2_id[0] == 2)) {
+        return true;
     }
-    return i;
+    return false;
 }
