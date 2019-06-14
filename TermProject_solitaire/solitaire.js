@@ -24,6 +24,8 @@ var allCards = [];
 var allCards_id = [];
 var flipBackCards_id = [];
 
+var resultCardCount = 0;
+
 // 게임 시작할 때 해야 할 것들.
 // 카드들을 배열에 넣고, 섞고, 배치하고 등등...
 function gameInit() {
@@ -184,10 +186,13 @@ function allowDrop(ev) {
         var oldClickedCardParent = document.getElementById(data).parentNode;
         console.log(oldClickedCardParent.id);
         var dataElement = document.getElementById(data);
-        data.setAttribute('value','2');
+        dataElement.setAttribute('value','2');
+        dataElement.setAttribute("draggable","false");
+        dataElement.setAttribute("ondrop","drop(event)");
         pn.appendChild(dataElement);
         console.log("oldClickedCardParent : " + oldClickedCardParent);
         revealLastCardInProcessId(oldClickedCardParent);
+        isWinCardCount()
         }
         
 
@@ -377,6 +382,9 @@ function dropACardToResult(ev,sortNumber) {
         // dataElement.style.backgroundImage = "url(data/" + lastCardInThisLine.getAttribute('id') + ".jpg)";
         // console.log("oldClickedCardParent : " + oldClickedCardParent);
         // console.log("oldClickedCardParent.id : " + oldClickedCardParent.id);
+
+        isWinCardCount()
+
         revealLastCardInProcessId(oldClickedCardParent);
     }
 }
@@ -426,4 +434,9 @@ function changeToMakeChildDrop(ev) {
         }
 
     }
+}
+
+function isWinCardCount() {
+    resultCardCount++;
+    console.log("resultCardCount : " + resultCardCount);
 }
