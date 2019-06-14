@@ -283,7 +283,7 @@ function dropOnlyKCard(ev) {
     console.log(data); // 내가 마우스 클릭한 곳의 id string
 
     if (getCardNumberInIdString(data) == 13) {
-        pn.appendChild(data);
+        pn.appendChild(document.getElementById(data));
     }
 
 }
