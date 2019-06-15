@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="kr">
+  <head>
+    <title>question 4</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="2_main.css">
+  </head>
+  <body>
+      <form action="">
+Book title: <input type="text" name="" id="" required>
+<br><br>
+ISBN: <input type="text" name="" id="" pattern="^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[- ]){4})[-0-9]{17}$)(?:97[89][- ]?)?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$" required title="시험 문항의 국제표준 도서번호"> <i id = "red">시험 문항의 국제표준 도서번호</i>
+<br><br>
+Date of publication: <input type="date" name="" id="" required>
+<br><br>
+Price($) <input type="number" name="" id="" min="0.85" max="42.27" step="0.01" required> 
+<br><br>
+<input type="submit" value="Add new book">
+<br><br>
+<p>By date:</p>
+<br><br>
+      </form>
+      <form action="">
+<input type="radio" name="order" id="ascending"> ascending order
+<input type="radio" name="order" id="descending"> descending order
+<br><br>
+<input type="submit" value="view all books">
+<br><br>
+</form>
+  <script src="2_main.js">
+  </script>
+  </body>
+</html>
