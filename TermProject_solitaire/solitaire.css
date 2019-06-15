@@ -48,6 +48,15 @@
   
 }
 
+tr>td#back_card{
+    background-image: url("data/refill_card_background.jpg");
+    left: 25px;
+}
+
+tr>td#front_card{
+    left: 150px;
+}
+
 #table1 {
     border-spacing: 15px;
 }
