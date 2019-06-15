@@ -6,9 +6,7 @@ function save() {
     {
         title : inputTitle,
         content : inputContent
-    },
-    function(data,status){
-        alert("Data: " + data + "\nStatus: " + status);
-      });
+    })
+
       
 }
