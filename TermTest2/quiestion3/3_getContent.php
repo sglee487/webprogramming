@@ -12,6 +12,8 @@ while (!feof($myfile_r)) {
     // echo $token;
 
     $a[] = $token;
+    $token = strtok("|");
+    $b[] = $token;
     // $title = str_split("|");
     // $a[] = $title[1];
     // echo $title[1];
@@ -19,29 +21,23 @@ while (!feof($myfile_r)) {
 }
 fclose($myfile_r);
 
-if ($q !== "") {
-    $q = strtolower($q);
-    $len = strlen($q);
+
+$index = 0;
     foreach($a as $title) {
         // echo substr($title, 0, $len);
-        if (stristr($q, substr($title, 0, $len))) {
-            if ($hint === "") {
-                $hint = $title;
-            } else {
-                // $hint .= $title . "\n";
-                $hint .= "$title";
-                $hint_a[] = $title;
-            }
+        if (stristr($q, $title)) {
+            $content = $b[$index];
             
         }
-        
+        $index++;
     }
 
-}
 
-foreach($hint_a as $onehint) {
-    echo $onehint === "" ? "no suggestion" : "<li id = " . $onehint . " onclick = findContent(". "'" . $onehint . "'" . ")> " . $onehint . "</li>";
-}
+echo $content;
+
+// foreach($hint_a as $onehint) {
+//     echo $onehint === "" ? "no suggestion" : "<li id = " . $onehint . " onclick = findContent(". $onehint . ")> " . $onehint . "</li>";
+// }
 // echo $hint === "" ? "no suggestion" : "<li> " . $hint . "</li>";
 // echo $hint;
 // echo $q;

@@ -46,3 +46,26 @@ function showHint(str) {
 
     
 }
+
+function findContent(str) {
+    if (str.length == 0) { 
+        // document.getElementById(str).innerHTML = "";
+        return;
+      }
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+        //   document.getElementById(str).innerHTML = this.responseText;
+        var pElement = document.createElement("p");
+        var tNode = document.createTextNode(this.responseText);
+
+        pElement.appendChild(tNode);
+        // console.log(str);
+        // console.log(document.getElementById(str));
+        document.getElementById(str).appendChild(pElement);
+
+        }
+      };
+      xhttp.open("GET", "3_getContent.php?hint="+str, true);
+      xhttp.send();
+}
