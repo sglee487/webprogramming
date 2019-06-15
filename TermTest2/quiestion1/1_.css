@@ -1,0 +1,79 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto ;
+    grid-template-rows: 200px 200px 200px 200px ;
+    grid-gap: 15px;
+    background-color: blue;
+    padding: 10px;
+  }
+  
+  .grid-container > div {
+    background-color: white;
+    text-align: center;
+    color: red;
+    padding: 20px 0;
+    font-size: 30px;
+  }
+
+.item1 {
+  grid-column: span 3;
+}
+
+.item2 {
+grid-column: span 3;
+}
+.item3 {
+grid-column: span 6;
+}
+.item4 {
+grid-column: span 6;
+}
+.item5 {
+grid-column: span 2;
+}
+.item6 {
+grid-column: span 2;
+}
+.item7 {
+grid-column: span 2;
+}
+
+@media only screen and (max-width: 1200px) {
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto ;
+    grid-template-rows: 100px ;
+    grid-gap: 15px;
+    background-color: blue;
+    padding: 10px;
+  }
+    .item1 {
+  grid-column: span 4;
+}
+
+.item2 {
+grid-column: span 4;
+row:200px;
+
+}
+.item3 {
+grid-column: span 5;
+grid-row: 2 / span 3;
+}
+.item4 {
+grid-column: span 3;
+grid-row: span 4;
+}
+.item5 {
+grid-column: span 2;
+grid-row: 6;
+}
+.item6 {
+grid-column: span 4;
+grid-row: 6;
+}
+.item7 {
+grid-column: span 2;
+grid-row: 6 / span 2;
+}
+  }
