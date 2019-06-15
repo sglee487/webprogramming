@@ -113,26 +113,7 @@ function putCardsInit(){
     // console.log("allCards_id.length + flipBackCards_id.length : " + allCards_id.length + flipBackCards_id.length);
     // 처음 back_card id에 붙이는 카드.
     // document.getElementById("back_card").appendChild($("<div class='card' id=" + flipBackCards_id[0] + " value = 3></div>")[0]);
-    for (var index = 0; index < flipBackCards_id.length; index++) {
-        // document.getElementById(flipBackCards_id[(index-1)]).appendChild($("<div class='card' id=" + flipBackCards_id[index] + " value = 3></div>")[0]);
-        $("<div class='card' id=" + flipBackCards_id[index] + " value = 3></div>").appendTo("#back_card");
-        $("#" + flipBackCards_id[index]).css("background-image","url(data/0_0.jpg)");
-        
-        // $("#" + flipBackCards_id[index]).attr("draggable","false");
-        // $("#" + flipBackCards_id[index]).attr("ondragstart","");
-        // $("#" + flipBackCards_id[index]).attr("ondrop","");
-        // $("#" + flipBackCards_id[index]).attr("ondragover","");
-        
-        $("#" + flipBackCards_id[index]).css("position","absolute");
-        $("#" + flipBackCards_id[index]).css("top","23px");
-
-        $("#" + flipBackCards_id[index]).attr("onclick","flipCard('" + flipBackCards_id[index] + "')");
-        // $("#" + flipBackCards_id[index]).attr("ondragstart","drag(event)");
-        // $("#" + flipBackCards_id[index]).attr("ondrop","drop(event)");
-        // $("#" + flipBackCards_id[index]).attr("ondragover","allowDrop(event)");
-        // $("<div class='card' id=" + flipBackCards_id[index] + " value = 3></div>").appendTo("#back_card");
-        // $("#" + flipBackCards_id[index]).css("background-image","url(data/0_0.jpg)");
-    }
+    refillCards();
     // $("#" + flipBackCards_id[23]).attr("onclick","flipCard('" + flipBackCards_id[23] + "')");
 }
 
@@ -142,7 +123,15 @@ function flipCard(cardId_str) {
     // $("#front_card")[0].appendChild($("#" + cardId_str)[0]);
     $("#" + cardId_str).css("top","23px");
     $("#" + cardId_str).css("background-image","url(data/" + cardId_str + ".jpg)");
+
+    isBackCardsEmpty();
     
+}
+
+function isBackCardsEmpty() {
+    if($("#back_card")[0].childElementCount == 0) {
+        setBackCard();
+    }
 }
 
 function allowDrop(ev) {
@@ -357,6 +346,23 @@ function setBackCard() {
 
 function refillCards() {
     console.log("refill cards");
+    $("#front_card").empty();
+    for (var index = 0; index < flipBackCards_id.length; index++) {
+        $("<div class='card' id=" + flipBackCards_id[index] + " value = 3></div>").appendTo("#back_card");
+        $("#" + flipBackCards_id[index]).css("background-image","url(data/0_0.jpg)");
+        
+        $("#" + flipBackCards_id[index]).removeAttr("draggable");
+        $("#" + flipBackCards_id[index]).removeAttr("ondragstart");
+        $("#" + flipBackCards_id[index]).removeAttr("ondrop");
+        $("#" + flipBackCards_id[index]).removeAttr("ondragover");
+        
+        $("#" + flipBackCards_id[index]).css("position","absolute");
+        $("#" + flipBackCards_id[index]).css("top","23px");
+
+        $("#" + flipBackCards_id[index]).attr("onclick","flipCard('" + flipBackCards_id[index] + "')");
+    }
+
+    $("#back_card").removeAttr("onclick");
 }
 
 function setResultBackground() {
