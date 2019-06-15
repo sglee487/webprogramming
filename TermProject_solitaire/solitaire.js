@@ -118,6 +118,7 @@ function putCardsInit(){
 }
 
 function flipCard(cardId_str) {
+    // isBackCardsEmpty();
     console.log("cardId_str : " + cardId_str);
     $("#" + cardId_str).appendTo("#front_card");
     // $("#front_card")[0].appendChild($("#" + cardId_str)[0]);
@@ -130,6 +131,7 @@ function flipCard(cardId_str) {
 
 function isBackCardsEmpty() {
     if($("#back_card")[0].childElementCount == 0) {
+        console.log('$("#back_card")[0].childElementCount == 0 : is true');
         setBackCard();
     }
 }
@@ -341,7 +343,8 @@ function setCardBackgroundProperty() {
 }
 
 function setBackCard() {
-    $("#back_card").attr("onclick","refillCards()");
+    // $("#back_card").attr("onclick","refillCards()");
+    $("#back_card").attr("ondblclick","refillCards()");
 }
 
 function refillCards() {
