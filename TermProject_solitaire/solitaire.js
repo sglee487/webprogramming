@@ -125,6 +125,13 @@ function flipCard(cardId_str) {
     $("#" + cardId_str).css("top","23px");
     $("#" + cardId_str).css("background-image","url(data/" + cardId_str + ".jpg)");
 
+    $("#" + cardId_str).attr("draggable","true");
+    $("#" + cardId_str).attr("ondragstart","drag(event)");
+    $("#" + cardId_str).attr("ondrop","drop(event)");
+    $("#" + cardId_str).attr("ondragover","allowDrop(event)");
+    $("#" + cardId_str).attr("value","3");
+
+
     isBackCardsEmpty();
     
 }
@@ -132,7 +139,8 @@ function flipCard(cardId_str) {
 function isBackCardsEmpty() {
     if($("#back_card")[0].childElementCount == 0) {
         console.log('$("#back_card")[0].childElementCount == 0 : is true');
-        setBackCard();
+        // setBackCard();
+        setTimeout(setBackCard,700);
     }
 }
 
@@ -343,8 +351,8 @@ function setCardBackgroundProperty() {
 }
 
 function setBackCard() {
-    // $("#back_card").attr("onclick","refillCards()");
-    $("#back_card").attr("ondblclick","refillCards()");
+    $("#back_card").attr("onclick","refillCards()");
+    // $("#back_card").attr("ondblclick","refillCards()");
 }
 
 function refillCards() {
