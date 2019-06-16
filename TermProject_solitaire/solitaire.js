@@ -587,7 +587,7 @@ function startTime() {
     h + ":" + m + ":" + s;
     var t = setTimeout(startTime, 500);
     document.getElementById('showCurrentScore').innerHTML =
-    "현재 점수 : " + (score - changeToSeconds(h-start_h,m-start_m,s-start_s));
+    "점수 : " + (score - changeToSeconds(h-start_h,m-start_m,s-start_s));
   }
   function checkTime(i) {
     if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
