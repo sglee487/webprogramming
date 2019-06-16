@@ -18,6 +18,8 @@ $(document).ready(function(){
     recordStartTime();
     startTime();
 
+    // winFunction();
+    setTimeout(winFunction,5000);
     // document.getElementById("1_1").setAttribute("draggable","true");
     // $("#1_1").css("draggable","true");
 });
@@ -584,7 +586,7 @@ function startTime() {
     m = checkTime(m);
     s = checkTime(s);
     document.getElementById('showCurrentTime').innerHTML =
-    h + ":" + m + ":" + s;
+    "Time " + h + ":" + m + ":" + s;
     var t = setTimeout(startTime, 500);
     document.getElementById('showCurrentScore').innerHTML =
     "점수 : " + (score - changeToSeconds(h-start_h,m-start_m,s-start_s));
@@ -612,13 +614,28 @@ function recordStartTime() {
 function winFunction() {
     recordEndTime();
     $("#win_window").css("display","block");
+    var winScore = (score - changeToSeconds(end_h-start_h,end_m-start_m,end_s-start_s));
+
+
+    var sumAllNewSeconds = end_h*3600 + end_m*60 + end_s;
+    var sumAlloldSeconds = start_h*3600 + start_m*60 + start_s;
+
+    var diffAllTwoSeconds = sumAllNewSeconds- sumAlloldSeconds;
+    var diff_h,diff_m,diff_s;
+
+    diff_h = Math.floor(diffAllTwoSeconds / 3600);
+    diff_m =  Math.floor(diffAllTwoSeconds / 60);
+    diff_s = diffAllTwoSeconds % 60;
+
+    $("#howLongToBeat").text("깨는데 걸린 시간: " + (diff_h) + "시간 " + (diff_m) + "분 " + (diff_s) + "초");
+    $("#finalScore").text("최종 점수 : " + winScore);
 
 }
 
 function recordEndTime() {
     end_today = new Date();
-    end_h = end_todaytoday.getHours();
-    end_m = end_todaytoday.getMinutes();
-    end_s = end_todaytoday.getSeconds();
+    end_h = end_today.getHours();
+    end_m = end_today.getMinutes();
+    end_s = end_today.getSeconds();
 }
 

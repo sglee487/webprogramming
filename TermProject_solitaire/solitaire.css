@@ -63,7 +63,7 @@ tr>td#front_card{
 
 #win_window {
     width: 300px;
-    height: 500px;
+    height: 300px;
     position: fixed;
     left: 250px;
     top: 250px;
@@ -71,6 +71,7 @@ tr>td#front_card{
     padding: 20px;
     line-height: 40px;
     display: none;
+    text-align: center;
 }
 
 .card {
@@ -86,7 +87,7 @@ tr>td#front_card{
 #showCurrentTime {
     position: absolute;
     top: 30px;
-    right: 10px;
+    right: -10px;
     background-color: aliceblue;
     font-style: inherit;
 }

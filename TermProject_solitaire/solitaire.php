@@ -60,9 +60,14 @@
         
         <div id="win_window">
         <!-- 클리어시간, 점수 등을 표시 -->
-        <?php
-
-        ?>
+        <form action="" method="post"></form>
+            <p>CLEAR!</p>
+            <div id="howLongToBeat"></div>
+            <div id="finalScore"></div>
+            이름 : <input type="text" name="" id="clear_name">
+            <br>
+            <input type="submit" value="등록하기">
+        </form>
         </div>
 
             <div id="showCurrentTime">
