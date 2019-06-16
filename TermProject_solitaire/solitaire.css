@@ -83,6 +83,14 @@ tr>td#front_card{
     z-index: 3;
 }
 
+#showCurrentTime {
+    position: absolute;
+    top: 30px;
+    right: 10px;
+    background-color: aliceblue;
+    font-style: inherit;
+}
+
 #process1 {
     border-radius: 6px;
     border: 2px solid rgb(40, 59, 13);

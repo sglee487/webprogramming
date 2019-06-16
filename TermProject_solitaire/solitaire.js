@@ -15,7 +15,7 @@ $(document).ready(function(){
     // process2.text("hellop2");
 
     gameInit();
-
+    startTime();
     // document.getElementById("1_1").setAttribute("draggable","true");
     // $("#1_1").css("draggable","true");
 });
@@ -558,3 +558,19 @@ function isWinCardCount() {
     resultCardCount++;
     console.log("resultCardCount : " + resultCardCount);
 }
+
+function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('showCurrentTime').innerHTML =
+    h + ":" + m + ":" + s;
+    var t = setTimeout(startTime, 500);
+  }
+  function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+  }

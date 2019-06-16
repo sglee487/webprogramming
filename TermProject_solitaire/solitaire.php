@@ -65,5 +65,7 @@
         ?>
         </div>
 
+            <div id="showCurrentTime">
+            </div>
     </body>
 </html>
