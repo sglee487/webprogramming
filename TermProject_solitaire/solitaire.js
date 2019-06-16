@@ -131,6 +131,9 @@ function flipCard(cardId_str) {
     $("#" + cardId_str).attr("ondragover","allowDrop(event)");
     $("#" + cardId_str).attr("value","3");
 
+    // $("#" + flipBackCards_id[index]).attr("onclick","flipCard('" + flipBackCards_id[index] + "')");
+    $("#" + cardId_str).removeAttr("onclick");
+
 
     isBackCardsEmpty();
     
@@ -140,7 +143,7 @@ function isBackCardsEmpty() {
     if($("#back_card")[0].childElementCount == 0) {
         console.log('$("#back_card")[0].childElementCount == 0 : is true');
         // setBackCard();
-        setTimeout(setBackCard,700);
+        setTimeout(setBackCard,400);
     }
 }
 
@@ -164,10 +167,59 @@ function allowDrop(ev) {
     // // console.log(pn); // 대상의 object
     // // console.log(typeof(pn));
 
+    var clickedCard_value = $("#" + data).attr("value");
+    console.log("내가 마우스 클릭한 곳의 id : " + data + ", value: " + clickedCard_value);
     var movedCard_value = $("#" + pn.id).attr("value");
-    console.log(pn.id);
-    console.log("내가 마우스 놓는 곳의 value: " + movedCard_value);
-    if (movedCard_value == 0) {
+    // console.log(pn.id);
+    console.log("내가 마우스 놓는 곳의 id : " + pn.id + ", value: " + movedCard_value);
+
+    if (clickedCard_value == 3) {
+        if (movedCard_value == 1) {
+            if (isDiffSortCard(data,pn.id)) {
+                if (isDiffOne(pn.id,data)) {
+
+                }
+                    // position과 top 속성도 삭제해야 함.
+                    // 먼저 삭제하고 붙어야 없앤 상태로 적용이 되는 듯.
+                    $("#" + data).css("position","");
+                    $("#" + data).css("top","");
+
+                    $("#" + pn.id)[0].parentElement.appendChild($("#" + data)[0]);
+                    $("#" + data).attr("value","1");
+
+
+                    removeElementInArray(flipBackCards_id,data);
+            }
+        } else if (movedCard_value == 2) {
+            if (isSameSort(pn.id,data)) {
+                if (isDiffOne(pn.id,data)) {
+
+                }
+                
+            // position과 top 속성도 삭제해야 함.
+            // 먼저 삭제하고 붙어야 없앤 상태로 적용이 되는 듯.
+            $("#" + data).removeAttr("onclick","");
+            $("#" + data).css("position","");
+            $("#" + data).css("top","");
+
+            var dataElement = document.getElementById(data);
+            dataElement.setAttribute('value','2');
+            dataElement.setAttribute("draggable","false");
+            dataElement.setAttribute("ondrop","drop(event)");
+            pn.appendChild(dataElement);
+            console.log("oldClickedCardParent : " + oldClickedCardParent);
+
+            removeElementInArray(flipBackCards_id,data);
+
+            isWinCardCount()
+            }
+            
+    
+        }
+        
+        
+    }
+    else if (movedCard_value == 0) {
 
     }
     else if (movedCard_value == 1) {
@@ -230,6 +282,13 @@ function allowDrop(ev) {
 
     }
 
+}
+
+function removeElementInArray(array,data) {
+    var index = array.indexOf(data);
+        if (index > -1) {
+            array.splice(index, 1);
+        }
 }
 
 function appendAllDownChild(movedChild,str_TargetId) {
