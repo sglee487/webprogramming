@@ -91,6 +91,14 @@ tr>td#front_card{
     font-style: inherit;
 }
 
+#showCurrentScore {
+    position: absolute;
+    top: 55px;
+    right: -10px;
+    background-color: aliceblue;
+    font-style: inherit;
+}
+
 #process1 {
     border-radius: 6px;
     border: 2px solid rgb(40, 59, 13);

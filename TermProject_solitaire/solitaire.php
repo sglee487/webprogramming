@@ -67,5 +67,7 @@
 
             <div id="showCurrentTime">
             </div>
+            <div id="showCurrentScore">
+            </div>
     </body>
 </html>

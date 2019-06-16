@@ -15,10 +15,24 @@ $(document).ready(function(){
     // process2.text("hellop2");
 
     gameInit();
+    recordStartTime();
     startTime();
+
     // document.getElementById("1_1").setAttribute("draggable","true");
     // $("#1_1").css("draggable","true");
 });
+
+var start_today; 
+var start_h;
+var start_m;
+var start_s;
+
+var end_today;
+var end_h;
+var end_m;
+var end_s;
+
+var score = 10000;
 
 var allCards = [];
 var allCards_id = [];
@@ -557,6 +571,9 @@ function changeToMakeChildDrop(ev) {
 function isWinCardCount() {
     resultCardCount++;
     console.log("resultCardCount : " + resultCardCount);
+    if (resultCardCount == 52) {
+        winFunction();
+    }
 }
 
 function startTime() {
@@ -569,8 +586,39 @@ function startTime() {
     document.getElementById('showCurrentTime').innerHTML =
     h + ":" + m + ":" + s;
     var t = setTimeout(startTime, 500);
+    document.getElementById('showCurrentScore').innerHTML =
+    "현재 점수 : " + (score - changeToSeconds(h-start_h,m-start_m,s-start_s));
   }
   function checkTime(i) {
     if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
     return i;
   }
+
+  function changeToSeconds(h,m,s) {
+    //   var r = (h*3600) + (m*60) + (s);
+    //   console.log(r);
+    //   console.log(typeof(r));
+    return (h*3600) + (m*60) + (s);
+  }
+
+function recordStartTime() {
+    start_today = new Date();
+    start_h = start_today.getHours();
+    start_m = start_today.getMinutes();
+    start_s = start_today.getSeconds();
+
+}
+
+function winFunction() {
+    recordEndTime();
+    $("#win_window").css("display","block");
+
+}
+
+function recordEndTime() {
+    end_today = new Date();
+    end_h = end_todaytoday.getHours();
+    end_m = end_todaytoday.getMinutes();
+    end_s = end_todaytoday.getSeconds();
+}
+
