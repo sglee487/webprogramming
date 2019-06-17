@@ -87,7 +87,8 @@ tr>td#front_card{
 #showCurrentTime {
     position: absolute;
     top: 30px;
-    right: -10px;
+    /* right: -10px; */
+    left: 880px;
     background-color: aliceblue;
     font-style: inherit;
 }
@@ -95,7 +96,17 @@ tr>td#front_card{
 #showCurrentScore {
     position: absolute;
     top: 55px;
-    right: -10px;
+    /* right: -10px; */
+    left: 880px;
+    background-color: aliceblue;
+    font-style: inherit;
+}
+
+#other_scores {
+    position: absolute;
+    top: 90px;
+    /* right: -10px; */
+    left: 880px;
     background-color: aliceblue;
     font-style: inherit;
 }

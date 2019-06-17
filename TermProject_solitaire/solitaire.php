@@ -48,16 +48,6 @@
             </table>
         </div>
 
-        <div id="time_and_score_show">
-
-        </div>
-
-        <div id="other_scores">
-            <?php
-
-            ?>
-        </div>
-        
         <div id="win_window">
         <!-- 클리어시간, 점수 등을 표시 -->
         <form action="" method="post"></form>
@@ -66,13 +56,12 @@
             <div id="finalScore"></div>
             이름 : <input type="text" name="" id="clear_name">
             <br>
-            <input type="submit" value="등록하기">
+            <input type="submit" value="등록하기" onclick="recordWinner()">
         </form>
         </div>
 
-            <div id="showCurrentTime">
-            </div>
-            <div id="showCurrentScore">
-            </div>
+            <div id="showCurrentTime"></div>
+            <div id="showCurrentScore"></div>
+            <div id="other_scores"></div>
     </body>
 </html>

@@ -18,8 +18,9 @@ $(document).ready(function(){
     recordStartTime();
     startTime();
 
+    readOtherScore();
     // winFunction();
-    setTimeout(winFunction,5000);
+    setTimeout(winFunction,2000);
     // document.getElementById("1_1").setAttribute("draggable","true");
     // $("#1_1").css("draggable","true");
 });
@@ -35,6 +36,7 @@ var end_m;
 var end_s;
 
 var score = 10000;
+var winScore;
 
 var allCards = [];
 var allCards_id = [];
@@ -614,7 +616,7 @@ function recordStartTime() {
 function winFunction() {
     recordEndTime();
     $("#win_window").css("display","block");
-    var winScore = (score - changeToSeconds(end_h-start_h,end_m-start_m,end_s-start_s));
+    winScore = (score - changeToSeconds(end_h-start_h,end_m-start_m,end_s-start_s));
 
 
     var sumAllNewSeconds = end_h*3600 + end_m*60 + end_s;
@@ -639,3 +641,38 @@ function recordEndTime() {
     end_s = end_today.getSeconds();
 }
 
+function recordWinner() {
+    var player = $("#clear_name").val();
+
+    $.post("save_player.php",
+    {
+        player : player,
+        score : winScore
+    },
+    function(data,status){
+        alert("Data: " + data + "\nStatus: " + status);
+    });
+
+
+}
+
+function readOtherScore() {
+
+    var otherPlayer;
+    var otherScore;
+
+    var loadLineStr;
+    $.post("load_player.php",{},function(data,status) {
+        console.log("data : " + data + ", status : " + status);
+        loadLineStr = data;
+        console.log("loadLineStr : " + loadLineStr);
+        // loadLineStr = data;
+        loadLineStr = loadLineStr.split("|");
+
+        $("#other_scores").text(loadLineStr[0] + " : " + loadLineStr[1]);
+    });
+
+    // console.log("loadLineStr : " + loadLineStr);
+    // $("#other_scores").text(loadLineStr);
+    
+}
