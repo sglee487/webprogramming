@@ -17,7 +17,7 @@ $(document).ready(function(){
     gameInit();
     processCardsPositioning()
     recordStartTime();
-    // startTime();
+    startTime();
 
     readOtherScore();
     // winFunction();
@@ -225,9 +225,13 @@ function allowDrop(ev) {
 
             var dataElement = document.getElementById(data);
             dataElement.setAttribute('value','2');
-            dataElement.setAttribute("draggable","false");
+            // dataElement.setAttribute("draggable","false");
+            dataElement.removeAttribute("draggable");
             dataElement.setAttribute("ondrop","drop(event)");
             pn.appendChild(dataElement);
+            pn.removeAttribute("ondrop");
+            pn.removeAttribute("ondragover");
+            
             console.log("oldClickedCardParent : " + oldClickedCardParent);
 
             removeElementInArray(flipBackCards_id,data);
@@ -334,6 +338,10 @@ function allowDrop(ev) {
         dataElement.setAttribute("draggable","false");
         dataElement.setAttribute("ondrop","drop(event)");
         pn.appendChild(dataElement);
+
+        pn.removeAttribute("ondrop");
+        pn.removeAttribute("ondragover");
+
         console.log("oldClickedCardParent : " + oldClickedCardParent);
         revealLastCardInProcessId(oldClickedCardParent);
 
@@ -724,7 +732,7 @@ function changeToMakeChildDrop(ev) {
 function isWinCardCount() {
     resultCardCount++;
     console.log("resultCardCount : " + resultCardCount);
-    if (resultCardCount >= 316) {
+    if (resultCardCount >= 52) {
         winFunction();
     }
 }
