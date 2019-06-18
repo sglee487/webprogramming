@@ -705,10 +705,19 @@ function processCardsPositioning() {
         for (var childIndex = 0; childIndex < $("#process"+processIndex)[0].childElementCount; childIndex++) {
             // console.log("tempProcess.children[childIndex] : " + tempProcess.children[childIndex]);
             tempProcess.children[childIndex].style.position = "absolute";
-            tempProcess.children[childIndex].style.top = (childIndex*50) + "px";
+            tempProcess.children[childIndex].style.top = (childIndex*40) + "px";
             // $("#process"+processIndex + ":nth-child(" + childIndex + ")").css("position","absolute");
             // $("#process"+processIndex + ":nth-child(" + childIndex + ")").css("top",160 + (childIndex*20) + "px");
             // console.log("loop?");
+            
+            // 여기에서 중간 카드에 drop 하는 것도 해결하자.
+            if (childIndex != $("#process"+processIndex)[0].childElementCount-1) {
+                tempProcess.children[childIndex].removeAttribute("ondragover");
+                tempProcess.children[childIndex].removeAttribute("ondrop");
+            } else {
+                tempProcess.children[childIndex].setAttribute("ondragover","allowDrop(event)");
+                tempProcess.children[childIndex].setAttribute("ondrop","drop(event)");
+            }
         }
     }
 }
