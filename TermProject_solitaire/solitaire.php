@@ -36,13 +36,13 @@
                 <!-- 카드 메인 부분 -->
                 <tbody>
                     <tr class="card_normal">
-                        <td id="process1"></td>
-                        <td id="process2"></td>
-                        <td id="process3"></td>
-                        <td id="process4"></td>
-                        <td id="process5"></td>
-                        <td id="process6"></td>
-                        <td id="process7"></td>
+                        <td id="process1" value=4></td>
+                        <td id="process2" value=4></td>
+                        <td id="process3" value=4></td>
+                        <td id="process4" value=4></td>
+                        <td id="process5" value=4></td>
+                        <td id="process6" value=4></td>
+                        <td id="process7" value=4></td>
                     </tr>
                 </tbody>
             </table>
