@@ -49,10 +49,10 @@ var resultCardCount = 0;
 // 게임 시작할 때 해야 할 것들.
 // 카드들을 배열에 넣고, 섞고, 배치하고 등등...
 function gameInit() {
-    cardsInit();
-    setCardBackgroundProperty(); // 빈 프로세스1 위에 K 카드 오게 할 수 있다던가 등등..
-    suffleCards(allCards_id);
-    putCardsInit();
+    cardsInit(); // 카드들을 배열에 저장한다.
+    setCardBackgroundProperty(); // 빈 프로세스1 위에 K 카드 오게 할 수 있다던가 등등을 설정한다.
+    suffleCards(allCards_id); // 배열에 저장한 카드들을 기반으로 하여 무작위로 섞는다.
+    putCardsInit(); // 배열에서 무작위로 섞인 카드들을 계단 형식으로 배치하고, 여유부분에도 넣는다.
 }
 
 // 총 52개의 카드가 있으므로, 52개를 담을 수 있는 배열을 만든다.
@@ -89,31 +89,38 @@ function suffleCards(array) {
     return array;
 }
 
-// 처음 게임을 시작했을 때 카드를 계단 형식으로 놓도록 함..
+// 처음 게임을 시작했을 때 카드를 계단 형식으로 놓도록 함
 function putCardsInit(){
-    var rest;
     var card_number = 0;
+    // 7줄이 있다.
     for (var row = 1; row <= 7; row++) {
 
         for (var col = 0; col < row; col++) {
             // $("<div class='card'> hHHeeloo</div>").appendTo("#process"+row);
             // child = $("#process"+row).append("<div class='card'> hHHeeloo</div>");
 
-            $("<div class='card' id=" + allCards_id[card_number] + " value = 0></div>").appendTo("#process"+row);
-            $("#" + allCards_id[card_number]).css("background-image","url(data/0_0.jpg)");
+            $("<div class='card' id=" + allCards_id[card_number] + " value = 0></div>").appendTo("#process"+row); // process 의 자식으로 붙이게끔 설정
+            $("#" + allCards_id[card_number]).css("background-image","url(data/0_0.jpg)"); // 카드의 뒷면을 이미지로 함
+            // 계단 배열 중 맨 마지막 카드의 경우
             if ((row - col) == 1) {
                 // console.log("hi");
                 // document.getElementById(allCards_id[card_number]).setAttribute("color","blue");
                 // $("#" + allCards_id[card_number]).css("draggable","true");
                 // $("#" + allCards_id[card_number]).css("ondragstart","drag(event)");
                 // $("#" + allCards_id[card_number]).css("ondragover","");
+                
+                // 마지막 카드이므로 무슨 카드인지 드러나게 해당 카드의 이미지를 배경으로 바꾼다.
                 $("#" + allCards_id[card_number]).css("background-image","url(data/" + allCards_id[card_number] + ".jpg)");
                 // $("#" + allCards_id[card_number]).css("color","blue");
 
+                // 드러난 카드가 가질 수 있는 기능.
                 document.getElementById(allCards_id[card_number]).setAttribute("draggable","true");
                 document.getElementById(allCards_id[card_number]).setAttribute("ondragstart","drag(event)");
                 document.getElementById(allCards_id[card_number]).setAttribute("ondrop","drop(event)");
                 document.getElementById(allCards_id[card_number]).setAttribute("ondragover","allowDrop(event)");
+
+                // 카드의 value는 매우 중요한 역할을 하는데, 여유분에서 온건지, process 진행부분에서 온건지, 활성화가 되어있는 카드인지 결정한다.
+                // 비활성화는 0, 밑에 process에 있는 카드는 1, 결과분에 있는 카드는 2, 여유분에 있는 카드는 3, process는 4를 가진다.
                 document.getElementById(allCards_id[card_number]).setAttribute("value","1");
                 
                 
@@ -136,6 +143,7 @@ function putCardsInit(){
     // $("#" + flipBackCards_id[23]).attr("onclick","flipCard('" + flipBackCards_id[23] + "')");
 }
 
+// 여유분의 카드에서 뒷면을 누르면 차례로 카드가 드러나게 한다.
 function flipCard(cardId_str) {
     // isBackCardsEmpty();
     console.log("cardId_str : " + cardId_str);
@@ -154,14 +162,18 @@ function flipCard(cardId_str) {
     $("#" + cardId_str).removeAttr("onclick");
 
 
+    // 모든 여유분 카드를 다 봤을 경우, 해당 위치를 마우스를 클릭하면 다시 채워지는 함수가 활성화 되게끔 한다.
     isBackCardsEmpty();
     
 }
 
+// 여유분 카드를 채우도록 하는 함수를 활성화 한다.
+// 여유분의 카드는 배열로 관리한다.
 function isBackCardsEmpty() {
     if($("#back_card")[0].childElementCount == 0) {
         console.log('$("#back_card")[0].childElementCount == 0 : is true');
         // setBackCard();
+        // 바로 기능을 활성화하면 같이 눌리는 버그가 있어 약간의 시간을 두엇다.
         setTimeout(setBackCard,400);
     }
 }
@@ -174,6 +186,7 @@ function allowDrop(ev) {
     ev.dataTransfer.setData("frontcard", ev.target.id);
 }
 
+// 카드에서 손을 땠을 떼
   function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("frontcard");
@@ -192,42 +205,44 @@ function allowDrop(ev) {
     // console.log(pn.id);
     console.log("내가 마우스 놓는 곳의 id : " + pn.id + ", value: " + movedCard_value);
 
-    
+    // 3번은 여유분에서 왓을 때
     if (clickedCard_value == 3) {
+        // 여유분에서 밑의 일반 카드들로 왔을 때
         if (movedCard_value == 1) {
-            if (isDiffSortCard(data,pn.id)) {
-                if (isDiffOne(data,pn.id)) {
+            if (isDiffSortCard(data,pn.id)) { // 다른 종류인지 확인
+                if (isDiffOne(data,pn.id)) { // 1의 차이가 나는 카드인지 확인
                     console.log("SD");
                     // position과 top 속성도 삭제해야 함.
                     // 먼저 삭제하고 붙어야 없앤 상태로 적용이 되는 듯.
                     $("#" + data).css("position","");
                     $("#" + data).css("top","");
 
+                    // 해당 카드가 있는 process의 자식으로 넘긴다.
                     $("#" + pn.id)[0].parentElement.appendChild($("#" + data)[0]);
-                    $("#" + data).attr("value","1");
+                    $("#" + data).attr("value","1"); // 진행부분에 왔으므로 value를 1로 설정
 
-
+                    // 여유분의 카드에서 왔으므로 여유분의 카드를 관리해주는 배열에서 이 카드를 뺀다.
                     removeElementInArray(flipBackCards_id,data);
 
                     processCardsPositioning();
                 }
                     
             }
-        } else if (movedCard_value == 2) {
-            if (isSameSort(pn.id,data)) {
-                if (isDiffOne(pn.id,data)) {
+        } else if (movedCard_value == 2) { // 여유분의 카드가 바로 결과부분으로 갔을 때
+            if (isSameSort(pn.id,data)) { // 같은 종류인지 확인
+                if (isDiffOne(pn.id,data)) { // 1의 차이가 나느지 확인
                     console.log("DD");
 // position과 top 속성도 삭제해야 함.
             // 먼저 삭제하고 붙어야 없앤 상태로 적용이 되는 듯.
-            $("#" + data).removeAttr("onclick","");
+            $("#" + data).removeAttr("onclick",""); // 결과분에 있는 카드는 아무것도 하면 안되므로 기능을 제거함
             $("#" + data).css("position","");
             $("#" + data).css("top","");
 
             var dataElement = document.getElementById(data);
-            dataElement.setAttribute('value','2');
+            dataElement.setAttribute('value','2'); // 결과분에 왔으므로 value를 2로 설정
             // dataElement.setAttribute("draggable","false");
-            dataElement.removeAttribute("draggable");
-            dataElement.setAttribute("ondrop","drop(event)");
+            dataElement.removeAttribute("draggable"); // 결과분에 있는 카드는 아무것도 하면 안되므로 기능을 제거함
+            dataElement.setAttribute("ondrop","drop(event)"); // 이 위에 카드가 올 수 있도록 ondrop은 설정함
             pn.appendChild(dataElement);
             pn.removeAttribute("ondrop");
             pn.removeAttribute("ondragover");
@@ -245,8 +260,8 @@ function allowDrop(ev) {
             }
             
     
-        } else if (movedCard_value == 4) {
-            if (isIt13card(data)) {
+        } else if (movedCard_value == 4) { // process에 바로 올라오는 카드
+            if (isIt13card(data)) { // process 위에 바로 올라오는 카드는 K 밖에 없다.
                 console.log("V4");
                     // position과 top 속성도 삭제해야 함.
                     // 먼저 삭제하고 붙어야 없앤 상태로 적용이 되는 듯.
@@ -276,21 +291,8 @@ function allowDrop(ev) {
     else if (movedCard_value == 1) {
         if (isDiffSortCard(data,pn.id)) {
             if (isDiffOne(data,pn.id)) {
-                console.log("DD");
-                // console.log("내가 마우스 놓는 곳의 value: " + document.getElementById(pn.id).getAttribute('value'));
-                // console.log(typeof(pn.id)); // 내가 마우스 놓는 곳의 id string
-                // console.log(pn.parentElement);
+                // console.log("DD");
 
-                // var childindex = getChildIndex(document.getElementById(data));
-                // console.log(childindex); // index가 0,1,2,... 로 시작
-                // console.log(document.getElementById(data).parentNode.childElementCount); // 1개 , 2개, 3개 ... 로 시작
-                // console.log(document.getElementById(data).parentNode.children[1]);
-
-                // var oldMovedCardParent = pn.id.parentNode;
-
-                // appendAllDownChild(document.getElementById(data),pn.id);
-                // console.log(oldMovedCardParent.childElementCount);
-                // pn.parentElement.appendChild(document.getElementById(data));
                 var oldClickedCardParent = document.getElementById(data).parentNode;
                 // console.log(oldClickedCardParent.id);
                 appendAllDownChild(document.getElementById(data),pn.id);
@@ -299,36 +301,13 @@ function allowDrop(ev) {
 
                 processCardsPositioning();
             }
-            // var oldClickedCardParent = document.getElementById(data).parentNode;
-            //     // console.log(oldClickedCardParent.id);
-            //     appendAllDownChild(document.getElementById(data),pn.id);
-            //     // console.log(oldClickedCardParent.id);
-            //     revealLastCardInProcessId(oldClickedCardParent);
-            // // appendAllDownChild(document.getElementById(data),pn.id);
+
         }
 
     } else if (movedCard_value == 2) {
         if (isSameSort(pn.id,data)) {
             if (isDiffOne(pn.id,data)) {
                 console.log("SD");
-            // result에 있는 A 위에 2가 올 때..
-            // console.log("내가 마우스 놓는 곳의 value: " + document.getElementById(pn.id).getAttribute('value'));
-            // console.log(typeof(pn.id)); // 내가 마우스 놓는 곳의 id string
-            // console.log(pn.parentElement);
-
-            // var childindex = getChildIndex(document.getElementById(data));
-            // console.log(childindex); // index가 0,1,2,... 로 시작
-            // console.log(document.getElementById(data).parentNode.childElementCount); // 1개 , 2개, 3개 ... 로 시작
-            // console.log(document.getElementById(data).parentNode.children[1]);
-
-            // var oldMovedCardParent = pn.id.parentNode;
-
-            // appendAllDownChild(document.getElementById(data),pn.id);
-            // console.log(oldMovedCardParent.childElementCount);
-            // pn.parentElement.appendChild(document.getElementById(data));
-            // position과 top 속성도 삭제해야 함.
-
-        // 먼저 삭제하고 붙어야 없앤 상태로 적용이 되는 듯.
         $("#" + data).removeAttr("onclick","");
         $("#" + data).css("position","");
         $("#" + data).css("top","0px");
@@ -347,10 +326,6 @@ function allowDrop(ev) {
         console.log("oldClickedCardParent : " + oldClickedCardParent);
         revealLastCardInProcessId(oldClickedCardParent);
 
-        // $("#" + data).removeAttr("onclick","");
-        // $("#" + data).css("position","");
-        // $("#" + data).css("top","0px");
-
         isWinCardCount();
 
         processCardsPositioning();
@@ -362,20 +337,7 @@ function allowDrop(ev) {
     } else if (movedCard_value == 4) {
         if (isIt13card(data)) {
             console.log("V4");
-            // console.log("내가 마우스 놓는 곳의 value: " + document.getElementById(pn.id).getAttribute('value'));
-            // console.log(typeof(pn.id)); // 내가 마우스 놓는 곳의 id string
-            // console.log(pn.parentElement);
 
-            // var childindex = getChildIndex(document.getElementById(data));
-            // console.log(childindex); // index가 0,1,2,... 로 시작
-            // console.log(document.getElementById(data).parentNode.childElementCount); // 1개 , 2개, 3개 ... 로 시작
-            // console.log(document.getElementById(data).parentNode.children[1]);
-
-            // var oldMovedCardParent = pn.id.parentNode;
-
-            // appendAllDownChild(document.getElementById(data),pn.id);
-            // console.log(oldMovedCardParent.childElementCount);
-            // pn.parentElement.appendChild(document.getElementById(data));
             var oldClickedCardParent = document.getElementById(data).parentNode;
             // console.log(oldClickedCardParent.id);
             appendAllDownChild(document.getElementById(data),pn.id);
@@ -390,6 +352,7 @@ function allowDrop(ev) {
     // processCardsPositioning();
 }
 
+// 카드가 K인지 아닌지 확인
 function isIt13card(data_id) {
     var Card_number;
     if (data_id[3] == null) {
@@ -406,6 +369,7 @@ function isIt13card(data_id) {
     }
 }
 
+// 배열에서 특정 element를 제거
 function removeElementInArray(array,data) {
     var index = array.indexOf(data);
         if (index > -1) {
@@ -413,6 +377,7 @@ function removeElementInArray(array,data) {
         }
 }
 
+// process에서 맨 위에있는 카드를 옮길 경우 밑의 나머지 카드들도 옮겨져야 한다.
 function appendAllDownChild(movedChild,str_TargetId) {
     var target_Object = document.getElementById(str_TargetId);
     // K가 빈 곳으로 넘어가면 생기는 버그 때문에 조금 바꾸자..
@@ -425,6 +390,7 @@ function appendAllDownChild(movedChild,str_TargetId) {
     var movedparent = movedChild.parentNode;
     var movedChildren = movedparent.children;
     // var i = children.length - 1;
+    // 옮겨지는 카드가 process에서 몇 번째 index 자식인지 확인. 이 index자식 이후의 카드들을 찾아 모두 옮겨지게 한다.
     var foundStartIndex = 0;
     for (foundStartIndex; foundStartIndex < movedChildren.length - 1; foundStartIndex++){
         if (movedChild == movedChildren[foundStartIndex]){
@@ -439,6 +405,7 @@ function appendAllDownChild(movedChild,str_TargetId) {
         // 못 찾았 단 뜻
         console.log("not found");
     } else {
+        // 찾은 index 밑의 카드들을 모두 옮긴다.
         console.log("found");
         var iteratorCount = movedChildren.length - foundStartIndex;
         for ( ;iteratorCount >0;iteratorCount--) {
@@ -450,6 +417,7 @@ function appendAllDownChild(movedChild,str_TargetId) {
     
 }
 
+// 다른 종류의 카드인지 확인.
 function isDiffSortCard(card1_id,card2_id) {
     console.log("card1_id[0] : " + card1_id[0] + ", card2_id[0] : " + card2_id[0]);
     if ((card1_id[0] == 1 && card2_id[0] == 3)
@@ -465,6 +433,7 @@ function isDiffSortCard(card1_id,card2_id) {
     return false;
 }
 
+// 같은 종류의 카드인지 확인
 function isSameSort(card1_id,card2_id) {
     console.log("card1_id[0] : " + card1_id[0] + ", card2_id[0] : " + card2_id[0]);
     if (card1_id[0] == card2_id[0]) {
@@ -474,6 +443,7 @@ function isSameSort(card1_id,card2_id) {
     }
 }
 
+// 1의 차이가 나는지 확인
 function isDiffOne(targetCard_id,movedCard_id) {
     var targetCard_number;
     var movedCard_number;
@@ -503,6 +473,7 @@ function isDiffOne(targetCard_id,movedCard_id) {
 
 }
 
+// process에서 맨 마지막 카드가 옮겨져 뒷면 카드가 마지막인 경우 그 카드를 앞면으로 드러낸다.
 function revealLastCardInProcessId(oldClickedCardParent) {
     var lastCardInThisLine = oldClickedCardParent.children[oldClickedCardParent.childElementCount-1];
     if (lastCardInThisLine != null) {
@@ -528,11 +499,13 @@ function setCardBackgroundProperty() {
 
 }
 
+// 여유부분에서 카드를 리필하도록 한다.
 function setBackCard() {
     $("#back_card").attr("onclick","refillCards()");
     // $("#back_card").attr("ondblclick","refillCards()");
 }
 
+// 여유분의 카드는 배열에서 관리하므로, 하나하나 꺼내서 다시 다 집어넣는다.
 function refillCards() {
     console.log("refill cards");
     $("#front_card").empty();
@@ -554,6 +527,7 @@ function refillCards() {
     $("#back_card").removeAttr("onclick");
 }
 
+// 결과부분 판에 처음에 A가 올수 있도록 설정. 그 다음부터는 카드의 drop 함수에서 알아서 차례대로 쌓을 수 있도록 했다.
 function setResultBackground() {
     var resultElement;
     for (var resultId_index = 1; resultId_index <= 4; resultId_index++) {
@@ -627,6 +601,7 @@ function getCardNumberInIdString(id_string) {
     return cardNumber;
 }
 
+// 결과부분에 처음에 A 카드를 넣을 수 있도록 설정.
 function dropACardToResult(ev,sortNumber) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("frontcard");
@@ -665,6 +640,7 @@ function dropACardToResult(ev,sortNumber) {
     }
 }
 
+// 자식을 놓을 수 있도록 설정
 function changeToMakeChildDrop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("frontcard");
@@ -686,20 +662,6 @@ function changeToMakeChildDrop(ev) {
     else if (movedCard_value == 1) {
         if (isDiffSortCard(data,pn.id)) {
             if (isDiffOne(pn.id,data)) {
-                // console.log("내가 마우스 놓는 곳의 value: " + document.getElementById(pn.id).getAttribute('value'));
-                // console.log(typeof(pn.id)); // 내가 마우스 놓는 곳의 id string
-                // console.log(pn.parentElement);
-
-                // var childindex = getChildIndex(document.getElementById(data));
-                // console.log(childindex); // index가 0,1,2,... 로 시작
-                // console.log(document.getElementById(data).parentNode.childElementCount); // 1개 , 2개, 3개 ... 로 시작
-                // console.log(document.getElementById(data).parentNode.children[1]);
-
-                // var oldMovedCardParent = pn.id.parentNode;
-
-                // appendAllDownChild(document.getElementById(data),pn.id);
-                // console.log(oldMovedCardParent.childElementCount);
-                // pn.parentElement.appendChild(document.getElementById(data));
 
                 var oldClickedCardParent = document.getElementById(data).parentNode;
                 // console.log(oldClickedCardParent.id);
@@ -708,17 +670,13 @@ function changeToMakeChildDrop(ev) {
                 revealLastCardInProcessId(oldClickedCardParent);
             // appendAllDownChild(document.getElementById(data),pn.id);
             }
-            // var oldClickedCardParent = document.getElementById(data).parentNode;
-            //     // console.log(oldClickedCardParent.id);
-            //     appendAllDownChild(document.getElementById(data),pn.id);
-            //     // console.log(oldClickedCardParent.id);
-            //     revealLastCardInProcessId(oldClickedCardParent);
-            // // appendAllDownChild(document.getElementById(data),pn.id);
+
         }
 
     }
 }
 
+// 결과부분에 모든 카드가 들어있는지 체크
 function isWinCardCount() {
     resultCardCount++;
     console.log("resultCardCount : " + resultCardCount);
@@ -727,6 +685,7 @@ function isWinCardCount() {
     }
 }
 
+// 시간을 잰다.
 function startTime() {
     var today = new Date();
     var h = today.getHours();
@@ -760,6 +719,7 @@ function recordStartTime() {
 
 }
 
+// 이겼을 때 하는 행동.
 function winFunction() {
     recordEndTime();
     $("#win_window").css("display","block");
@@ -780,7 +740,7 @@ function winFunction() {
     $("#finalScore").text("최종 점수 : " + winScore);
 
 }
-
+// 시간 기록
 function recordEndTime() {
     end_today = new Date();
     end_h = end_today.getHours();
@@ -831,8 +791,6 @@ function processCardsPositioning() {
             // console.log("tempProcess.children[childIndex] : " + tempProcess.children[childIndex]);
             tempProcess.children[childIndex].style.position = "absolute";
             tempProcess.children[childIndex].style.top = (childIndex*40) + "px";
-            // $("#process"+processIndex + ":nth-child(" + childIndex + ")").css("position","absolute");
-            // $("#process"+processIndex + ":nth-child(" + childIndex + ")").css("top",160 + (childIndex*20) + "px");
             // console.log("loop?");
             
             // 여기에서 중간 카드에 drop 하는 것도 해결하자.
