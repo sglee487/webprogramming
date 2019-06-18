@@ -17,7 +17,7 @@ $(document).ready(function(){
     gameInit();
     processCardsPositioning()
     recordStartTime();
-    startTime();
+    // startTime();
 
     readOtherScore();
     // winFunction();
@@ -196,9 +196,8 @@ function allowDrop(ev) {
         if (movedCard_value == 1) {
             if (isDiffSortCard(data,pn.id)) {
                 if (isDiffOne(pn.id,data)) {
-
-                }
-                    // position과 top 속성도 삭제해야 함.
+                    console.log("SD");
+// position과 top 속성도 삭제해야 함.
                     // 먼저 삭제하고 붙어야 없앤 상태로 적용이 되는 듯.
                     $("#" + data).css("position","");
                     $("#" + data).css("top","");
@@ -208,14 +207,16 @@ function allowDrop(ev) {
 
 
                     removeElementInArray(flipBackCards_id,data);
+
+                    processCardsPositioning();
+                }
+                    
             }
         } else if (movedCard_value == 2) {
             if (isSameSort(pn.id,data)) {
                 if (isDiffOne(pn.id,data)) {
-
-                }
-                
-            // position과 top 속성도 삭제해야 함.
+                    console.log("DD");
+// position과 top 속성도 삭제해야 함.
             // 먼저 삭제하고 붙어야 없앤 상태로 적용이 되는 듯.
             $("#" + data).removeAttr("onclick","");
             $("#" + data).css("position","");
@@ -231,6 +232,11 @@ function allowDrop(ev) {
             removeElementInArray(flipBackCards_id,data);
 
             isWinCardCount()
+
+            processCardsPositioning();
+                }
+                
+            
             }
             
     
@@ -244,6 +250,7 @@ function allowDrop(ev) {
     else if (movedCard_value == 1) {
         if (isDiffSortCard(data,pn.id)) {
             if (isDiffOne(pn.id,data)) {
+                console.log("DD");
                 // console.log("내가 마우스 놓는 곳의 value: " + document.getElementById(pn.id).getAttribute('value'));
                 // console.log(typeof(pn.id)); // 내가 마우스 놓는 곳의 id string
                 // console.log(pn.parentElement);
@@ -263,6 +270,8 @@ function allowDrop(ev) {
                 appendAllDownChild(document.getElementById(data),pn.id);
                 // console.log(oldClickedCardParent.id);
                 revealLastCardInProcessId(oldClickedCardParent);
+
+                processCardsPositioning();
             }
             // var oldClickedCardParent = document.getElementById(data).parentNode;
             //     // console.log(oldClickedCardParent.id);
@@ -275,6 +284,7 @@ function allowDrop(ev) {
     } else if (movedCard_value == 2) {
         if (isSameSort(pn.id,data)) {
             if (isDiffOne(pn.id,data)) {
+                console.log("SD");
             // result에 있는 A 위에 2가 올 때..
             // console.log("내가 마우스 놓는 곳의 value: " + document.getElementById(pn.id).getAttribute('value'));
             // console.log(typeof(pn.id)); // 내가 마우스 놓는 곳의 id string
@@ -311,7 +321,9 @@ function allowDrop(ev) {
         // $("#" + data).css("position","");
         // $("#" + data).css("top","0px");
 
-        isWinCardCount()
+        isWinCardCount();
+
+        processCardsPositioning();
 
         }
         // // position과 top 속성도 삭제해야 함.
@@ -340,7 +352,7 @@ function allowDrop(ev) {
 
     }
 
-    processCardsPositioning()
+    // processCardsPositioning();
 }
 
 function removeElementInArray(array,data) {
@@ -437,8 +449,10 @@ function isDiffOne(targetCard_id,movedCard_id) {
     console.log("movedCard_number : " + movedCard_number);
     console.log("(targetCard_number - movedCard_number) : " + (targetCard_number - movedCard_number));
     if ((targetCard_number - movedCard_number) == 1) {
+        console.log("DiffOne true");
         return true;
     } else {
+        console.log("DiffOne false");
         return false;
     }
 
@@ -519,6 +533,7 @@ function dropOnlyWantNumberCard(ev,thisNumberOnly) {
     var data = ev.dataTransfer.getData("frontcard");
     var pn = ev.target;
     console.log(data); // 내가 마우스 클릭한 곳의 id string
+    console.log("pn.id : " + pn.id);
 
     if (getCardNumberInIdString(data) == thisNumberOnly) {
         pn.appendChild(document.getElementById(data));
@@ -527,7 +542,12 @@ function dropOnlyWantNumberCard(ev,thisNumberOnly) {
 
         // process 다른 곳에서 K가 나와서 빈 공간으로 갔을 경우, 카드를 뒤집어야 됨.
         if (pn.id.indexOf("process")) {
-            revealLastCardInProcessId(pn);
+            var oldClickedCardParent = document.getElementById(data).parentNode;
+                // console.log(oldClickedCardParent.id);
+                appendAllDownChild(document.getElementById(data),pn.id);
+                // console.log(oldClickedCardParent.id);
+                revealLastCardInProcessId(oldClickedCardParent);
+            // revealLastCardInProcessId(pn);
         }
         
     }
@@ -555,6 +575,13 @@ function dropACardToResult(ev,sortNumber) {
     if (getCardNumberInIdString(data) == 1 && sortNumber == data[0]) {
         var oldClickedCardParent = document.getElementById(data).parentNode;
         var dataElement = document.getElementById(data);
+
+        console.log("dataElement : " + dataElement);
+        console.log("dataElement.value : " + dataElement.getAttribute("value"));
+        if (dataElement.getAttribute("value") == "3") {
+            removeElementInArray(flipBackCards_id,data);
+        }
+
         pn.appendChild(dataElement);
         // 이제 A 카드 위에 drop 되는 것들은 이 A 카드의 자식이 되어야 함. 그 자식들도 마찬가지..
         // changeToMakeChildDrop(document.getElementById(data));
@@ -569,6 +596,7 @@ function dropACardToResult(ev,sortNumber) {
         // dataElement.style.backgroundImage = "url(data/" + lastCardInThisLine.getAttribute('id') + ".jpg)";
         // console.log("oldClickedCardParent : " + oldClickedCardParent);
         // console.log("oldClickedCardParent.id : " + oldClickedCardParent.id);
+
 
         isWinCardCount()
 
