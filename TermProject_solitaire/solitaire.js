@@ -285,6 +285,12 @@ function allowDrop(ev) {
             // console.log(oldMovedCardParent.childElementCount);
             // pn.parentElement.appendChild(document.getElementById(data));
         }
+        // position과 top 속성도 삭제해야 함.
+        // 먼저 삭제하고 붙어야 없앤 상태로 적용이 되는 듯.
+        $("#" + data).removeAttr("onclick","");
+        $("#" + data).css("position","");
+        $("#" + data).css("top","0px");
+
         var oldClickedCardParent = document.getElementById(data).parentNode;
         console.log(oldClickedCardParent.id);
         var dataElement = document.getElementById(data);
@@ -294,6 +300,11 @@ function allowDrop(ev) {
         pn.appendChild(dataElement);
         console.log("oldClickedCardParent : " + oldClickedCardParent);
         revealLastCardInProcessId(oldClickedCardParent);
+
+        $("#" + data).removeAttr("onclick","");
+        $("#" + data).css("position","");
+        $("#" + data).css("top","0px");
+
         isWinCardCount()
         }
         
@@ -515,6 +526,8 @@ function dropACardToResult(ev,sortNumber) {
         dataElement.setAttribute("ondrop","drop(event)");
         // dataElement.setAttribute("ondragover","allowDrop(event)");
         dataElement.setAttribute("value","2");
+        dataElement.style.position = "";
+        dataElement.style.top ="";
         // dataElement.style.backgroundImage = "url(data/" + lastCardInThisLine.getAttribute('id') + ".jpg)";
         // console.log("oldClickedCardParent : " + oldClickedCardParent);
         // console.log("oldClickedCardParent.id : " + oldClickedCardParent.id);
