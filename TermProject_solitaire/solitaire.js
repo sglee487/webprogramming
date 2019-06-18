@@ -258,13 +258,18 @@ function allowDrop(ev) {
                 // appendAllDownChild(document.getElementById(data),pn.id);
                 // console.log(oldMovedCardParent.childElementCount);
                 // pn.parentElement.appendChild(document.getElementById(data));
-            }
-            var oldClickedCardParent = document.getElementById(data).parentNode;
+                var oldClickedCardParent = document.getElementById(data).parentNode;
                 // console.log(oldClickedCardParent.id);
                 appendAllDownChild(document.getElementById(data),pn.id);
                 // console.log(oldClickedCardParent.id);
                 revealLastCardInProcessId(oldClickedCardParent);
-            // appendAllDownChild(document.getElementById(data),pn.id);
+            }
+            // var oldClickedCardParent = document.getElementById(data).parentNode;
+            //     // console.log(oldClickedCardParent.id);
+            //     appendAllDownChild(document.getElementById(data),pn.id);
+            //     // console.log(oldClickedCardParent.id);
+            //     revealLastCardInProcessId(oldClickedCardParent);
+            // // appendAllDownChild(document.getElementById(data),pn.id);
         }
 
     } else if (movedCard_value == 2) {
@@ -285,8 +290,8 @@ function allowDrop(ev) {
             // appendAllDownChild(document.getElementById(data),pn.id);
             // console.log(oldMovedCardParent.childElementCount);
             // pn.parentElement.appendChild(document.getElementById(data));
-        }
-        // position과 top 속성도 삭제해야 함.
+            // position과 top 속성도 삭제해야 함.
+
         // 먼저 삭제하고 붙어야 없앤 상태로 적용이 되는 듯.
         $("#" + data).removeAttr("onclick","");
         $("#" + data).css("position","");
@@ -302,11 +307,34 @@ function allowDrop(ev) {
         console.log("oldClickedCardParent : " + oldClickedCardParent);
         revealLastCardInProcessId(oldClickedCardParent);
 
-        $("#" + data).removeAttr("onclick","");
-        $("#" + data).css("position","");
-        $("#" + data).css("top","0px");
+        // $("#" + data).removeAttr("onclick","");
+        // $("#" + data).css("position","");
+        // $("#" + data).css("top","0px");
 
         isWinCardCount()
+
+        }
+        // // position과 top 속성도 삭제해야 함.
+        // // 먼저 삭제하고 붙어야 없앤 상태로 적용이 되는 듯.
+        // $("#" + data).removeAttr("onclick","");
+        // $("#" + data).css("position","");
+        // $("#" + data).css("top","0px");
+
+        // var oldClickedCardParent = document.getElementById(data).parentNode;
+        // console.log(oldClickedCardParent.id);
+        // var dataElement = document.getElementById(data);
+        // dataElement.setAttribute('value','2');
+        // dataElement.setAttribute("draggable","false");
+        // dataElement.setAttribute("ondrop","drop(event)");
+        // pn.appendChild(dataElement);
+        // console.log("oldClickedCardParent : " + oldClickedCardParent);
+        // revealLastCardInProcessId(oldClickedCardParent);
+
+        // $("#" + data).removeAttr("onclick","");
+        // $("#" + data).css("position","");
+        // $("#" + data).css("top","0px");
+
+        // isWinCardCount()
         }
         
 
@@ -497,6 +525,10 @@ function dropOnlyWantNumberCard(ev,thisNumberOnly) {
         document.getElementById(data).style.top = "";
         document.getElementById(data).setAttribute("value","1");
 
+        // process 다른 곳에서 K가 나와서 빈 공간으로 갔을 경우, 카드를 뒤집어야 됨.
+        if (pn.id.indexOf("process")) {
+            revealLastCardInProcessId(pn);
+        }
         
     }
 
@@ -579,13 +611,20 @@ function changeToMakeChildDrop(ev) {
                 // appendAllDownChild(document.getElementById(data),pn.id);
                 // console.log(oldMovedCardParent.childElementCount);
                 // pn.parentElement.appendChild(document.getElementById(data));
-            }
-            var oldClickedCardParent = document.getElementById(data).parentNode;
+
+                var oldClickedCardParent = document.getElementById(data).parentNode;
                 // console.log(oldClickedCardParent.id);
                 appendAllDownChild(document.getElementById(data),pn.id);
                 // console.log(oldClickedCardParent.id);
                 revealLastCardInProcessId(oldClickedCardParent);
             // appendAllDownChild(document.getElementById(data),pn.id);
+            }
+            // var oldClickedCardParent = document.getElementById(data).parentNode;
+            //     // console.log(oldClickedCardParent.id);
+            //     appendAllDownChild(document.getElementById(data),pn.id);
+            //     // console.log(oldClickedCardParent.id);
+            //     revealLastCardInProcessId(oldClickedCardParent);
+            // // appendAllDownChild(document.getElementById(data),pn.id);
         }
 
     }
