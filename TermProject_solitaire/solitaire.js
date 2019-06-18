@@ -195,7 +195,7 @@ function allowDrop(ev) {
     if (clickedCard_value == 3) {
         if (movedCard_value == 1) {
             if (isDiffSortCard(data,pn.id)) {
-                if (isDiffOne(pn.id,data)) {
+                if (isDiffOne(data,pn.id)) {
                     console.log("SD");
 // position과 top 속성도 삭제해야 함.
                     // 먼저 삭제하고 붙어야 없앤 상태로 적용이 되는 듯.
@@ -249,7 +249,7 @@ function allowDrop(ev) {
     }
     else if (movedCard_value == 1) {
         if (isDiffSortCard(data,pn.id)) {
-            if (isDiffOne(pn.id,data)) {
+            if (isDiffOne(data,pn.id)) {
                 console.log("DD");
                 // console.log("내가 마우스 놓는 곳의 value: " + document.getElementById(pn.id).getAttribute('value'));
                 // console.log(typeof(pn.id)); // 내가 마우스 놓는 곳의 id string
@@ -283,7 +283,7 @@ function allowDrop(ev) {
 
     } else if (movedCard_value == 2) {
         if (isSameSort(pn.id,data)) {
-            if (isDiffOne(pn.id,data)) {
+            if (isDiffOne(data,pn.id)) {
                 console.log("SD");
             // result에 있는 A 위에 2가 올 때..
             // console.log("내가 마우스 놓는 곳의 value: " + document.getElementById(pn.id).getAttribute('value'));
@@ -447,8 +447,8 @@ function isDiffOne(targetCard_id,movedCard_id) {
 
     console.log("targetCard_number : " + targetCard_number);
     console.log("movedCard_number : " + movedCard_number);
-    console.log("(targetCard_number - movedCard_number) : " + (targetCard_number - movedCard_number));
-    if ((targetCard_number - movedCard_number) == 1) {
+    console.log("(movedCard_number - targetCard_number) : " + (movedCard_number - targetCard_number));
+    if ((movedCard_number - targetCard_number) == 1) {
         console.log("DiffOne true");
         return true;
     } else {
