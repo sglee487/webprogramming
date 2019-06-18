@@ -15,6 +15,7 @@ $(document).ready(function(){
     // process2.text("hellop2");
 
     gameInit();
+    processCardsPositioning()
     recordStartTime();
     startTime();
 
@@ -311,6 +312,7 @@ function allowDrop(ev) {
 
     }
 
+    processCardsPositioning()
 }
 
 function removeElementInArray(array,data) {
@@ -492,6 +494,10 @@ function dropOnlyWantNumberCard(ev,thisNumberOnly) {
 
     if (getCardNumberInIdString(data) == thisNumberOnly) {
         pn.appendChild(document.getElementById(data));
+        document.getElementById(data).style.top = "";
+        document.getElementById(data).setAttribute("value","1");
+
+        
     }
 
 }
@@ -695,9 +701,9 @@ function readOtherScore() {
 function processCardsPositioning() {
     for (var processIndex = 1; processIndex <= 7; processIndex++) {
         var tempProcess = $("#process"+processIndex)[0];
-        console.log('$("#process"+processIndex)[0].childElementCount : ' + $("#process"+processIndex)[0].childElementCount);
+        // console.log('$("#process"+processIndex)[0].childElementCount : ' + $("#process"+processIndex)[0].childElementCount);
         for (var childIndex = 0; childIndex < $("#process"+processIndex)[0].childElementCount; childIndex++) {
-            console.log("tempProcess.children[childIndex] : " + tempProcess.children[childIndex]);
+            // console.log("tempProcess.children[childIndex] : " + tempProcess.children[childIndex]);
             tempProcess.children[childIndex].style.position = "absolute";
             tempProcess.children[childIndex].style.top = (childIndex*50) + "px";
             // $("#process"+processIndex + ":nth-child(" + childIndex + ")").css("position","absolute");
