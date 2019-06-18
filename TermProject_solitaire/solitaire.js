@@ -20,7 +20,7 @@ $(document).ready(function(){
 
     readOtherScore();
     // winFunction();
-    setTimeout(winFunction,2000);
+    // setTimeout(winFunction,2000);
     // document.getElementById("1_1").setAttribute("draggable","true");
     // $("#1_1").css("draggable","true");
 });
@@ -675,4 +675,21 @@ function readOtherScore() {
     // console.log("loadLineStr : " + loadLineStr);
     // $("#other_scores").text(loadLineStr);
     
+}
+
+
+// process 에 있는 모든 카드들을 겹쳐서 놓게끔 만들려고 한다..
+function processCardsPositioning() {
+    for (var processIndex = 1; processIndex <= 7; processIndex++) {
+        var tempProcess = $("#process"+processIndex)[0];
+        console.log('$("#process"+processIndex)[0].childElementCount : ' + $("#process"+processIndex)[0].childElementCount);
+        for (var childIndex = 0; childIndex < $("#process"+processIndex)[0].childElementCount; childIndex++) {
+            console.log("tempProcess.children[childIndex] : " + tempProcess.children[childIndex]);
+            tempProcess.children[childIndex].style.position = "absolute";
+            tempProcess.children[childIndex].style.top = (childIndex*50) + "px";
+            // $("#process"+processIndex + ":nth-child(" + childIndex + ")").css("position","absolute");
+            // $("#process"+processIndex + ":nth-child(" + childIndex + ")").css("top",160 + (childIndex*20) + "px");
+            // console.log("loop?");
+        }
+    }
 }
