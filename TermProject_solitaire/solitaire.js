@@ -450,18 +450,6 @@ function appendAllDownChild(movedChild,str_TargetId) {
     
 }
 
-// function getChildIndex(child) {
-//     var parent = child.parentNode;
-//     var children = parent.children;
-//     var i = children.length - 1;
-//     for (; i >= 0; i--){
-//         if (child == children[i]){
-//             break;
-//         }
-//     }
-//     return i;
-// }
-
 function isDiffSortCard(card1_id,card2_id) {
     console.log("card1_id[0] : " + card1_id[0] + ", card2_id[0] : " + card2_id[0]);
     if ((card1_id[0] == 1 && card2_id[0] == 3)
@@ -576,56 +564,56 @@ function setResultBackground() {
     }
 }
 
-function setProcessBackground() {
-    // process id 들 설정
-    var processElement;
-    for (var processId_index = 1; processId_index <= 7; processId_index++) {
-        processElement = document.getElementById("process" + processId_index);
-        processElement.setAttribute("ondrop","dropOnlyWantNumberCard(event,13)");
-        processElement.setAttribute("ondragover","allowDrop(event)");
-    }
-}
+// function setProcessBackground() {
+//     // process id 들 설정
+//     var processElement;
+//     for (var processId_index = 1; processId_index <= 7; processId_index++) {
+//         processElement = document.getElementById("process" + processId_index);
+//         processElement.setAttribute("ondrop","dropOnlyWantNumberCard(event,13)");
+//         processElement.setAttribute("ondragover","allowDrop(event)");
+//     }
+// }
 
-function dropOnlyWantNumberCard(ev,thisNumberOnly) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("frontcard");
-    var pn = ev.target;
-    console.log(data); // 내가 마우스 클릭한 곳의 id string
-    console.log("pn.id : " + pn.id);
+// function dropOnlyWantNumberCard(ev,thisNumberOnly) {
+//     ev.preventDefault();
+//     var data = ev.dataTransfer.getData("frontcard");
+//     var pn = ev.target;
+//     console.log(data); // 내가 마우스 클릭한 곳의 id string
+//     console.log("pn.id : " + pn.id);
 
-    if (getCardNumberInIdString(data) == thisNumberOnly) {
-        var oldClickedCardParent = document.getElementById(data).parentNode;
-        // appendAllDownChild(document.getElementById(data),pn.id);
-        //         // console.log(oldClickedCardParent.id);
-        //         revealLastCardInProcessId(oldClickedCardParent);
-        // process 다른 곳에서 K가 나와서 빈 공간으로 갔을 경우, 카드를 뒤집어야 됨.
+//     if (getCardNumberInIdString(data) == thisNumberOnly) {
+//         var oldClickedCardParent = document.getElementById(data).parentNode;
+//         // appendAllDownChild(document.getElementById(data),pn.id);
+//         //         // console.log(oldClickedCardParent.id);
+//         //         revealLastCardInProcessId(oldClickedCardParent);
+//         // process 다른 곳에서 K가 나와서 빈 공간으로 갔을 경우, 카드를 뒤집어야 됨.
 
-        // appendAllDownChild(document.getElementById(data),pn.id);
-        //         // console.log(oldClickedCardParent.id);
-        //         revealLastCardInProcessId(oldClickedCardParent);
+//         // appendAllDownChild(document.getElementById(data),pn.id);
+//         //         // console.log(oldClickedCardParent.id);
+//         //         revealLastCardInProcessId(oldClickedCardParent);
 
 
-        if (document.getElementById(data).getAttribute("value") == 1) {
-            appendAllDownChild(document.getElementById(data),pn.id);
-            // console.log(oldClickedCardParent.id);
-            revealLastCardInProcessId(oldClickedCardParent);
-        }
+//         if (document.getElementById(data).getAttribute("value") == 1) {
+//             appendAllDownChild(document.getElementById(data),pn.id);
+//             // console.log(oldClickedCardParent.id);
+//             revealLastCardInProcessId(oldClickedCardParent);
+//         }
 
-        document.getElementById(data).style.top = "0px";
-        document.getElementById(data).setAttribute("value","1");
+//         document.getElementById(data).style.top = "0px";
+//         document.getElementById(data).setAttribute("value","1");
 
-        // if (pn.id.indexOf("process")) {
-        //     // var oldClickedCardParent = document.getElementById(data).parentNode;
-        //         // console.log(oldClickedCardParent.id);
-        //         appendAllDownChild(document.getElementById(data),pn.children[0]);
-        //         // console.log(oldClickedCardParent.id);
-        //         revealLastCardInProcessId(oldClickedCardParent);
-        //     // revealLastCardInProcessId(pn);
-        // }
+//         // if (pn.id.indexOf("process")) {
+//         //     // var oldClickedCardParent = document.getElementById(data).parentNode;
+//         //         // console.log(oldClickedCardParent.id);
+//         //         appendAllDownChild(document.getElementById(data),pn.children[0]);
+//         //         // console.log(oldClickedCardParent.id);
+//         //         revealLastCardInProcessId(oldClickedCardParent);
+//         //     // revealLastCardInProcessId(pn);
+//         // }
         
-    }
+//     }
 
-}
+// }
 
 function getCardNumberInIdString(id_string) {
     var cardNumber;
@@ -817,9 +805,6 @@ function recordWinner() {
 
 function readOtherScore() {
 
-    var otherPlayer;
-    var otherScore;
-
     var loadLineStr;
     $.post("load_player.php",{},function(data,status) {
         console.log("data : " + data + ", status : " + status);
@@ -861,6 +846,7 @@ function processCardsPositioning() {
         }
 
         // 여기에서 process가 카드를 가지고 있지 않을 경우 Wanted 함수를 가지게 하고, 그렇지 않으면 없애자.
+        // 개발 중 want 함수는 필요 없어지게 되어서 주석처리함.
         if (tempProcess.childElementCount == 0) {
             tempProcess.setAttribute("ondrop","drop(event)");
             tempProcess.setAttribute("ondragover","allowDrop(event)");
