@@ -3,7 +3,7 @@
 http://www.berryjam.eu/solitaire/
 에서 참고하였음. */
 #card_1_1{
-	background-image: url("1_1.jpg");
+	background-image: url("data/1_1.jpg");
 }
 #card_1_2{
 	background-image: url("data/1_2.jpg");
