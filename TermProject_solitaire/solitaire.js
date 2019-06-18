@@ -255,9 +255,11 @@ function allowDrop(ev) {
 
                     $("#" + pn.id)[0].appendChild($("#" + data)[0]);
                     $("#" + data).attr("value","1");
+                    
+                    console.log("V4 4 to 1")
 
 
-                    // removeElementInArray(flipBackCards_id,data);
+                    removeElementInArray(flipBackCards_id,data);
 
                     processCardsPositioning();
             }
